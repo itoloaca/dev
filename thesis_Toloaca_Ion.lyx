@@ -1,0 +1,2321 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{pgfgantt}
+\usepackage{adjustbox}
+\usepackage{listings}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type numerical
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 4cm
+\topmargin 3cm
+\rightmargin 4cm
+\bottommargin 3cm
+\headheight 3cm
+\headsep 3cm
+\footskip 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+MathSemantifier - a Notation-based Semantification Study
+\end_layout
+
+\begin_layout Author
+Toloaca Ion
+\begin_inset Newline newline
+\end_inset
+
+Supervisor: Michael Kohlhase
+\begin_inset Newline newline
+\end_inset
+
+Jacobs University Bremen
+\end_layout
+
+\begin_layout Abstract
+Mathematical formulae are a highly ambiguous content for which typesetting
+ systems as LaTeX store only the representation.
+ MathSemantifier is an open-source notation-based mathematical formula semantifi
+cation system that attempts to tackle the problem of ambiguity in mathematical
+ documents and produce knowledge-rich equivalents.
+ The system extracts formulae (from formats such as LaTeX or MathML) and
+ produces content-rich results (sTeX or Content MathML) that contain no
+ semantic ambiguity.
+ The disambiguation is achieved by matching the input formulae against a
+ known database of notation definitions, which is aggregated into a Context
+ Free Grammar.
+ This paper outlines an implementation of MathSemantifier that focuses on
+ helping researchers in semantifying their works, and the ultimate goal
+ being a scalable implementation that would need next to no help from a
+ human, and, therefore, could be used to semantify large collections of
+ mathematical papers such as arXiV 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ArXiv"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+The scientific community produces a large number of mathematical papers
+ (approximately 120 thousand new papers per year), which raises the importance
+ of machine based processing of such documents.
+ Unfortunately, the most popular formats in which these papers are found
+ (for instance, LaTeX) do not contain much information that would allow
+ the computers to infer the complex knowledge graph behind each paper.
+ Since, at this point, changing these formats is not practically possible,
+ the other solution is to add a semantic flavor to the existing documents
+ by translating them into a more suitable format, like sTeX or Content MathML,
+ manually.
+\end_layout
+
+\begin_layout Subsection
+History
+\end_layout
+
+\begin_layout Standard
+As a system as complex as the current scientific community was created,
+ it went through a series of evolutions in the attempt to introduce the
+ best method of writing scientific documents.
+ This process was highly influenced by the invention and spreading of the
+ internet.
+ Scientists understood the necessity of a standard that could help them
+ write and exchange their findings in an efficient way.
+ A lot of effort has gone into translating books into digital documents.
+ 
+\end_layout
+
+\begin_layout Standard
+Now, scientists have found ways to represent their knowledge in a machine
+ comprehensible manner, some of which are Content MathML and OMDoc 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OMDOC"
+
+\end_inset
+
+.
+ These new methods do not directly store the representation of the documents.
+ Instead, what is actually stored is the knowledge graph hidden behind the
+ ambiguity of the representation.
+ Naturally, these documents can be used to also generate a human readable
+ format, examples being Presentation MathML and LaTeX.
+\end_layout
+
+\begin_layout Standard
+As previously mentioned, a lot of effort went into translating books into
+ digital documents.
+ Since the year of 1850, there have been produced approximately 3.5 million
+ papers, and approximately 120 thousand new papers are written every year.
+ Now, when all these digital documents need to be converted to these semantic
+ representation, doing it by hand is not just unreasonable, but straight
+ out impossible.
+\end_layout
+
+\begin_layout Standard
+The next step in this evolution is translating digital documents into improved
+ digital documents, that the computers can actually understand and not just
+ store.
+ This next step can only happen if a new, relatively painless, way of transition
+ appears.
+ As soon as the ease of transition and the benefits from doing it outweigh
+ the difficulties associated with it, the scientific community will open
+ the door into the world where computers can actively help researchers with
+ more than just symbolic searches.
+\end_layout
+
+\begin_layout Subsection
+Content MathML and Presentation MathML
+\end_layout
+
+\begin_layout Standard
+The two main formats this paper is focusing on are Content MathML (CMML)
+ and Presentation MathML (PMML) 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "W3C03"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+PMML is used to describe the layout and structure of mathematical notations.
+ PMML elements construct the basic kinds of symbols and expression-building
+ structures present in traditional mathematical notations, containing also
+ enough information for good renderings.
+ The last part is exactly the motivation as to why MathML alone is not enough
+ - because it only suggests specific ways of renderings, but does not require
+ anything.
+ 
+\end_layout
+
+\begin_layout Standard
+An example of PMML code for the expression 
+\begin_inset Formula $(x-a)/b$
+\end_inset
+
+ is provided below.
+ Note how the 
+\series bold
+mrow
+\series default
+ tag is used to delimit nested expressions, while the 
+\series bold
+mo
+\series default
+ tag indicate mathematical objects (such as arithmetic operators) and 
+\series bold
+mi
+\series default
+ is used for variables and similar objects.
+ This provides a clear structured format, that will be easily parsed by
+ MathSemantifier.
+ In particular, PMML is such a small and convenient language that even building
+ a parser for it as a part of MathSemantifier is certainly reasonable.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=XML,
+\end_layout
+
+\begin_layout Plain Layout
+
+	morekeywords={mrow, mi, mo},
+\end_layout
+
+\begin_layout Plain Layout
+
+basicstyle=
+\backslash
+ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
+\backslash
+color{gray}
+\backslash
+upshape
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+<mrow>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<mrow>
+\end_layout
+
+\begin_layout Plain Layout
+
+		<mi> x </mi>
+\end_layout
+
+\begin_layout Plain Layout
+
+		<mo> + </mo>
+\end_layout
+
+\begin_layout Plain Layout
+
+		<mi> a </mi>
+\end_layout
+
+\begin_layout Plain Layout
+
+	</mrow>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<mo> / </mo>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<mi> b </mi>
+\end_layout
+
+\begin_layout Plain Layout
+
+</mrow>
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+CMML, on the other hand, is used to provide an explicit encoding of the
+ underlying mathematical meaning of mathematical expressions.
+ This fact is important in this context because this implies that CMML contains
+ no ambiguity, so, by choosing the final product to be CMML, it is indeed
+ possible to achieve meaningful semantification.
+ For example, considered 
+\begin_inset Quotes eld
+\end_inset
+
+H multiplied by e
+\begin_inset Quotes erd
+\end_inset
+
+.
+ It can be often seen to be written as 
+\begin_inset Formula $H$
+\end_inset
+
+
+\begin_inset Formula $e$
+\end_inset
+
+ in mathematics, however, this can be interpreted also as 
+\begin_inset Formula $H$
+\end_inset
+
+ applied to 
+\begin_inset Formula $e$
+\end_inset
+
+ in the context of lambda calculus, as well as a chemical.
+ In the example below it can be seen how CMML deals with these issues.
+ Note the 
+\begin_inset Formula $<apply>$
+\end_inset
+
+ tag that semantically is the application of its first element (the arithmetic
+ plus) on two identifiers 
+\begin_inset Formula $x$
+\end_inset
+
+ and 
+\begin_inset Formula $y$
+\end_inset
+
+, which altogether means simply 
+\begin_inset Formula $x+y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=XML,
+\end_layout
+
+\begin_layout Plain Layout
+
+	morekeywords={mrow, mi, mo},
+\end_layout
+
+\begin_layout Plain Layout
+
+basicstyle=
+\backslash
+ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
+\backslash
+color{gray}
+\backslash
+upshape
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+<apply>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<csymbol cd="arith1">plus</csymbol>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<ci>x</ci>
+\end_layout
+
+\begin_layout Plain Layout
+
+	<ci>y</ci>
+\end_layout
+
+\begin_layout Plain Layout
+
+</apply>
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An important part of CMML is that all notations (like the arithmetic plus
+ notations used in the example above), contain specifications of how these
+ should be rendered into PMML, so the conversion is not a problem.
+\end_layout
+
+\begin_layout Subsection
+Ambiguity in Mathematical Documents
+\end_layout
+
+\begin_layout Standard
+An important concept necessary in order to understand why semantification
+ is a complex process is ambiguity.
+ Mathematical documents are not a simple collection of symbols.
+ The main use of these documents emerges only when the knowledge graph of
+ a document is accessible.
+ However, humans tend to be lazy in writing down the whole graph, but instead
+ rely on implicit human knowledge to decipher these documents.
+ This is where ambiguity comes into play, when the author relies on the
+ ability of the human to use the context of document in order to pinpoint
+ the actual meaning an expression.
+ Ambiguities can be largely divided into two: structural and idiomatic ambiguiti
+es.
+\end_layout
+
+\begin_layout Subsubsection
+Structural Ambiguities
+\end_layout
+
+\begin_layout Standard
+A simple example that demonstrates the concept of structural ambiguities
+ can be 
+\begin_inset Formula $f(a(b))$
+\end_inset
+
+.
+ It can mean one of the following:
+\end_layout
+
+\begin_layout Enumerate
+Application of function 
+\begin_inset Formula $f$
+\end_inset
+
+ to 
+\begin_inset Formula $a$
+\end_inset
+
+ times 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Application of function 
+\begin_inset Formula $f$
+\end_inset
+
+ to the application of 
+\begin_inset Formula $a$
+\end_inset
+
+ to 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Multiplication of 
+\begin_inset Formula $f$
+\end_inset
+
+, 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Multiplication of 
+\begin_inset Formula $f$
+\end_inset
+
+ and the application of 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note how such a simple example with just three identifiers has at three
+ different possible interpretations.
+ It is easy to notice that the number of readings has an exponential complexity
+ in the length of the expression.
+ For instance, the expression above will have 
+\begin_inset Formula $2^{n-1}$
+\end_inset
+
+ readings, where 
+\begin_inset Formula $n$
+\end_inset
+
+ is the number of identifiers, which is because we can considered each applicati
+on as a multiplication too.
+\end_layout
+
+\begin_layout Standard
+The concept above can be generalized as structural ambiguities being associated
+ to different readings generated from different parse trees.
+ This means that the document may provide some direct clue about what parse
+ tree is the best, and the readings can be characterized by parse trees.
+\end_layout
+
+\begin_layout Subsubsection
+Idiomatic Ambiguities
+\end_layout
+
+\begin_layout Standard
+Contrary to structural ambiguities, idiomatic ambiguities are not due to
+ different parse trees.
+ Given one single parse tree, some formulae allow for multiple readings.
+ A standard example would be 
+\begin_inset Formula $B_{n}$
+\end_inset
+
+.
+ This could be:
+\end_layout
+
+\begin_layout Enumerate
+The sequence of Bernoulli numbers
+\end_layout
+
+\begin_layout Enumerate
+A user defined sequence
+\end_layout
+
+\begin_layout Enumerate
+The vertex of one of a series of geometric objects
+\end_layout
+
+\begin_layout Standard
+In other words, the same sequence of symbols, associated with the same parse
+ tree can lead to multiple readings.
+ The only feasible way at the moment of solving such ambiguities is having
+ a large notation database and ultimately asking the user to choose from
+ a list of possible readings.
+ This is exactly how MathSemantifier works, which means that the final product
+ is expect to excel at solving such tasks.
+\end_layout
+
+\begin_layout Subsection
+Extracting Semantics from Mathematical Documents
+\end_layout
+
+\begin_layout Standard
+Ambiguity is the problem, so, now, a solution for it is required.
+ Let us recall the example from the previous section 
+\begin_inset Formula $f(a(b))$
+\end_inset
+
+.
+ The first interpretation of the expression a human reader is likely to
+ come up with is the application of 
+\begin_inset Formula $f$
+\end_inset
+
+ to the application of 
+\begin_inset Formula $a$
+\end_inset
+
+ to 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ Moreover, the other readings may take the human reader by surprise, as
+ he or she would assume that the first reading is the correct one.
+ 
+\end_layout
+
+\begin_layout Standard
+Let us look into why this happens.
+ First of all, 
+\begin_inset Formula $f$
+\end_inset
+
+ is a symbol humans usually use for functions, moreover, the brackets around
+ 
+\begin_inset Formula $a(b)$
+\end_inset
+
+ could be omitted if it were a multiplication rather than an application.
+ Next, 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ are usually used for variables, but then again the brackets are useless
+ if it is a multiplication.
+ To sum up, the human throws away meanings that would imply useless work
+ or usage of symbols in an unusual way.
+ Imagine asking a mathematician which of the expressions is more natural,
+ 
+\begin_inset Formula $fa$
+\end_inset
+
+ or 
+\begin_inset Formula $ab$
+\end_inset
+
+, or, to be even more extreme, 
+\begin_inset Quotes eld
+\end_inset
+
+Let 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+Let 
+\begin_inset Formula $\epsilon<0$
+\end_inset
+
+
+\begin_inset Quotes erd
+\end_inset
+
+.
+ All of these can be translated to heuristics that MathSemantifier can use
+ to improve its results, or otherwise said, minimize the amount of work
+ the human has to do by restricting the possible meanings as much as possible.
+\end_layout
+
+\begin_layout Standard
+Up until now, different heuristics used were discussed.
+ However, mathematics has better means of finding the one true meaning of
+ the document.
+ Imagine the formula 
+\begin_inset Formula $a=b$
+\end_inset
+
+.
+ As a human, we can deduce it may mean that some two objects are equal.
+ We still have absolutely no understanding of what those objects are, and
+ we just assume 
+\begin_inset Formula $=$
+\end_inset
+
+ works as a relation on any 2 objects of the same type.
+\end_layout
+
+\begin_layout Standard
+Now let's add a bit to the formula 
+\begin_inset Formula $(a=b)\wedge(b=3)$
+\end_inset
+
+.
+ At this point, we deduce that 
+\begin_inset Formula $a=3$
+\end_inset
+
+, and 
+\begin_inset Formula $=$
+\end_inset
+
+ is a relation of numbers by applying First Order Logic to the expression.
+ Notice how more context reduced the ambiguity of the previous expression.
+ Also, notice how we naturally assume First Order Logic is applicable to
+ this situation.
+ Notice also that we are not using just heuristics, but rather we are applying
+ a deterministic approach to find out which meanings are impossible.
+\end_layout
+
+\begin_layout Standard
+Let's get to a more interesting example 
+\begin_inset Formula $f(a+b)$
+\end_inset
+
+.
+ Normally, we would assume this is a function applied to 
+\begin_inset Formula $a+b$
+\end_inset
+
+, but nothing in this context can help us decide against 
+\begin_inset Formula $f$
+\end_inset
+
+ multiplied by 
+\begin_inset Formula $a+b$
+\end_inset
+
+.
+ Adding an expression like 
+\begin_inset Formula $f:\mbox{R\rightarrow R}$
+\end_inset
+
+ would certainly help to reason against the second interpretation, because
+ it does not typecheck.
+\end_layout
+
+\begin_layout Standard
+To sum up, humans read mathematical documents bit by bit and throw away
+ impossible interpretations until there is, hopefully, only one left.
+ In doing so, they mainly apply two strategies - heuristics and proof by
+ contradiction.
+ This proposal explores the possibility of MathSemantifier doing the same
+ to some extent.
+ 
+\end_layout
+
+\begin_layout Subsection
+MathSemantifier in the Context of Disambiguation
+\end_layout
+
+\begin_layout Standard
+In the endeavour of extracting semantics from mathematical documents MathSemanti
+fier will use its notation database in order to attempt to explore the space
+ of all possible readings, and the to throw away some using heuristics,
+ ultimately letting the user decide which reading is the best.
+\end_layout
+
+\begin_layout Standard
+This makes clear the parts the final product is expected to excel at, but
+ also the main challenges related to that.
+\end_layout
+
+\begin_layout Standard
+Regarding the good parts:
+\end_layout
+
+\begin_layout Itemize
+Solving both structural and idiomatic ambiguities by exploring the space
+ of all readings
+\end_layout
+
+\begin_layout Itemize
+Dynamic notation addition can be easily added to the system, since the Context
+ Free Grammar used is anyways generated dynamically
+\end_layout
+
+\begin_layout Itemize
+Enhanced overall user experience when writing or semantifying existing mathemati
+cal documents by creating a dynamic, adaptive system by means of the above
+ mentioned strengths
+\end_layout
+
+\begin_layout Standard
+The main challenges are expected to be:
+\end_layout
+
+\begin_layout Itemize
+Scalability in the context of such a system would translate into finding
+ extremely good heuristics that would minimize the amount of work the human
+ has to perform, which will require a lot of testing and fine tuning of
+ the final product
+\end_layout
+
+\begin_layout Itemize
+Compiling a notation database of formulae into a grammar dynamically will
+ certainly pose various technical challenges
+\end_layout
+
+\begin_layout Itemize
+The response time of a query to the system is a big issue, since, as mentioned
+ before, everything related to ambiguities has an exponential time complexity.
+ Finding a balance between exploring the space of all readings enough in
+ order to find meaningful results while keeping the response time low may
+ happen to be one of the hardest challenges in the development process
+\end_layout
+
+\begin_layout Section
+State of the Art
+\end_layout
+
+\begin_layout Subsection
+Semantification
+\end_layout
+
+\begin_layout Standard
+Nowadays extracting the semantics of mathematical documents is regarded
+ as an interesting field, however the number of researchers in it is limited.
+ This is caused by several domain specific problems.
+\end_layout
+
+\begin_layout Standard
+First of all, mathematics is usually represented in a format where it mixed
+ with natural language.
+ Research on extracting mathematical expressions from such contexts has
+ not been incredibly successful so far.
+ Another important problem is the lack of a well prepared set of data.
+ This kind of data could be used for Machine Learning applications as training
+ data, or simply as test data for complex systems.
+ As software that has not been tested cannot be called particularly useful,
+ this poses a great problem.
+\end_layout
+
+\begin_layout Subsubsection
+Restricted Natural Language
+\end_layout
+
+\begin_layout Standard
+There are multiple projects that try to use a subset of the natural language
+ that is still not that ambiguous but allows for intuitive document creation.
+ Such projects are FMathL 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "NS10"
+
+\end_inset
+
+, MathLang 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KMW04"
+
+\end_inset
+
+, MathNat 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "HR10"
+
+\end_inset
+
+ and Naproche 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "CKS11"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Most such approaches try to analyze the context free parts of mathematical
+ expressions.
+ We will go into more detail about Context Free Grammar applications in
+ semantification in the next sections.
+ It is worthy to note though that most such projects are not satisfied by
+ commonly found grammar engines, and some, like FMathL, are developing their
+ own specialized parsers.
+ This paper does not outline custom parsers, however, if further work is
+ to be done on the subject, implementing heuristics as to reduce the disambiguat
+ion choice list could require at some point a similar approach.
+\end_layout
+
+\begin_layout Subsubsection
+Format Conversions
+\end_layout
+
+\begin_layout Standard
+Mathematical documents in their majority are written in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+TeX/
+\backslash
+LaTeX
+\end_layout
+
+\end_inset
+
+, but for storage and processing purposes converting them to an XML representati
+on is a good idea.
+ Large scale mathematical document archives such as 
+\begin_inset Formula $arXMLiv$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SKG"
+
+\end_inset
+
+ are using the LaTeXML 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Bru07"
+
+\end_inset
+
+ converter to produce MathML and OpenMath.
+\end_layout
+
+\begin_layout Standard
+LaTeXML can actually already produce Content MathML, however the result
+ produced in such a way from a knowledge poor setting contains only one
+ of the possible readings, and, therefore, is not satisfactory from a semantic
+ point of view as it not need satisfy the actual semantics of the document.
+ Enhancing LaTeXML's ability of converting 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LaTeX
+\end_layout
+
+\end_inset
+
+ into knowledge rich XML format variations by exploring the space of possible
+ readings is one of the main goal of this proposal.
+\end_layout
+
+\begin_layout Subsection
+The Notation Database of MMT
+\end_layout
+
+\begin_layout Standard
+MathSemantifier uses a Notation Database to create the grammar it uses.
+ Therefore, it needs to be explained where those notations come from.
+ MMT 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MMT"
+
+\end_inset
+
+ (Module system for Mathematical Theories) is a language developed as a
+ scalable representation and interchange language for mathematical knowledge.
+ It permits natural representations of the syntax and semantics of virtually
+ all declarative languages.
+ The decisive factor about MMT is that there is already a large database
+ of notations written in sTeX, which is transformed and stored in MMT in
+ an original format that MathSemantifier is going to use.
+\end_layout
+
+\begin_layout Standard
+SMGloM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SMGLOM"
+
+\end_inset
+
+ is a part of the notation database of MMT that is especially relevant to
+ the MathSemantifier.
+ It contains notations from vastly different topics such as:
+\end_layout
+
+\begin_layout Itemize
+Algebra
+\end_layout
+
+\begin_layout Itemize
+Calculus
+\end_layout
+
+\begin_layout Itemize
+Geometry
+\end_layout
+
+\begin_layout Itemize
+Graphs
+\end_layout
+
+\begin_layout Itemize
+Number fields
+\end_layout
+
+\begin_layout Itemize
+Topology
+\end_layout
+
+\begin_layout Itemize
+Set Theory
+\end_layout
+
+\begin_layout Standard
+These notations should be a set large enough for testing at least the initial
+ versions of the final product.
+\end_layout
+
+\begin_layout Subsection
+Using Grammars for Semantification
+\end_layout
+
+\begin_layout Subsubsection
+Combinatory Categorial Grammars
+\end_layout
+
+\begin_layout Standard
+The MSc Thesis of Deyan Ginev 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "DEYAN11"
+
+\end_inset
+
+ studies a similar approach that uses Combinatory Categorial Grammars as
+ a part of a larger analysis pipeline that is applied to handpicked set
+ of mathematical texts.
+ The results show a close to perfect recall rate with a low degree of ambiguity.
+ 
+\end_layout
+
+\begin_layout Standard
+This approach, however, uses a manually crafted grammar as opposed to the
+ generated grammar used by MathSemantifier.
+ While writing a grammar by hand can lead to good results as mentioned above,
+ this approach does not scale, since it is hard to find someone who will
+ write such grammars every time a new notation is needed.
+ Notations, on the other hand, are much faster and easier to write.
+ In other words, scalability and extensibility are the reasons behind MathSemant
+ifier.
+\end_layout
+
+\begin_layout Subsubsection
+S-graph grammars
+\end_layout
+
+\begin_layout Standard
+The research of Alexander Koller of University of Potsdam exhibits an interestin
+g way of utilizing grammars for semantic construction.
+ S-graph grammars 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "KOLLSG"
+
+\end_inset
+
+ constitute a new grammar formalism for computing graph based semantic represent
+ations.
+ What distinguishes this line of research from the common data-driven systems
+ trained for such purposes is that S-graph grammars use graphs as semantic
+ representations in a way that is consistent with more classical views on
+ semantic construction.
+\end_layout
+
+\begin_layout Standard
+S-graph grammars are introduced as a synchronous grammar formalism that
+ describes relations between strings and graphs, which can be used for a
+ graph based compositional semantic construction, which is essentially what
+ this paper outlines in simpler terms - using Context Free Grammars.
+\end_layout
+
+\begin_layout Subsubsection
+Marpa Grammar Engine
+\end_layout
+
+\begin_layout Standard
+As the idea of the proposal is to use a Grammar Engine, we need to introduce
+ a concrete solution.
+ Text parsing using Context Free Grammars is quite popular, and, therefore,
+ there is quite a number of solutions, which can, however, make the choice
+ of the best grammar engine for a particular purpose difficult.
+ After comparing several such tools, the conclusion reached was that the
+ Marpa Grammar Engine 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Jeff"
+
+\end_inset
+
+ stands out as a flexible, powerful and efficient tool suited for the purpose
+ of semantification.
+\end_layout
+
+\begin_layout Standard
+To understand better the claim about efficiency, below a comparison between
+ multiple regex parsers and Marpa made by the creator of Marpa is provided.
+ (Source: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://blogs.perl.org/users/jeffrey_kegler/2011/11/marpa-v-perl-regexes-some-numbe
+rs.html
+\end_layout
+
+\end_inset
+
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="6">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+#nesting
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+libmarpa (C)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Marpa::XS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Regexp::Common
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+tchrist
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Marpa::PP 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4524.89
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+111.71
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3173.30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+33429.33
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+47.39
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1180.64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+58.96
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+62.09
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+197.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.35
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+117.16 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.28 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.53 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.84 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.14
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36.35
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.72
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.05
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.74 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The results are presented in executions per second.
+ We can see that standard solutions may be faster for a small nesting level,
+ but they go quadratic as it rises.
+\end_layout
+
+\begin_layout Standard
+Another important point is that Marpa Grammar Engine has a quite simple
+ interface, allowing for extensive manipulations during the parsing process.
+ Each rules can be given an 
+\begin_inset Quotes eld
+\end_inset
+
+Action
+\begin_inset Quotes erd
+\end_inset
+
+ - a Perl routine - that can define what the engine is supposed to do when
+ the rules is used.
+ 
+\end_layout
+
+\begin_layout Standard
+As it was mentioned in the previous sections, the grammar generated will
+ most likely be highly ambiguous, and the Marpa Engine allows for ambiguous
+ grammar of any kind that could be required for this application.
+\end_layout
+
+\begin_layout Subsection
+Extracting formulae from mathematical documents
+\end_layout
+
+\begin_layout Standard
+As MathSemantifier as described in this paper is not restricted to processing
+ just MathML formulae, but also mathematical documents written in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LaTeX
+\end_layout
+
+\end_inset
+
+, it is natural that a method of extracting MathML formulae from mathematical
+ documents is provided.
+ A simple way of achieving that would be by using the same method as MathWebSear
+ch 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MWS12"
+
+\end_inset
+
+ is using in order to extract MathML formulae from documents containing
+ MathML formulae and other information (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+LaTeX
+\end_layout
+
+\end_inset
+
+ can It accepts MwsHarvest 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MWSHarvest"
+
+\end_inset
+
+ as crawled data.
+ These harvests are in MathML, therefore perfectly suited for this application.
+\end_layout
+
+\begin_layout Subsection
+SAlly - an integration framework
+\end_layout
+
+\begin_layout Standard
+In order to make MathSemantifier usable by human beings it needs to be integrate
+d, for instance, into a Web Editor.
+ SAlly 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sally"
+
+\end_inset
+
+ is a framework that complements existing software by using an invasive
+ approach.
+ Users can profit from semantic technology without having to leave their
+ accustomed workflows and tools (like MathSemantifier).
+ SAlly offers an open API that MathSemantifier is going to apply in order
+ to provide its functionality in a Web Editor.
+ A good side effect of using SAlly is that, if needed, the workflow can
+ be easily extended to other applications, one example of such being LibreOffice
+ Calc 3.4 (SAlly provides a thin API for it).
+\end_layout
+
+\begin_layout Section
+Proposal Outline
+\end_layout
+
+\begin_layout Subsection
+Objectives
+\end_layout
+
+\begin_layout Standard
+There are two main objectives of MathSemantifier.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Manual semantification aid
+\end_layout
+
+\begin_layout Standard
+First MathSemantifier is intended to be a way of generating dynamically
+ the full set of possible interpretations.
+ The author inputs LaTeX or MathML and the engine suggests possible ways
+ of disambiguation.
+ The author ultimately decides which one is the correct one.
+ This is the easiest of the objectives, since it requires only matching
+ mathematical notations against given expressions.
+ The main challenges here are:
+\end_layout
+
+\begin_layout Itemize
+Aggregating the mathematical notation database that the MMT system of the
+ KWARC research group has accumulated, and using the result to match against
+ the input
+\end_layout
+
+\begin_layout Itemize
+Dealing with the exponential complexity which is entailed by ambiguity
+\end_layout
+
+\begin_layout Subsubsection
+Semi-Automated semantification
+\end_layout
+
+\begin_layout Standard
+When the first step succeeds and dynamic semantification is possible, the
+ next step will be to restrict the number of choices given to the user or/and
+ sort them in a reasonable way such that the user needs to make the least
+ number of decisions.
+ This step will ultimately decide whether the result software is usable
+ or not.
+\end_layout
+
+\begin_layout Standard
+Some ideas of how this could be achieved include:
+\end_layout
+
+\begin_layout Itemize
+Restricting the mathematical notations that are matched against an input
+ by asking the user to choose from a list of topics that can be encountered
+ in the current document
+\end_layout
+
+\begin_layout Itemize
+Using the context or previous results of semantification to throw away some
+ of the choices, possibly by determining the topic of the context by a heuristic
+, or by grouping notations that usually appear together (Ex: If an arithmetic
+ '-' is encountered, then an arithmetic '+' would not be strange to appear
+ in the next notations as opposed to '+' meaning anything else, like a limit
+ qualifier or for string addition)
+\end_layout
+
+\begin_layout Itemize
+Assigning different probabilities of occurrence to different notations (either
+ manually or by applying a Machine Learning framework)
+\end_layout
+
+\begin_layout Itemize
+Theory graph methods from SMGLoM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "SMGLOM"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Work Packages
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename Proposal Design (1).pdf
+	width 14cm
+	height 10cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MathSemantifier Architecture
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The start architecture will employ a multistep formulae semantification.
+ Let's take a detailed look at the work packages that are associated with
+ accomplishing each step.
+\end_layout
+
+\begin_layout Subsubsection
+WP 1: Grammar Generator
+\end_layout
+
+\begin_layout Standard
+The Grammar Generator will be a Scala application that aggregates all the
+ knowledge contained in the MMT Notations into one Context Free Grammar.
+ The grammar will be shaped into the normal form accepted by the Grammar
+ Engine.
+ To achieve this, the format used to store the notations in MMT will need
+ to be decomposed into CFG rules.
+ Otherwise said, the tree-like structure of each formula, that is now stored
+ as nested applications of some Scala case classes will need to be serialized
+ into CFG rules.
+\end_layout
+
+\begin_layout Standard
+This will be done in 2 steps:
+\end_layout
+
+\begin_layout Enumerate
+Transform the nested rules into an intermediate serialized representation
+\end_layout
+
+\begin_layout Enumerate
+Transform the serialized representation into valid CFG rules
+\end_layout
+
+\begin_layout Enumerate
+Optimize if possible (for example by removing rules that are not used anywhere)
+\end_layout
+
+\begin_layout Subsubsection
+WP 2: Parse Tree Generator
+\end_layout
+
+\begin_layout Standard
+The Parse Tree Generator will take the Grammar generated at the previous
+ steps and input from the Web Editor in order to produce possible parse
+ trees of the input.
+ Marpa Grammar Engine is the proposed, and we can see once again at this
+ step why it is a good choice for this purpose.
+ 
+\end_layout
+
+\begin_layout Standard
+Marpa is
+\end_layout
+
+\begin_layout Itemize
+Fast - it parses grammars in linear time.
+ This is critical since the size of the grammar is likely to be at least
+ linear in the number of notations
+\end_layout
+
+\begin_layout Itemize
+Powerful - it can parse left, right and middle recursions.
+ Since it is unclear what kind of recursions can occur in generated grammars,
+ and it would be a pity if the parse tree generator would need to be changed
+ midway because of it, it is better to choose something that can handle
+ all kinds of recursion
+\end_layout
+
+\begin_layout Itemize
+Convenient - Parser generation is unrestricted and exact, all that needs
+ to be provided is a CFG in BNF form.
+ Also, if several alternatives may yield a parse, all of them are considered.
+ This is critical, since this directly implies that it can deal with ambiguous
+ grammars
+\end_layout
+
+\begin_layout Itemize
+Flexibility - it provides control over the parsing process, giving out informati
+on about which rules have been recognized so far and their locations.
+ This is again extremely important because otherwise, once again, semantificatio
+n would be simply impossible
+\end_layout
+
+\begin_layout Standard
+Obviously, since the Grammar will be ambiguous this is the most computationally
+ intensive part.
+ The scalability of the final product will mostly depend on the efficiency
+ of this step.
+\end_layout
+
+\begin_layout Standard
+As a side note, Marpa does not have a Scala API, so, instead, the Perl API
+ will be used.
+ This implies that the result parse trees will need to be transported somehow
+ to the core application, which will naturally be a Scala application since
+ it is strongly related to SAlly and MMT, both being Scala/Java based.
+ For that purpose the intended solution is LWP 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LWP"
+
+\end_inset
+
+.
+ LWP is a set of Perl modules which provide a simple and consistent API
+ to the World Wide Web.
+ After experimenting with the API, the conclusion was that the API is simple
+ and powerful enough for the current purpose.
+\end_layout
+
+\begin_layout Subsubsection
+WP 3: Semantifier
+\end_layout
+
+\begin_layout Standard
+The Semantifier is expected to be one of the easier steps of the process,
+ since it is applied when the parse trees are already generated and is only
+ concerned with getting the final result.
+ For that purpose, it should take the input from the Web Editor, possible
+ Parse Trees and the arguments for the notations involved in the Parse Trees
+ used.
+ Having all this, it can then query MMT the final structure of the result
+ and finalize the semantification process.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+WP 4: Web Editor Integration
+\end_layout
+
+\begin_layout Standard
+The Web Editor will produce the input formulae and present to the user the
+ semantified result.
+ While it is being designed initially for such a use case in order to create
+ a product that can be easily presented to a potential user, the input and
+ output will use the generic REST protocol, which allows for any type of
+ document processing as long as there exists an endpoint which can send
+ it over HTTP.
+\end_layout
+
+\begin_layout Standard
+In the current implementation the endpoint will be a SAlly 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Sally"
+
+\end_inset
+
+ instance, which will have the core logic inside it.
+\end_layout
+
+\begin_layout Subsubsection
+WP 5: Core
+\end_layout
+
+\begin_layout Standard
+The Core part will contain the control logic and put all the parts together.
+ It will direct the workflow like described below.
+\end_layout
+
+\begin_layout Itemize
+Initialization
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Initialize Web Editor settings.
+\end_layout
+
+\begin_layout Enumerate
+Send a request for the grammar to be generated
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Semantification
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Get the input from Web Editor
+\end_layout
+
+\begin_layout Enumerate
+Query the parse trees for the input
+\end_layout
+
+\begin_layout Enumerate
+Query for the final semantified result
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+It is expected that the Core will be a SAlly based Scala application which
+ interfaces with an MMT instance and a Parse Tree Generation Server by means
+ of the REST protocol.
+ Since the application seems to need a lot of routing of data, Apache Camel
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "ApacheCamel"
+
+\end_inset
+
+ is a natural choice in order to implement that, since it was built exactly
+ for defining routes and mediation rules, and is available in Java.
+\end_layout
+
+\begin_layout Section
+Conclusions and Time Plan
+\end_layout
+
+\begin_layout Subsection
+Implementation
+\end_layout
+
+\begin_layout Standard
+To summarize the ideas presented in this paper, MathSemantifier is a conceptuall
+y important enhancement to the existing semantification solutions.
+ Its implementation is feasible for the planned timespan and the design
+ is elaborate enough and is highly likely not to suffer big conceptual changes.
+\end_layout
+
+\begin_layout Subsection
+Testing
+\end_layout
+
+\begin_layout Standard
+The system will be tested for scalability using tests dynamically generated
+ by extracting MathML from archives of papers, and, naturally, by actual
+ user input.
+ The results will be considered satisfactory if, while having queries under
+ 
+\begin_inset Formula $500ms$
+\end_inset
+
+, the results of such a query will still be meaningful, which in this context
+ would mean having the expected result among the possible interpretations
+ in more than 
+\begin_inset Formula $90\%$
+\end_inset
+
+ of cases.
+\end_layout
+
+\begin_layout Subsection
+Time Plan
+\end_layout
+
+\begin_layout Standard
+The expected time plan is described in the Gantt chart below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttset{%
+\end_layout
+
+\begin_layout Plain Layout
+
+ calendar week text={% 
+\end_layout
+
+\begin_layout Plain Layout
+
+	~
+\backslash
+currentweek%
+\end_layout
+
+\begin_layout Plain Layout
+
+ }%
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{ganttchart}[ 
+\end_layout
+
+\begin_layout Plain Layout
+
+vgrid={*{6}{draw=none}, dotted}, 
+\end_layout
+
+\begin_layout Plain Layout
+
+x unit=.1cm, 
+\end_layout
+
+\begin_layout Plain Layout
+
+y unit title=.6cm, 
+\end_layout
+
+\begin_layout Plain Layout
+
+y unit chart=.5cm, 
+\end_layout
+
+\begin_layout Plain Layout
+
+time slot format=isodate, 
+\end_layout
+
+\begin_layout Plain Layout
+
+time slot format/start date=2016-02-01]
+\end_layout
+
+\begin_layout Plain Layout
+
+{2016-02-01}{2016-05-21} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttset{bar height=.6} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+gantttitlecalendar{year, month=name, week} 
+\backslash
+
+\backslash
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttgroup{Design}{2016-02-02}{2016-02-27} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=red}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Core System Design}{2016-02-02}{2016-02-27}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttgroup{Implementation}{2016-02-28}{2016-04-23} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=blue}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Grammar Generation}{2016-02-28}{2016-03-26}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=green}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Parse Tree Handling}{2016-03-27}{2016-04-9}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=yellow}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{User Interface}{2016-04-10}{2016-04-23}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttgroup{Testing}{2016-04-24}{2016-05-7} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=cyan}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Interactive Testing}{2016-04-24}{2016-04-30}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=black}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Scalability Testing}{2016-05-1}{2016-05-7}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttgroup{Thesis}{2016-04-1}{2016-05-20} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=magenta}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Thesis Draft}{2016-04-1}{2016-04-29}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+ganttbar[bar/.append style={fill=white}]
+\end_layout
+
+\begin_layout Plain Layout
+
+{Thesis Final Ver.}{2016-04-30}{2016-05-20}
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{ganttchart}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Milestones Chart
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "bibtexDatabase"
+options "bibtotoc,plainnat"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
