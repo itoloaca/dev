@@ -249,127 +249,6 @@ PMML is used to describe the layout and structure of mathematical notations.
 \end_layout
 
 \begin_layout Standard
-An example of PMML code for the expression 
-\begin_inset Formula $(x-a)/b$
-\end_inset
-
- is provided below.
- Note how the 
-\series bold
-mrow
-\series default
- tag is used to delimit nested expressions, while the 
-\series bold
-mo
-\series default
- tag indicate mathematical objects (such as arithmetic operators) and 
-\series bold
-mi
-\series default
- is used for variables and similar objects.
- This provides a clear structured format, that will be easily parsed by
- MathSemantifier.
- In particular, PMML is such a small and convenient language that even building
- a parser for it as a part of MathSemantifier is certainly reasonable.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstset{language=XML,
-\end_layout
-
-\begin_layout Plain Layout
-
-	morekeywords={mrow, mi, mo},
-\end_layout
-
-\begin_layout Plain Layout
-
-basicstyle=
-\backslash
-ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
-\backslash
-color{gray}
-\backslash
-upshape
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-<mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mi> x </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mo> + </mo>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mi> a </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-	</mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mo> / </mo>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mi> b </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-</mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lstlisting}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 CMML, on the other hand, is used to provide an explicit encoding of the
  underlying mathematical meaning of mathematical expressions.
  This fact is important in this context because this implies that CMML contains
@@ -401,12 +280,39 @@ H multiplied by e
 \end_inset
 
  in the context of lambda calculus, as well as a chemical.
- In the example below it can be seen how CMML deals with these issues.
- Note the 
-\begin_inset Formula $<apply>$
+\end_layout
+
+\begin_layout Standard
+An example of PMML and CMML code for the expression 
+\begin_inset Formula $x+y$
 \end_inset
 
- tag that semantically is the application of its first element (the arithmetic
+ is provided below.
+ Note how the 
+\series bold
+mrow
+\series default
+ tag is used to delimit nested expressions, while the 
+\series bold
+mo
+\series default
+ tag indicate mathematical objects (such as arithmetic operators) and 
+\series bold
+mi
+\series default
+ is used for variables and similar objects.
+ This provides a clear structured format, that will be easily parsed by
+ MathSemantifier.
+ In particular, PMML is such a small and convenient language that even building
+ a parser for it as a part of MathSemantifier is certainly reasonable.
+\end_layout
+
+\begin_layout Standard
+In the CMML part of the example, the 
+\series bold
+apply
+\series default
+ tag is semantically the application of its first element (the arithmetic
  plus) on two identifiers 
 \begin_inset Formula $x$
 \end_inset
@@ -423,79 +329,9 @@ H multiplied by e
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstset{language=XML,
-\end_layout
-
-\begin_layout Plain Layout
-
-	morekeywords={mrow, mi, mo},
-\end_layout
-
-\begin_layout Plain Layout
-
-basicstyle=
-\backslash
-ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
-\backslash
-color{gray}
-\backslash
-upshape
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-<apply>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<csymbol cd="arith1">plus</csymbol>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<ci>x</ci>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<ci>y</ci>
-\end_layout
-
-\begin_layout Plain Layout
-
-</apply>
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
+\begin_inset Graphics
+	filename pmmlANDcmml.png
+	scale 40
 
 \end_inset
 
@@ -838,7 +674,7 @@ To sum up, humans read mathematical documents bit by bit and throw away
 \end_layout
 
 \begin_layout Subsection
-MathSemantifier in the Context of Disambiguation #delete/rewrite
+MathSemantifier in the Context of Disambiguation
 \end_layout
 
 \begin_layout Standard
@@ -849,8 +685,8 @@ fier uses its notation database in order to attempt to explore the space
 \end_layout
 
 \begin_layout Standard
-This makes clear the parts the final product is expected to excel at, but
- also the main challenges related to that.
+This makes clear the parts the final product excels at, but also the main
+ challenges related to that.
 \end_layout
 
 \begin_layout Standard
@@ -863,8 +699,8 @@ Solving both structural and idiomatic ambiguities by exploring the space
 \end_layout
 
 \begin_layout Itemize
-Dynamic notation addition can be easily added to the system, since the Context
- Free Grammar used is anyways generated dynamically
+Notation addition can be easily added to the system, since the Context Free
+ Grammar used is generated automatically 
 \end_layout
 
 \begin_layout Itemize
@@ -874,27 +710,30 @@ cal documents by creating a dynamic, adaptive system by means of the above
 \end_layout
 
 \begin_layout Standard
-The main challenges are expected to be:
+The main challenges are:
 \end_layout
 
 \begin_layout Itemize
-Scalability in the context of such a system would translate into finding
- extremely good heuristics that would minimize the amount of work the human
- has to perform, which will require a lot of testing and fine tuning of
- the final product
+Scalability in the context of such a system translates into finding the
+ best ways to generate as few useless parse trees as possible
 \end_layout
 
 \begin_layout Itemize
-Compiling a notation database of formulae into a grammar dynamically will
- certainly pose various technical challenges
+Compiling a notation database into a Context Free Grammar when including
+ multiple notation archives simultaneously 
 \end_layout
 
 \begin_layout Itemize
 The response time of a query to the system is a big issue, since, as mentioned
  before, everything related to ambiguities has an exponential time complexity.
  Finding a balance between exploring the space of all readings enough in
- order to find meaningful results while keeping the response time low may
- happen to be one of the hardest challenges in the development process
+ order to find meaningful results while keeping the response time low is
+ a very difficult challenge.
+\end_layout
+
+\begin_layout Standard
+The rest of this paper will demonstrate in detail how MathSemantifier harnesses
+ its strengths and solves or avoids the challenges described.
 \end_layout
 
 \begin_layout Section
@@ -1624,7 +1463,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename sTeXtoOMDOC.png
-	scale 50
+	scale 55
 
 \end_inset
 

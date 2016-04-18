@@ -249,127 +249,6 @@ PMML is used to describe the layout and structure of mathematical notations.
 \end_layout
 
 \begin_layout Standard
-An example of PMML code for the expression 
-\begin_inset Formula $(x-a)/b$
-\end_inset
-
- is provided below.
- Note how the 
-\series bold
-mrow
-\series default
- tag is used to delimit nested expressions, while the 
-\series bold
-mo
-\series default
- tag indicate mathematical objects (such as arithmetic operators) and 
-\series bold
-mi
-\series default
- is used for variables and similar objects.
- This provides a clear structured format, that will be easily parsed by
- MathSemantifier.
- In particular, PMML is such a small and convenient language that even building
- a parser for it as a part of MathSemantifier is certainly reasonable.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstset{language=XML,
-\end_layout
-
-\begin_layout Plain Layout
-
-	morekeywords={mrow, mi, mo},
-\end_layout
-
-\begin_layout Plain Layout
-
-basicstyle=
-\backslash
-ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
-\backslash
-color{gray}
-\backslash
-upshape
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-<mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mi> x </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mo> + </mo>
-\end_layout
-
-\begin_layout Plain Layout
-
-		<mi> a </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-	</mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mo> / </mo>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<mi> b </mi>
-\end_layout
-
-\begin_layout Plain Layout
-
-</mrow>
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lstlisting}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 CMML, on the other hand, is used to provide an explicit encoding of the
  underlying mathematical meaning of mathematical expressions.
  This fact is important in this context because this implies that CMML contains
@@ -401,12 +280,39 @@ H multiplied by e
 \end_inset
 
  in the context of lambda calculus, as well as a chemical.
- In the example below it can be seen how CMML deals with these issues.
- Note the 
-\begin_inset Formula $<apply>$
+\end_layout
+
+\begin_layout Standard
+An example of PMML and CMML code for the expression 
+\begin_inset Formula $x+y$
 \end_inset
 
- tag that semantically is the application of its first element (the arithmetic
+ is provided below.
+ Note how the 
+\series bold
+mrow
+\series default
+ tag is used to delimit nested expressions, while the 
+\series bold
+mo
+\series default
+ tag indicate mathematical objects (such as arithmetic operators) and 
+\series bold
+mi
+\series default
+ is used for variables and similar objects.
+ This provides a clear structured format, that will be easily parsed by
+ MathSemantifier.
+ In particular, PMML is such a small and convenient language that even building
+ a parser for it as a part of MathSemantifier is certainly reasonable.
+\end_layout
+
+\begin_layout Standard
+In the CMML part of the example, the 
+\series bold
+apply
+\series default
+ tag is semantically the application of its first element (the arithmetic
  plus) on two identifiers 
 \begin_inset Formula $x$
 \end_inset
@@ -423,79 +329,9 @@ H multiplied by e
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-lstset{language=XML,
-\end_layout
-
-\begin_layout Plain Layout
-
-	morekeywords={mrow, mi, mo},
-\end_layout
-
-\begin_layout Plain Layout
-
-basicstyle=
-\backslash
-ttfamily,   columns=fullflexible,   showstringspaces=false,   commentstyle=
-\backslash
-color{gray}
-\backslash
-upshape
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-<apply>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<csymbol cd="arith1">plus</csymbol>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<ci>x</ci>
-\end_layout
-
-\begin_layout Plain Layout
-
-	<ci>y</ci>
-\end_layout
-
-\begin_layout Plain Layout
-
-</apply>
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{lstlisting}
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
+\begin_inset Graphics
+	filename pmmlANDcmml.png
+	scale 40
 
 \end_inset
 
@@ -1472,8 +1308,9 @@ Extracting formulae from mathematical documents
 \end_layout
 
 \begin_layout Standard
-As MathSemantifier as described in this paper is not restricted to processing
- just MathML formulae, but also mathematical documents written in 
+As MathSemantifier as described in this paper need not be restricted to
+ processing just MathML formulae, but also mathematical documents written
+ in 
 \begin_inset ERT
 status open
 
@@ -1497,20 +1334,8 @@ key "MWS12"
 \end_inset
 
  is using in order to extract MathML formulae from documents containing
- MathML formulae and other information (
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-LaTeX
-\end_layout
-
-\end_inset
-
- can It accepts MwsHarvest 
+ MathML formulae and other information.
+ MathWebSearch accepts MwsHarvest 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "MWSHarvest"
@@ -1519,31 +1344,6 @@ key "MWSHarvest"
 
  as crawled data.
  These harvests are in MathML, therefore perfectly suited for this application.
-\end_layout
-
-\begin_layout Subsection
-SAlly - an integration framework
-\end_layout
-
-\begin_layout Standard
-In order to make MathSemantifier usable by human beings it needs to be integrate
-d, for instance, into a Web Editor.
- SAlly 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Sally"
-
-\end_inset
-
- is a framework that complements existing software by using an invasive
- approach.
- Users can profit from semantic technology without having to leave their
- accustomed workflows and tools (like MathSemantifier).
- SAlly offers an open API that MathSemantifier is going to apply in order
- to provide its functionality in a Web Editor.
- A good side effect of using SAlly is that, if needed, the workflow can
- be easily extended to other applications, one example of such being LibreOffice
- Calc 3.4 (SAlly provides a thin API for it).
 \end_layout
 
 \begin_layout Section
@@ -1660,7 +1460,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename sTeXtoOMDOC.png
-	scale 50
+	scale 55
 
 \end_inset
 
