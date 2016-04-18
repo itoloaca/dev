@@ -674,7 +674,7 @@ To sum up, humans read mathematical documents bit by bit and throw away
 \end_layout
 
 \begin_layout Subsection
-MathSemantifier in the Context of Disambiguation #delete/rewrite
+MathSemantifier in the Context of Disambiguation
 \end_layout
 
 \begin_layout Standard
@@ -685,8 +685,8 @@ fier uses its notation database in order to attempt to explore the space
 \end_layout
 
 \begin_layout Standard
-This makes clear the parts the final product is expected to excel at, but
- also the main challenges related to that.
+This makes clear the parts the final product excels at, but also the main
+ challenges related to that.
 \end_layout
 
 \begin_layout Standard
@@ -699,8 +699,8 @@ Solving both structural and idiomatic ambiguities by exploring the space
 \end_layout
 
 \begin_layout Itemize
-Dynamic notation addition can be easily added to the system, since the Context
- Free Grammar used is anyways generated dynamically
+Notation addition can be easily added to the system, since the Context Free
+ Grammar used is generated automatically 
 \end_layout
 
 \begin_layout Itemize
@@ -710,27 +710,30 @@ cal documents by creating a dynamic, adaptive system by means of the above
 \end_layout
 
 \begin_layout Standard
-The main challenges are expected to be:
+The main challenges are:
 \end_layout
 
 \begin_layout Itemize
-Scalability in the context of such a system would translate into finding
- extremely good heuristics that would minimize the amount of work the human
- has to perform, which will require a lot of testing and fine tuning of
- the final product
+Scalability in the context of such a system translates into finding the
+ best ways to generate as few useless parse trees as possible
 \end_layout
 
 \begin_layout Itemize
-Compiling a notation database of formulae into a grammar dynamically will
- certainly pose various technical challenges
+Compiling a notation database into a Context Free Grammar when including
+ multiple notation archives simultaneously 
 \end_layout
 
 \begin_layout Itemize
 The response time of a query to the system is a big issue, since, as mentioned
  before, everything related to ambiguities has an exponential time complexity.
  Finding a balance between exploring the space of all readings enough in
- order to find meaningful results while keeping the response time low may
- happen to be one of the hardest challenges in the development process
+ order to find meaningful results while keeping the response time low is
+ a very difficult challenge.
+\end_layout
+
+\begin_layout Standard
+The rest of this paper will demonstrate in detail how MathSemantifier harnesses
+ its strengths and solves or avoids the challenges described.
 \end_layout
 
 \begin_layout Section
@@ -1416,6 +1419,122 @@ Set Theory
 \end_layout
 
 \begin_layout Subsection
+MMT Notation Storage Format
+\end_layout
+
+\begin_layout Standard
+The original format that MMT uses to store the notations is of high relevance,
+ since it is influences directly the process of CFG generation.
+ The format consists of a Scala 
+\series bold
+case class 
+\series default
+tree.
+ Several examples are provided below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename marker.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MMT Notation Markers (severely simplified)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Since there are about 40 types of different Markers, the tree above is meant
+ to simply give an idea of the structure, rather than explain it fully.
+ The 
+\series bold
+Marker
+\series default
+ class is the tree of all possible notation components.
+ The most basic types of Markers include 
+\series bold
+Presentation Markers 
+\series default
+and 
+\series bold
+Argument Markers.
+
+\series default
+ They have a great diversity of subtypes.
+ 
+\series bold
+Simple Argument 
+\series default
+is used for single arguments, while 
+\series bold
+Sequence Argument 
+\series default
+is a placeholder for a sequence with a specified delimiter.
+ The most basic example of a sequence argument is, if considering the example
+ 
+\begin_inset Formula $2+3+5$
+\end_inset
+
+, the sequence 
+\begin_inset Formula $2,3,5$
+\end_inset
+
+ and the delimiter 
+\begin_inset Formula $+$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Presentation Markers 
+\series default
+have yet another purpose of simulating the PMML structure.
+ 
+\series bold
+Group Marker 
+\series default
+stands for the 
+\series bold
+mrow 
+\series default
+MathML tag, 
+\series bold
+Fraction Marker 
+\series default
+- for 
+\series bold
+mfrac 
+\series default
+and so on.
+ MMT has Markers for every possible MathML tag, which goes to explain the
+ total number of Markers to an extent.
+\end_layout
+
+\begin_layout Subsection
 LaTeXML Pre-processing
 \end_layout
 
@@ -1453,6 +1572,7 @@ Below is an example of the arithmetic plus notation written in sTeX and
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1479,10 +1599,6 @@ sTeX to OMDoc conversion
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-MMT Notation Storage Format
 \end_layout
 
 \begin_layout Subsection
