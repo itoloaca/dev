@@ -1565,6 +1565,10 @@ The set of generated parses should ideally be a subset of the set of correct
  parses too
 \end_layout
 
+\begin_layout Itemize
+Handle character encodings correctly
+\end_layout
+
 \begin_layout Standard
 This following subsections how 
 \series bold
@@ -1985,6 +1989,40 @@ hyperref[6]{section 6}
 ).
 \end_layout
 
+\begin_layout Subsection
+Encoding issues
+\end_layout
+
+\begin_layout Standard
+Since 
+\series bold
+MathSemantifier 
+\series default
+deals with unicode, and has parts written in Javascript, Scala and Perl,
+ which treat unicode symbols differently, it needed a solution for this
+ problem.
+ Javascript and Scala have 
+\series bold
+UTF-16 
+\series default
+strings, while Perl has 
+\series bold
+UTF-8 
+\series default
+strings.
+ The implemented solution simply passes around the string encoded using
+ 
+\series bold
+encodeURIComponent 
+\series default
+in Javascript or its equivalents in other languages, and only the parsing
+ backend in Perl actually deals meaningfuly with substrings.
+ The result of the parsing backend contains the complete subtrings for the
+ matched rules and arguments.
+ This also represents an opportunity for improvement, since passing around
+ positions in a string is more efficient that substrings.
+\end_layout
+
 \begin_layout Section
 \begin_inset ERT
 status open
@@ -2235,23 +2273,74 @@ label{8}
 
 \end_inset
 
-Evaluation
+Evaluation (incomplete)
+\end_layout
+
+\begin_layout Standard
+This section presents an evaluation of 
+\series bold
+MathSemantifier 
+\series default
+from the point of view of how effective and efficient both guided semantificatio
+n and semantic tree generation are.
+ Next, the interoperability of the system with other possible applications
+ is examined, which mostly depends on the backend APIs.
 \end_layout
 
 \begin_layout Subsection
 Guided semantification
 \end_layout
 
+\begin_layout Standard
+The user interface for top level symbol guided semantification is simple
+ and intuitive, and it detects all the possible readings for the listed
+ examples.
+\end_layout
+
 \begin_layout Subsection
 Semantic Tree Generation
+\end_layout
+
+\begin_layout Standard
+For the provided list of examples of depth 2-3, all the possible parse trees
+ are produced.
 \end_layout
 
 \begin_layout Subsection
 Performance of the Semantic Tree Generation
 \end_layout
 
+\begin_layout Standard
+It is important to note that there are two kinds of figures we may want
+ to look at: one run or several subsequent related runs.
+ Because of memoization, in the long run, if the terms or evens just subterms
+ repeat, the queries become signficantly faster.
+ 
+\end_layout
+
 \begin_layout Subsection
 The backend APIs
+\end_layout
+
+\begin_layout Standard
+It is important that the MMT backend provides a simple 
+\series bold
+HTTP 
+\series default
+endpoint, which can be accessed with a 
+\series bold
+POST
+\series default
+ request that contains just the input in a suitable encoding.
+ The backend will then return a 
+\series bold
+JSON 
+\series default
+object that contains all the possible readings.
+ The backend could be modified to accept parameters to fine tune the system,
+ like the maximum number of processed parse trees, but even then accessing
+ it would be just as simple.
+ 
 \end_layout
 
 \begin_layout Section
@@ -2294,43 +2383,6 @@ hyperref[8]{section 8}
  The most important part of this study is, therefore, the optimizations
  and heuristics used, and other ones that further research could benefit
  from.
-\end_layout
-
-\begin_layout Subsection
-Implementation
-\end_layout
-
-\begin_layout Standard
-To summarize the ideas presented in this paper, MathSemantifier is a conceptuall
-y important enhancement to the existing semantification solutions.
- Its implementation is feasible for the planned timespan and the design
- is elaborate enough and is highly likely not to suffer big conceptual changes.
-\end_layout
-
-\begin_layout Subsection
-Testing
-\end_layout
-
-\begin_layout Standard
-The system will be tested for scalability using tests dynamically generated
- by extracting MathML from archives of papers, and, naturally, by actual
- user input.
- The results will be considered satisfactory if, while having queries under
- 
-\begin_inset Formula $500ms$
-\end_inset
-
-, the results of such a query will still be meaningful, which in this context
- would mean having the expected result among the possible interpretations
- in more than 
-\begin_inset Formula $90\%$
-\end_inset
-
- of cases.
-\end_layout
-
-\begin_layout Subsection
-Further work
 \end_layout
 
 \begin_layout Standard
