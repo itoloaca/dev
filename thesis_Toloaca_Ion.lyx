@@ -36,7 +36,7 @@
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry true
+\use_geometry false
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -966,312 +966,19 @@ key "Jeff"
 \begin_layout Standard
 To understand better the claim about efficiency, below a comparison between
  multiple regex parsers and Marpa made by the creator of Marpa is provided.
- (Source: 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://blogs.perl.org/users/jeffrey_kegler/2011/11/marpa-v-perl-regexes-some-numbe
-rs.html
-\end_layout
+\begin_inset CommandInset citation
+LatexCommand citep
+key "marpaComparison"
 
 \end_inset
 
-)
+
 \end_layout
 
 \begin_layout Standard
-\begin_inset Tabular
-<lyxtabular version="3" rows="5" columns="6">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-#nesting
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-libmarpa (C)
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Marpa::XS
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Regexp::Common
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-tchrist
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Marpa::PP 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-4524.89
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-111.71
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3173.30
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-33429.33
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-47.39
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-100
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1180.64
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-58.96
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-62.09
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-197.25
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-15.35
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1000
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-117.16 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-10.28 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.53 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.84 
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.14
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3000
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-36.35
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.72
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.05
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.13
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-0.74 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
+\begin_inset Graphics
+	filename marpaComparison.png
+	scale 50
 
 \end_inset
 
@@ -1580,7 +1287,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename sTeXtoOMDOC.png
-	scale 55
+	scale 45
 
 \end_inset
 
@@ -1599,6 +1306,92 @@ sTeX to OMDoc conversion
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Marpa Context Free Grammar Parser
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+MathSemantifier
+\series default
+ will take the an auto-generated CFG and input from the 
+\series bold
+Web UI
+\series default
+ (discussed in more details in further sections) in order to produce possible
+ parse trees of the input.
+ Marpa Grammar Engine is the proposed.
+ It was already discussed above, so let us summarize the important points
+ that matter for this particular application.
+\end_layout
+
+\begin_layout Standard
+Marpa is
+\begin_inset CommandInset citation
+LatexCommand citep
+key "marpaParser"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Fast - it parses grammars in linear time.
+ This is critical since the size of the grammar is likely to be at least
+ linear in the number of notations
+\end_layout
+
+\begin_layout Itemize
+Powerful - it can parse left, right and middle recursions.
+ Since it is unclear what kind of recursions can occur in generated grammars,
+ and it would be a pity if the parse tree generator would need to be changed
+ midway because of it, it is better to choose something that can handle
+ all kinds of recursion
+\end_layout
+
+\begin_layout Itemize
+Convenient - Parser generation is unrestricted and exact, all that needs
+ to be provided is a CFG in BNF form.
+ Also, if several alternatives may yield a parse, all of them are considered.
+ This is critical, since this directly implies that it can deal with ambiguous
+ grammars
+\end_layout
+
+\begin_layout Itemize
+Flexibility - it provides control over the parsing process, giving out informati
+on about which rules have been recognized so far and their locations.
+ This is again extremely important because otherwise, once again, semantificatio
+n would be simply impossible
+\end_layout
+
+\begin_layout Standard
+Obviously, since the CFG will be ambiguous this is the most computationally
+ intensive part.
+ The scalability of the final product will mostly depend on the efficiency
+ of this step.
+\end_layout
+
+\begin_layout Standard
+As a side note, Marpa does not have a Scala API, so, instead, the Perl API
+ will be used.
+ This implies that the result parse trees will need to be transported somehow
+ to the core application in MMT.
+ For that purpose the intended solution is LWP 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "LWP"
+
+\end_inset
+
+.
+ LWP is a set of Perl modules which provide a simple and consistent API
+ to the World Wide Web.
+ After experimenting with the API, the conclusion was that the API is simple
+ and powerful enough for the current purpose.
 \end_layout
 
 \begin_layout Section
@@ -1725,8 +1518,8 @@ has 2.
 \begin_inset Formula $72$
 \end_inset
 
- readings come from, since each notation can gowith any other notation without
- any restrictions.
+ readings come from, since each notation can be combined with any other
+ notation without any restrictions.
 \end_layout
 
 \begin_layout Section
@@ -1738,72 +1531,86 @@ Project Goals and Challenges
 \end_layout
 
 \begin_layout Standard
-MathSemantifier is intended to be a way of generating dynamically the full
- set of possible interpretations.
- The author inputs LaTeX or MathML and the engine suggests possible ways
- of disambiguation.
- The author ultimately decides which one is the correct one.
- This is the easiest of the objectives, since it requires only matching
- mathematical notations against given expressions.
- The main challenges here are:
+The main goals of the project are:
 \end_layout
 
 \begin_layout Itemize
-Aggregating the mathematical notation database that the MMT system of the
- KWARC research group has accumulated, and using the result to match against
- the input
+Generating the correct set of parses efficiently and effectively
 \end_layout
 
 \begin_layout Itemize
-Dealing with the exponential complexity which is entailed by ambiguity
+Providing opportunities for improvement for further research in the area
 \end_layout
 
 \begin_layout Standard
-When the first step succeeds and dynamic semantification is possible, the
- next step will be to restrict the number of choices given to the user or/and
- sort them in a reasonable way such that the user needs to make the least
- number of decisions.
- This step will ultimately decide whether the result software is usable
- or not.
+The challenges on the way of achieving a way of generating dynamically the
+ full set of semantic parse trees are:
+\end_layout
+
+\begin_layout Itemize
+Aggregating the mathematical notation database that the MMT system into
+ a CFG
+\end_layout
+
+\begin_layout Itemize
+Dealing with scalability issues which are entailed by ambiguity
+\end_layout
+
+\begin_layout Itemize
+The set of correct parses should be a subset of the set of generated parses
+\end_layout
+
+\begin_layout Itemize
+The set of generated parses should ideally be a subset of the set of correct
+ parses too
 \end_layout
 
 \begin_layout Standard
-Some ideas of how this could be achieved include:
+This section describes how 
+\series bold
+MathSemantifier 
+\series default
+how the current implementation achieves the above goals and to what extent
+ the challenges described are overcome and how.
 \end_layout
 
-\begin_layout Itemize
-Restricting the mathematical notations that are matched against an input
- by asking the user to choose from a list of topics that can be encountered
- in the current document
+\begin_layout Subsection
+MathSemantifier 
+\series medium
+Architecture
 \end_layout
 
-\begin_layout Itemize
-Using the context or previous results of semantification to throw away some
- of the choices, possibly by determining the topic of the context by a heuristic
-, or by grouping notations that usually appear together (Ex: If an arithmetic
- '-' is encountered, then an arithmetic '+' would not be strange to appear
- in the next notations as opposed to '+' meaning anything else, like a limit
- qualifier or for string addition)
+\begin_layout Standard
+The architecture can be roughly divided into four parts:
 \end_layout
 
-\begin_layout Itemize
-Assigning different probabilities of occurrence to different notations (either
- manually or by applying a Machine Learning framework)
+\begin_layout Enumerate
+
+\series bold
+Web UI
 \end_layout
 
-\begin_layout Itemize
-Theory graph methods from SMGLoM 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "SMGLOM"
+\begin_layout Enumerate
 
-\end_inset
-
-
+\series bold
+MMT Backend
 \end_layout
 
-\begin_layout Section
-Math Semantifier Components
+\begin_layout Enumerate
+
+\series bold
+Parsing Backend
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+MMT Notations DB
+\end_layout
+
+\begin_layout Standard
+The diagram below shows the subparts of each components.
+ The components will be discussed in more details in the further subsections.
 \end_layout
 
 \begin_layout Standard
@@ -1816,7 +1623,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename myThesisComponents_diagram.png
-	scale 40
+	width 13cm
 
 \end_inset
 
@@ -1824,7 +1631,11 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MathSemantifier Architecture
+
+\series bold
+MathSemantifier
+\series default
+ Architecture
 \end_layout
 
 \end_inset
@@ -1835,219 +1646,301 @@ MathSemantifier Architecture
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Component communication
 \end_layout
 
 \begin_layout Standard
-The start architecture will employ a multistep formulae semantification.
- Let's take a detailed look at the work packages that are associated with
- accomplishing each step.
+Regarding the communication between parts:
+\end_layout
+
+\begin_layout Itemize
+MMT Backends and MMT Notation DB are both part of the MMT Server Application
+\end_layout
+
+\begin_layout Itemize
+All the other connections are implemented using the 
+\series bold
+REST 
+\series default
+protocol, using simple 
+\series bold
+POST 
+\series default
+requests
+\end_layout
+
+\begin_layout Standard
+This also implies that the all the different components are not intended
+ to run on one machine, especially the 
+\series bold
+Web UI 
+\series default
+and
+\series bold
+ 
+\series default
+the reset of the components.
+\end_layout
+
+\begin_layout Standard
+The frontend / backend separation reveals opportunities for distributed
+ solutions of such a system, in case scalability becomes an issue.
+\end_layout
+
+\begin_layout Subsection
+Web User Interface
+\end_layout
+
+\begin_layout Standard
+The 
+\series bold
+Web UI 
+\series default
+is the simplest of the components of 
+\series bold
+MathSemantifier.
+
+\series default
+ It is intended to be a lightweight solution that queries a server for the
+ results of more computationally intensive tasks.
+\end_layout
+
+\begin_layout Standard
+The interface consists of an input area, where 
+\series bold
+MathML 
+\series default
+needs to be inputted, and two options:
+\end_layout
+
+\begin_layout Enumerate
+Semantify
+\end_layout
+
+\begin_layout Enumerate
+Show Semantic Tree
+\end_layout
+
+\begin_layout Standard
+Since the second option is technically more powerful that the first one,
+ since it generates all the possibilities at once, it is perfect to demo
+ the results the system can give.
+\end_layout
+
+\begin_layout Standard
+A series of example in 
+\series bold
+MathML 
+\series default
+is provided to show how the number of produced parse trees scales when varying
+ the length and complexity of the input.
+\end_layout
+
+\begin_layout Subsection
+MMT Backend
+\end_layout
+
+\begin_layout Standard
+The MMT Backend is a 
+\series bold
+Server Extension 
+\series default
+that is part of MMT.
+ 
+\end_layout
+
+\begin_layout Standard
+It is the core of the system, that assembles the results from all the other
+ parts together into 
+\series bold
+Semantic Trees.
+\end_layout
+
+\begin_layout Standard
+Its subcomponents are discussed below.
 \end_layout
 
 \begin_layout Subsubsection
-WP 1: Grammar Generator
+Context Free Grammar Generator
 \end_layout
 
 \begin_layout Standard
-The Grammar Generator will be a Scala application that aggregates all the
- knowledge contained in the MMT Notations into one Context Free Grammar.
- The grammar will be shaped into the normal form accepted by the Grammar
+The Grammar Generator aggregates all the knowledge contained in the MMT
+ Notations into one Context Free Grammar.
+ The grammar will be shaped into the normal form accepted by the Marpa Grammar
  Engine.
  To achieve this, the format used to store the notations in MMT will need
  to be decomposed into CFG rules.
- Otherwise said, the tree-like structure of each formula, that is now stored
- as nested applications of some Scala case classes will need to be serialized
- into CFG rules.
+ Otherwise said, the tree-like structure of each formula, that is stored
+ as nested applications of 
+\series bold
+MMT Markers 
+\series default
+(discussed previously) needs to be serialized into CFG rules.
 \end_layout
 
 \begin_layout Standard
-This will be done in 2 steps:
+This is done in several steps:
 \end_layout
 
 \begin_layout Enumerate
-Transform the nested rules into an intermediate serialized representation
+Break apart the 
+\series bold
+MMT Marker 
+\series default
+trees into level by level representations
 \end_layout
 
 \begin_layout Enumerate
-Transform the serialized representation into valid CFG rules
+Transform the intermediate representation into valid CFG rules
 \end_layout
 
 \begin_layout Enumerate
-Optimize if possible (for example by removing rules that are not used anywhere)
+Optimize if possible (will be discussed in detail in the subsequent sections)
 \end_layout
 
 \begin_layout Subsubsection
-WP 2: Parse Tree Generator
+Semantic Tree Generator
 \end_layout
 
 \begin_layout Standard
-The Parse Tree Generator will take the Grammar generated at the previous
- steps and input from the Web Editor in order to produce possible parse
- trees of the input.
- Marpa Grammar Engine is the proposed, and we can see once again at this
- step why it is a good choice for this purpose.
- 
+The 
+\series bold
+Semantic Tree Generator 
+\series default
+works by recursively querying the 
+\series bold
+Parsing Backend 
+\series default
+and using the result to construct a the tree of possible meanings.
 \end_layout
 
 \begin_layout Standard
-Marpa is
-\end_layout
-
-\begin_layout Itemize
-Fast - it parses grammars in linear time.
- This is critical since the size of the grammar is likely to be at least
- linear in the number of notations
-\end_layout
-
-\begin_layout Itemize
-Powerful - it can parse left, right and middle recursions.
- Since it is unclear what kind of recursions can occur in generated grammars,
- and it would be a pity if the parse tree generator would need to be changed
- midway because of it, it is better to choose something that can handle
- all kinds of recursion
-\end_layout
-
-\begin_layout Itemize
-Convenient - Parser generation is unrestricted and exact, all that needs
- to be provided is a CFG in BNF form.
- Also, if several alternatives may yield a parse, all of them are considered.
- This is critical, since this directly implies that it can deal with ambiguous
- grammars
-\end_layout
-
-\begin_layout Itemize
-Flexibility - it provides control over the parsing process, giving out informati
-on about which rules have been recognized so far and their locations.
- This is again extremely important because otherwise, once again, semantificatio
-n would be simply impossible
+The parse trees stored in MMT have the following structure:
 \end_layout
 
 \begin_layout Standard
-Obviously, since the Grammar will be ambiguous this is the most computationally
- intensive part.
- The scalability of the final product will mostly depend on the efficiency
- of this step.
-\end_layout
-
-\begin_layout Standard
-As a side note, Marpa does not have a Scala API, so, instead, the Perl API
- will be used.
- This implies that the result parse trees will need to be transported somehow
- to the core application, which will naturally be a Scala application since
- it is strongly related to SAlly and MMT, both being Scala/Java based.
- For that purpose the intended solution is LWP 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "LWP"
+\begin_inset Graphics
+	filename parseTreeStructure.png
+	scale 60
 
 \end_inset
 
-.
- LWP is a set of Perl modules which provide a simple and consistent API
- to the World Wide Web.
- After experimenting with the API, the conclusion was that the API is simple
- and powerful enough for the current purpose.
-\end_layout
 
-\begin_layout Subsubsection
-WP 3: Semantifier
 \end_layout
 
 \begin_layout Standard
-The Semantifier is expected to be one of the easier steps of the process,
- since it is applied when the parse trees are already generated and is only
- concerned with getting the final result.
- For that purpose, it should take the input from the Web Editor, possible
- Parse Trees and the arguments for the notations involved in the Parse Trees
- used.
- Having all this, it can then query MMT the final structure of the result
- and finalize the semantification process.
+This simple structure allows for a flexible way of parse tree storage.
  
 \end_layout
 
-\begin_layout Subsubsection
-WP 4: Web Editor Integration
-\end_layout
+\begin_layout Itemize
 
-\begin_layout Standard
-The Web Editor will produce the input formulae and present to the user the
- semantified result.
- While it is being designed initially for such a use case in order to create
- a product that can be easily presented to a potential user, the input and
- output will use the generic REST protocol, which allows for any type of
- document processing as long as there exists an endpoint which can send
- it over HTTP.
-\end_layout
-
-\begin_layout Standard
-In the current implementation the endpoint will be a SAlly 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Sally"
-
-\end_inset
-
- instance, which will have the core logic inside it.
-\end_layout
-
-\begin_layout Subsubsection
-WP 5: Core
-\end_layout
-
-\begin_layout Standard
-The Core part will contain the control logic and put all the parts together.
- It will direct the workflow like described below.
+\series bold
+Variants - 
+\series default
+represents a list of possible readings.
+ It will always be the top node in any parse tree.
 \end_layout
 
 \begin_layout Itemize
-Initialization
+
+\series bold
+Notation - 
+\series default
+a notation detected in the input.
+ It contains its name and arguments.
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-Initialize Web Editor settings.
-\end_layout
-
-\begin_layout Enumerate
-Send a request for the grammar to be generated
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
-Semantification
+
+\series bold
+Argument - 
+\series default
+an argument of a notation.
+ The plugin is recursively called on it to construct its meaning subtree
+ as well.
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-Get the input from Web Editor
+\begin_layout Itemize
+
+\series bold
+RawString - 
+\series default
+the ground term representation
 \end_layout
 
-\begin_layout Enumerate
-Query the parse trees for the input
-\end_layout
-
-\begin_layout Enumerate
-Query for the final semantified result
-\end_layout
-
-\end_deeper
 \begin_layout Standard
-It is expected that the Core will be a SAlly based Scala application which
- interfaces with an MMT instance and a Parse Tree Generation Server by means
- of the REST protocol.
- Since the application seems to need a lot of routing of data, Apache Camel
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "ApacheCamel"
+This structure is important because, in case another application wants to
+ access the parse trees and process them, this structure will need to be
+ dealt with.
+\end_layout
 
-\end_inset
+\begin_layout Standard
 
- is a natural choice in order to implement that, since it was built exactly
- for defining routes and mediation rules, and is available in Java.
+\end_layout
+
+\begin_layout Subsubsection
+Content MathML Generator
+\end_layout
+
+\begin_layout Subsection
+Parsing Backend
+\end_layout
+
+\begin_layout Subsubsection
+Context Free Grammar Parser
+\end_layout
+
+\begin_layout Subsubsection
+Parse Tree Generator
 \end_layout
 
 \begin_layout Section
-Conclusions and Time Plan
+Optimizations
+\end_layout
+
+\begin_layout Section
+Further work
+\end_layout
+
+\begin_layout Subsection
+Suggestions for optimizations
+\end_layout
+
+\begin_layout Subsection
+Requirements for a more suitable Notation Database 
+\end_layout
+
+\begin_layout Subsection
+Requirements for a more suitable Parsing Framework
+\end_layout
+
+\begin_layout Section
+Evaluation
+\end_layout
+
+\begin_layout Subsection
+Guided semantification
+\end_layout
+
+\begin_layout Subsection
+Semantic Tree Generation
+\end_layout
+
+\begin_layout Subsection
+Performance of the Semantic Tree Generation
+\end_layout
+
+\begin_layout Subsection
+The backend APIs
+\end_layout
+
+\begin_layout Section
+Conclusions 
 \end_layout
 
 \begin_layout Subsection
@@ -2081,6 +1974,10 @@ The system will be tested for scalability using tests dynamically generated
 \end_inset
 
  of cases.
+\end_layout
+
+\begin_layout Subsection
+Further work
 \end_layout
 
 \begin_layout Standard
