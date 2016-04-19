@@ -167,7 +167,7 @@ The scientific community produces a large number of mathematical papers
 \end_layout
 
 \begin_layout Subsection
-History
+History and Motivation
 \end_layout
 
 \begin_layout Standard
@@ -1601,12 +1601,24 @@ sTeX to OMDoc conversion
 
 \end_layout
 
-\begin_layout Subsection
-Marpa Parsing Engine for Auto-generated CFG Parsing
+\begin_layout Section
+Use Cases
 \end_layout
 
-\begin_layout Section
-Use Cases #rewrite
+\begin_layout Standard
+MathSemantifier has two major use cases.
+ 
+\end_layout
+
+\begin_layout Itemize
+The user can guide the semantification directly, by choosing the correct
+ matching range, notation and argument positions.
+ 
+\end_layout
+
+\begin_layout Itemize
+The other option is to ask for all the possibilities and get all the semantic
+ trees.
 \end_layout
 
 \begin_layout Subsection
@@ -1614,8 +1626,120 @@ User Guided Semantification
 \end_layout
 
 \begin_layout Standard
-First MathSemantifier is intended to be a way of generating dynamically
- the full set of possible interpretations.
+The user provides Presentation MathML as input to the system, then uses
+ the 
+\series bold
+Semantify 
+\series default
+button to reveal a list of top level notations as shown below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename guided1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After determining which notation is the correct one, the user needs to make
+ sure that the arguments were detected properly.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename guided2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, the resulting Content MathML will be displayed.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename guided3.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Note that while the workflow is certainly not ideal, this study is intended
+ to be a proof of concept and an aid to further similar research.
+\end_layout
+
+\begin_layout Subsection
+Semantic Tree Generation
+\end_layout
+
+\begin_layout Standard
+The easier but computationaly more expensive alternative is to simply generate
+ all the possible parse trees at once and display them.
+ The user simply needs to click the 
+\series bold
+Show Semantic Tree
+\series default
+ option.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename auto1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For this particular example, there is a total of 72 different readings.
+ This can be easily explained, since 
+\series bold
+Invisible Times 
+\series default
+and 
+\series bold
+Arithmetic Plus
+\series default
+ have each 6 different notations, and 
+\series bold
+Mod 
+\series default
+has 2.
+ 
+\begin_inset Formula $6\cdot6\cdot2=72$
+\end_inset
+
+ explains exactly where the 
+\begin_inset Formula $72$
+\end_inset
+
+ readings come from, since each notation can gowith any other notation without
+ any restrictions.
+\end_layout
+
+\begin_layout Section
+Implementation
+\end_layout
+
+\begin_layout Subsection
+Project Goals and Challenges
+\end_layout
+
+\begin_layout Standard
+MathSemantifier is intended to be a way of generating dynamically the full
+ set of possible interpretations.
  The author inputs LaTeX or MathML and the engine suggests possible ways
  of disambiguation.
  The author ultimately decides which one is the correct one.
@@ -1632,10 +1756,6 @@ Aggregating the mathematical notation database that the MMT system of the
 
 \begin_layout Itemize
 Dealing with the exponential complexity which is entailed by ambiguity
-\end_layout
-
-\begin_layout Subsection
-Semantic Tree Generation
 \end_layout
 
 \begin_layout Standard
