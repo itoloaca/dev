@@ -331,7 +331,7 @@ apply
 \begin_layout Standard
 \begin_inset Graphics
 	filename pmmlANDcmml.png
-	scale 40
+	width 11.5cm
 
 \end_inset
 
@@ -1404,8 +1404,8 @@ MathSemantifier has two major use cases.
 \end_layout
 
 \begin_layout Itemize
-The user can guide the semantification directly, by choosing the correct
- matching range, notation and argument positions.
+The user can guide the semantification of the top symbol directly, by choosing
+ the correct matching range, notation and argument positions.
  
 \end_layout
 
@@ -1566,12 +1566,28 @@ The set of generated parses should ideally be a subset of the set of correct
 \end_layout
 
 \begin_layout Standard
-This section describes how 
+This following subsections how 
 \series bold
-MathSemantifier 
+MathSemantifier
 \series default
-how the current implementation achieves the above goals and to what extent
- the challenges described are overcome and how.
+ achieves the above goals.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hyperref[6]{Section 6}
+\end_layout
+
+\end_inset
+
+ shows to what extent the challenges described are overcome and how.
 \end_layout
 
 \begin_layout Subsection
@@ -1887,20 +1903,211 @@ This structure is important because, in case another application wants to
 Content MathML Generator
 \end_layout
 
+\begin_layout Standard
+The final part of any of the semantification processes is converting the
+ internal represenation to a standard one, which is CMML in this case.
+ MMT provides a simple API which requires:
+\end_layout
+
+\begin_layout Enumerate
+The notation path
+\end_layout
+
+\begin_layout Enumerate
+The argument maps
+\end_layout
+
+\begin_layout Standard
+Both of which are available in my representation structure.
+ The argument path is obtained by extacting the argument number from the
+ argument name, and looking up in a map of paths created at the time of
+ grammar creation.
+ This implies the grammar rule names are overloaded with meaning, however,
+ the possibilities are very limited in this aspect since the parsing framework
+ used does not give complete control over the parsing process.
+\end_layout
+
 \begin_layout Subsection
 Parsing Backend
+\end_layout
+
+\begin_layout Standard
+The parsing backend consists of two parts.
+ 
 \end_layout
 
 \begin_layout Subsubsection
 Context Free Grammar Parser
 \end_layout
 
+\begin_layout Standard
+First of all, the the CFG needs to be queried and parsed.
+ This is implemented using lazy evaluation, which means that it is only
+ done when a request actually comes.
+\end_layout
+
+\begin_layout Standard
+The serialized CFG is unpacked and feed to the Marpa Parser Generator.
+\end_layout
+
 \begin_layout Subsubsection
 Parse Tree Generator
 \end_layout
 
+\begin_layout Standard
+The more complex of the two parts is actually going throught the parse trees
+ and extracting useful information.
+ Note that going through all the parse trees is not practical, so only the
+ first 
+\begin_inset Formula $N$
+\end_inset
+
+ (currently 
+\begin_inset Formula $1000$
+\end_inset
+
+) parse trees are processed.
+ This still gives the correct results in most cases since the grammar rules
+ are optimized for giving preference to parse trees that are more likely
+ to be correct (discussed in more detail in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hyperref[6]{section 6}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
 \begin_layout Section
-Optimizations
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{6}
+\end_layout
+
+\end_inset
+
+Optimizations and Heuristics
+\end_layout
+
+\begin_layout Standard
+This section describes the attempts made in order to deal with the overwhelming
+ ambiguity of mathematical notations and produce actual results.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Only notations on the whole input are matched.
+ Subterms are matched directly by the 
+\series bold
+Semantic Tree 
+\series default
+plugin.
+\end_layout
+
+\begin_layout Enumerate
+The number of parse trees is limited to 
+\begin_inset Formula $N=1000$
+\end_inset
+
+.
+ The number of parse trees was empirically determined to include the set
+ of correct parses for the examples used (see the 
+\series bold
+Evaluation 
+\series default
+section
+\series bold
+).
+\end_layout
+
+\begin_layout Enumerate
+The non-empty alternatives in the CFG are put first.
+ The Grammar Parser has a predictable behaviour of going through the alternative
+s left to right, and since empty rules match 
+\series bold
+always
+\series default
+, it is imperative that other alternative are attempted first.
+ Note that only after this optimization any kind of results were possible
+ to achieve on non-trivial input.
+\end_layout
+
+\begin_layout Enumerate
+The CFG includes precedences correctly.
+ This weeds out a large number of incorrect readings.
+\end_layout
+
+\begin_layout Enumerate
+Sub-term sharing is part of the 
+\series bold
+MathML 
+\series default
+standard, and within one request, the response will try to share its terms
+ as much as possible in order to compress the output.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+The Semantic Tree 
+\series default
+plugin makes use of memoziation to reduce one dimension of the exponential
+ blowup as explained on the following example.
+ 
+\series bold
+
+\begin_inset Formula $2+3$
+\end_inset
+
+ 
+\series default
+has 6 possible readings, because 
+\begin_inset Formula $+$
+\end_inset
+
+ is defined 6 times, between natural, integer, real numbers and so on.
+ However, 
+\begin_inset Formula $2$
+\end_inset
+
+ and 
+\begin_inset Formula $3$
+\end_inset
+
+ - these subterms do not contain any notations, yet, the plugin will need
+ to know that for every possibility of 
+\begin_inset Formula $+$
+\end_inset
+
+.
+ Memoization allows to omit a large number of 
+\series bold
+POST 
+\series default
+requests even in this simple example, which results into a signficant speedup
+ of a factor of approximately 4 (13 
+\series bold
+POST
+\series default
+ requests vs 3 
+\series bold
+POST 
+\series default
+requests).
+ Also, slight modification of the input benefit of a signifcant speed-up,
+ as well as using a previous input as a subterm in a new input.
 \end_layout
 
 \begin_layout Section
@@ -1908,18 +2115,126 @@ Further work
 \end_layout
 
 \begin_layout Subsection
-Suggestions for optimizations
+Suggestions for further optimizations
+\end_layout
+
+\begin_layout Enumerate
+The CFG could be checked for unused rules, and, more importantly, converted
+ to BNF, for instance
+\end_layout
+
+\begin_layout Enumerate
+Theory based optimization - either let the user specify which theories to
+ create the grammar from, or take into consideration that notations from
+ the same theory are likely to be close in the input (for instance, 
+\begin_inset Formula $-$
+\end_inset
+
+ and 
+\begin_inset Formula $+$
+\end_inset
+
+ are more likely to both be used as arithmetic sybmols in an expression,
+ than only one of them)
+\end_layout
+
+\begin_layout Enumerate
+Sequence arguments (for instance, 
+\begin_inset Formula $2+3+4+5+6$
+\end_inset
+
+) currently generate a very high number of possible parses.
+ If more control over parsing were possible, parsing of sequence arguments
+ should be greedy - attempting to take in as many delimiter argument pairs
+ as there are.
 \end_layout
 
 \begin_layout Subsection
 Requirements for a more suitable Notation Database 
 \end_layout
 
+\begin_layout Enumerate
+The most important optimization would be adding types to the notation input
+ arguments and output.
+ This would allow for type based parsing, which would certainly be more
+ efficient and generate more relevant results
+\end_layout
+
+\begin_layout Enumerate
+Grouping similar notations within a theory.
+ For example, arithmetic plus on natural, integer or real number should
+ be possible to connect somehow.
+ If the notations have types, the it will naturally occur by grouping the
+ notations with the same types into single rules.
+\end_layout
+
+\begin_layout Enumerate
+For the 
+\series bold
+csymbol 
+\series default
+used in an 
+\series bold
+apply 
+\series default
+tag, the notation should cross-reference it with the part of the representation
+ it corresponds to, since it is not otherwise clearly specified.
+\end_layout
+
 \begin_layout Subsection
 Requirements for a more suitable Parsing Framework
 \end_layout
 
+\begin_layout Enumerate
+Full control over the parsing process is a requirement for further work
+\end_layout
+
+\begin_layout Enumerate
+The ability to handle types, precedences and associativity
+\end_layout
+
+\begin_layout Enumerate
+The ability to handle greedy parsing - most CFG parsing frameworks have
+ the counted rule 
+\begin_inset Formula $Expression::=Expression+$
+\end_inset
+
+, which has a similar meaning to the 
+\begin_inset Formula $+$
+\end_inset
+
+ found in a 
+\series bold
+regex.
+ 
+\series default
+However, 
+\series bold
+regexes
+\series default
+ actually will do a greedy match, the more appropriate match being then
+ 
+\begin_inset Formula $Expression+?$
+\end_inset
+
+, the non-greedy version.
+ This is critical to reduce the number of useless parse trees when dealing
+ with Sequence Arguments
+\end_layout
+
 \begin_layout Section
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{8}
+\end_layout
+
+\end_inset
+
 Evaluation
 \end_layout
 
@@ -1943,41 +2258,42 @@ The backend APIs
 Conclusions 
 \end_layout
 
-\begin_layout Subsection
-Implementation
-\end_layout
-
 \begin_layout Standard
-To summarize the ideas presented in this paper, MathSemantifier is a conceptuall
-y important enhancement to the existing semantification solutions.
- Its implementation is feasible for the planned timespan and the design
- is elaborate enough and is highly likely not to suffer big conceptual changes.
+The conclusion of this study is the proof of concept architecture and implementa
+tion of a system capable of converting 
+\series bold
+Presentation MathML
+\series default
+ to all the possible meanings, which is a list of 
+\series bold
+Content MathML
+\series default
+.
+ The testing revealed that the system is able to recognize correctly single
+ top level symbols, as well as the whole set of readings of expressions
+ of nesting depth up to 3 (this is not the limit, but not enough testing
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+hyperref[8]{section 8}
 \end_layout
 
-\begin_layout Subsection
-Testing
-\end_layout
-
-\begin_layout Standard
-The system will be tested for scalability using tests dynamically generated
- by extracting MathML from archives of papers, and, naturally, by actual
- user input.
- The results will be considered satisfactory if, while having queries under
- 
-\begin_inset Formula $500ms$
 \end_inset
 
-, the results of such a query will still be meaningful, which in this context
- would mean having the expected result among the possible interpretations
- in more than 
-\begin_inset Formula $90\%$
-\end_inset
-
- of cases.
-\end_layout
-
-\begin_layout Subsection
-Further work
+ is done beyond that).
+ This shows that it is certainly possible to aggregate the knowledge from
+ the MMT Notations and to use it for parsing purposes.
+ However, both the Notations and the Parsing Framework need significant
+ improvements in order for the system to be scalable beyond what is presented
+ in the previous section.
+ The most important part of this study is, therefore, the optimizations
+ and heuristics used, and other ones that further research could benefit
+ from.
 \end_layout
 
 \begin_layout Standard
