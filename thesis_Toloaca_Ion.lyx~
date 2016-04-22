@@ -289,7 +289,20 @@ An example of PMML and CMML code for the expression
 \begin_inset Formula $x+y$
 \end_inset
 
- is provided below.
+ is provided in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:1}
+\end_layout
+
+\end_inset
+
+.
  Note how the 
 \series bold
 mrow
@@ -331,9 +344,43 @@ apply
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename pmmlANDcmml.png
-	width 11.5cm
+	width 16.5cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+PMML and CMML 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:1}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -980,7 +1027,7 @@ key "marpaComparison"
 \begin_layout Standard
 \begin_inset Graphics
 	filename marpaComparison.png
-	scale 50
+	width 16cm
 
 \end_inset
 
@@ -1016,7 +1063,7 @@ As it was mentioned in the previous sections, the grammar generated will
 \end_layout
 
 \begin_layout Subsection
-Extracting formulae from mathematical documents
+Extracting Formulae from Mathematical Documents
 \end_layout
 
 \begin_layout Standard
@@ -1139,7 +1186,20 @@ The original format that MMT uses to store the notations is of high relevance,
 case class 
 \series default
 tree.
- Several examples are provided below.
+ Several examples are provided in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:2}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -1152,7 +1212,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename marker.png
-	scale 50
+	width 16cm
 
 \end_inset
 
@@ -1160,7 +1220,20 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-MMT Notation Markers (severely simplified)
+MMT Notation Markers 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:2}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1275,7 +1348,19 @@ key "OMDOC"
 \end_layout
 
 \begin_layout Standard
-Below is an example of the arithmetic plus notation written in sTeX and
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:3}
+\end_layout
+
+\end_inset
+
+ contains an example of the arithmetic plus notation written in sTeX and
  the equivalent in MathML.
 \end_layout
 
@@ -1289,7 +1374,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename sTeXtoOMDOC.png
-	scale 45
+	width 16cm
 
 \end_inset
 
@@ -1297,7 +1382,20 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-sTeX to OMDoc conversion
+sTeX to OMDoc conversion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:3}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1397,7 +1495,24 @@ key "LWP"
 \end_layout
 
 \begin_layout Section
-Use Cases
+Use Cases 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ednote{The screenshots will be replaced after I include some better formatting/C
+SS for my frontend} 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1426,13 +1541,181 @@ The user provides Presentation MathML as input to the system, then uses
 \series bold
 Semantify 
 \series default
-button to reveal a list of top level notations as shown below.
+button to reveal a list of top level notations as shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:4}
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided1.png
 	scale 50
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Top level notations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename guided2.png
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Argument choice 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:5a}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename guided3.png
+	width 8cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Context MathML
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:5b}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Semantification
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1441,40 +1724,58 @@ button to reveal a list of top level notations as shown below.
 
 \begin_layout Standard
 After determining which notation is the correct one, the user needs to make
- sure that the arguments were detected properly.
-\end_layout
+ sure that the arguments were detected properly (see 
+\begin_inset ERT
+status open
 
-\begin_layout Standard
-\begin_inset Graphics
-	filename guided2.png
-	scale 50
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:5a}
+\end_layout
 
 \end_inset
 
-
+).
 \end_layout
 
 \begin_layout Standard
-Finally, the resulting Content MathML will be displayed.
-\end_layout
+Finally, the resulting Content MathML will be displayed, as shown in 
+\begin_inset ERT
+status open
 
-\begin_layout Standard
-\begin_inset Graphics
-	filename guided3.png
-	scale 50
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:5b}
+\end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Note that while the workflow is certainly not ideal, this study is intended
- to be a proof of concept and an aid to further similar research.
+.
 \end_layout
 
 \begin_layout Subsection
 Semantic Tree Generation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ednote{Should I try to export the Semantic Tree in some JSON format and
+ make a nice tree-like visualization?}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1488,6 +1789,16 @@ Show Semantic Tree
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename auto1.png
 	scale 50
@@ -1495,10 +1806,54 @@ Show Semantic Tree
 \end_inset
 
 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Semantic Tree Results 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:6}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-For this particular example, there is a total of 72 different readings.
+For the example shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:6}
+\end_layout
+
+\end_inset
+
+, there is a total of 72 different readings.
  This can be easily explained, since 
 \series bold
 Invisible Times 
@@ -1603,35 +1958,20 @@ Architecture
 \end_layout
 
 \begin_layout Standard
-The architecture can be roughly divided into four parts:
+The architecture can be roughly divided into four parts as shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:7}
 \end_layout
 
-\begin_layout Enumerate
+\end_inset
 
-\series bold
-Web UI
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-MMT Backend
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-Parsing Backend
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-MMT Notations DB
-\end_layout
-
-\begin_layout Standard
-The diagram below shows the subparts of each components.
+.
  The components will be discussed in more details in the further subsections.
 \end_layout
 
@@ -1645,7 +1985,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename myThesisComponents_diagram.png
-	width 13cm
+	width 16cm
 
 \end_inset
 
@@ -1657,7 +1997,20 @@ status open
 \series bold
 MathSemantifier
 \series default
- Architecture
+ Architecture 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:7}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1845,9 +2198,50 @@ The parse trees stored in MMT have the following structure:
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename parseTreeStructure.png
-	scale 60
+	scale 70
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Semantic Parse Tree Structure 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:8}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
@@ -1855,7 +2249,20 @@ The parse trees stored in MMT have the following structure:
 \end_layout
 
 \begin_layout Standard
-This simple structure allows for a flexible way of parse tree storage.
+This simple structure shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:8}
+\end_layout
+
+\end_inset
+
+ allows for a flexible way of parse tree storage.
  
 \end_layout
 
@@ -2154,6 +2561,14 @@ requests).
 Further work
 \end_layout
 
+\begin_layout Standard
+The study presented in this paper reached certain results, however there
+ is a long way yet to a fully automatic and scalable system that could handle
+ large collections of papers without any supervision.
+ Below there are some suggestions that further research could make use of
+ in order to get closer to this goal.
+\end_layout
+
 \begin_layout Subsection
 Suggestions for further optimizations
 \end_layout
@@ -2276,6 +2691,9 @@ label{8}
 \end_inset
 
 Evaluation 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
