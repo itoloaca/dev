@@ -10,6 +10,8 @@
 \usepackage{hyperref}
 \hypersetup{pdftex,colorlinks=true,allcolors=blue}
 \usepackage{hypcap}
+\usepackage{a4wide}
+\usepackage[show]{ed}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -32,7 +34,7 @@
 \output_sync 0
 \bibtex_command bibtex
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize default
@@ -1329,7 +1331,7 @@ Web UI
 \end_layout
 
 \begin_layout Standard
-Marpa is
+Marpa is 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "marpaParser"
@@ -2273,7 +2275,24 @@ label{8}
 
 \end_inset
 
-Evaluation (Incomplete)
+Evaluation 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ednote{The glossary needs to be fixed to some extend before I can do a proper
+ evaluation}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2390,7 +2409,7 @@ hyperref[8]{section 8}
 LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "bibtexDatabase"
-options "bibtotoc,plainnat"
+options "bibtotoc,alpha-fr"
 
 \end_inset
 
