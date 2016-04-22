@@ -1082,8 +1082,8 @@ LaTeX
 
 \end_inset
 
-, it is natural that a method of extracting MathML formulae from mathematical
- documents is provided.
+, a method of extracting MathML formulae from mathematical documents needs
+ to be provided.
  A simple way of achieving that would be by using the same method as MathWebSear
 ch 
 \begin_inset CommandInset citation
@@ -1094,6 +1094,20 @@ key "MWS12"
 
  is using in order to extract MathML formulae from documents containing
  MathML formulae and other information.
+ The structure of MWS is shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:mws}
+\end_layout
+
+\end_inset
+
+.
  MathWebSearch accepts MwsHarvest 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -1101,8 +1115,73 @@ key "MWSHarvest"
 
 \end_inset
 
- as crawled data.
- These harvests are in MathML, therefore perfectly suited for this application.
+ as from the crawler as seen in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:mws}
+\end_layout
+
+\end_inset
+
+.
+ These harvests are in Presentation MathML, therefore perfectly suited for
+ this application.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mwsStructure.png
+	width 16cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MathWebSearch Architecture 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:mws}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
