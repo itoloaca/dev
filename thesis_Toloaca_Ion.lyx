@@ -1013,8 +1013,21 @@ key "Jeff"
 \end_layout
 
 \begin_layout Standard
-To understand better the claim about efficiency, below a comparison between
- multiple regex parsers and Marpa made by the creator of Marpa is provided.
+To understand better the claim about efficiency, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:mcomp}
+\end_layout
+
+\end_inset
+
+ provides a comparison between multiple regex parsers and Marpa made by
+ the creator of Marpa is provided.
 \begin_inset CommandInset citation
 LatexCommand citep
 key "marpaComparison"
@@ -1025,9 +1038,51 @@ key "marpaComparison"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename marpaComparison.png
 	width 16cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Marpa Parser - Comparison with other Parsers 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:mcomp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
@@ -1135,13 +1190,10 @@ autoref{fig:mws}
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1638,6 +1690,7 @@ autoref{fig:4}
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1649,7 +1702,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided1.png
-	scale 50
+	width 14cm
 
 \end_inset
 
@@ -1685,6 +1738,7 @@ label{fig:4}
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1694,10 +1748,6 @@ status open
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1750,11 +1800,14 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided3.png
-	width 8cm
+	width 10cm
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1869,13 +1922,10 @@ Show Semantic Tree
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
-
-\begin_layout Plain Layout
-
-\end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -1956,6 +2006,22 @@ has 2.
 
  readings come from, since each notation can be combined with any other
  notation without any restrictions.
+\end_layout
+
+\begin_layout Subsubsection
+Term Sharing
+\end_layout
+
+\begin_layout Standard
+In order to minimize the Content MathML, the standard allows subtree sharing.
+ To enable this option, the 
+\series bold
+Use term sharing 
+\series default
+checkbox should be checked.
+ In that case, the terms will be shared along different readings.
+ This feature could be useful for an application that requires all the possible
+ readings, to minimize user interaction, for instance.
 \end_layout
 
 \begin_layout Section
@@ -2278,6 +2344,7 @@ The parse trees stored in MMT have the following structure:
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
