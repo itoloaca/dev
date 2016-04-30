@@ -727,6 +727,205 @@ To sum up, humans read mathematical documents bit by bit and throw away
 \end_layout
 
 \begin_layout Subsection
+An Introduction to MathSemantifier
+\end_layout
+
+\begin_layout Standard
+In order to understand what 
+\series bold
+MathSemantifier 
+\series default
+does, it is required that the Presentation Algorithm is explained first.
+ The reason for that is that 
+\series bold
+MathSemantifier 
+\series default
+is the exact opposite of the Presentation Algorithm, trying to convert PMML
+ to CMML, as opposed to CMML to PMML.
+\end_layout
+
+\begin_layout Subsubsection
+Presentation Algorithm
+\end_layout
+
+\begin_layout Standard
+The presentation algorithm has its main goal to covert Content MathML to
+ Presentation MathML, using a database of notation renderings.
+ In 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:presentation_output}
+\end_layout
+
+\end_inset
+
+ a typical example of what the presentation algorithm produces is displayed.
+ The
+\series bold
+ 
+\series default
+first child of the 
+\series bold
+semantics 
+\series default
+node contains the PMML that corresponds to the CMML contained in the 
+\series bold
+annotation-xml 
+\series default
+node.
+ In order to produce this output, the algorithm used the notation 
+\series bold
+natarith addition (
+\series default
+shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:presentation_output}
+\end_layout
+
+\end_inset
+
+ as well).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename present_math.png
+	width 8cm
+	height 5cm
+	BoundingBox 0bp 0bp 533bp 300bp
+	clip
+
+\end_inset
+
+
+\begin_inset space \hspace{}
+\length 0.3cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename presen_not.png
+	width 9cm
+	height 5cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Presentation Algorithm Output and the corresponding Notation Definition
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:presentation_output}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Definition of Valid Results
+\end_layout
+
+\begin_layout Standard
+The Presentation Algorithm is conceptually simple because there is no ambiguity
+ involved.
+ A certain CMML expression is always presented the same way.
+ Even more so, the implementation is free to include elements like 
+\series bold
+mrow 
+\series default
+or 
+\series bold
+mspace 
+\series default
+as long as those do not change the meaning.
+\end_layout
+
+\begin_layout Standard
+However, different CMML expressions can be rendered the same way, which
+ is were the ambiguity of the reverse process takes origin.
+\end_layout
+
+\begin_layout Standard
+A valid result for 
+\series bold
+MathSemantifier 
+\series default
+is, given a PMML expression, such a CMML expression that the Presentation
+ Algorithm can render back to the original expression (up to 
+\series bold
+mrow 
+\series default
+or 
+\series bold
+mspace 
+\series default
+tags).
+ 
+\end_layout
+
+\begin_layout Standard
+Note that, while this is certainly already a difficult task, a more proper
+ definition would be, given a PMML expression, a CMML expression that can
+ be rendered back to the original expression AND the resulting represents
+ the actual meaning of the PMML expression (or at least, it is a valid
+\end_layout
+
+\begin_layout Standard
+meaning for the expression according to the common sense of a human mathematicia
+n).
+ 
+\series bold
+MathSemantifier 
+\series default
+does not explore this task beyond using some heurisitics mentioned in the
+ further sections.
+\end_layout
+
+\begin_layout Subsubsection
+Approach to Semantification
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
 MathSemantifier in the Context of Disambiguation
 \end_layout
 
@@ -1640,429 +1839,6 @@ key "LWP"
 \end_layout
 
 \begin_layout Section
-Use Cases 
-\end_layout
-
-\begin_layout Standard
-MathSemantifier has two major use cases.
- 
-\end_layout
-
-\begin_layout Itemize
-The user can guide the semantification of the top symbol directly, by choosing
- the correct matching range, notation and argument positions.
- 
-\end_layout
-
-\begin_layout Itemize
-The other option is to ask for all the possibilities and get all the semantic
- trees.
-\end_layout
-
-\begin_layout Subsection
-User Guided Semantification
-\end_layout
-
-\begin_layout Standard
-The user provides Presentation MathML as input to the system, then uses
- the 
-\series bold
-Semantify 
-\series default
-button to reveal a list of top level notations as shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:4}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided1.png
-	width 13cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Top level notations 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:4}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The names of the notations are derived from the notation paths as follows:
- 
-\series bold
-archive name
-\series default
- + 
-\series bold
-sybmol name.
-
-\series default
- The result is humanly readable in most cases as seen in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:4}
-\end_layout
-
-\end_inset
-
-.
- For example, 
-\series bold
-natarith addition 
-\series default
-refers to the addition of natural numbers, 
-\series bold
-comparith addition 
-\series default
-- to the addition of complex numbers and so on.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided2.png
-	width 9cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Argument choice 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:5a}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
- 
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided3.png
-	width 9cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Content MathML
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:5b}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Semantification
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-After determining which notation is the correct one, the user needs to make
- sure that the arguments were detected properly (see 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:5a}
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Finally, the resulting Content MathML is displayed, as shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:5b}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Subsection
-Semantic Tree Generation
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ednote{Should I try to export the Semantic Tree in some JSON format and
- make a nice tree-like visualization?}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The easier but computationaly more expensive alternative is to simply generate
- all the possible parse trees at once and display them.
- The user simply needs to click the 
-\series bold
-Show Semantic Tree
-\series default
- option.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2cm
-\end_inset
-
-
-\begin_inset Graphics
-	filename auto1.png
-	width 12cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Semantic Tree Results 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:6}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-For the example shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:6}
-\end_layout
-
-\end_inset
-
-, there is a total of 72 different readings.
- This can be easily explained, since 
-\series bold
-Invisible Times 
-\series default
-and 
-\series bold
-Arithmetic Plus
-\series default
- have each 6 different notations, and 
-\series bold
-Mod 
-\series default
-has 2.
- 
-\begin_inset Formula $6\cdot6\cdot2=72$
-\end_inset
-
- explains exactly where the 
-\begin_inset Formula $72$
-\end_inset
-
- readings come from, since each notation can be combined with any other
- notation without any restrictions.
-\end_layout
-
-\begin_layout Subsubsection
-Term Sharing
-\end_layout
-
-\begin_layout Standard
-In order to minimize the Content MathML, the standard allows subtree sharing.
- To enable this option, the 
-\series bold
-Use term sharing 
-\series default
-checkbox should be checked.
- In that case, the terms is shared along different readings.
- This feature could be useful for an application that requires all the possible
- readings, to minimize user interaction, for instance.
-\end_layout
-
-\begin_layout Section
 Implementation
 \end_layout
 
@@ -2262,7 +2038,7 @@ The
 \series bold
 Web UI 
 \series default
-is the simplest of the components of 
+is a core component of 
 \series bold
 MathSemantifier.
 
@@ -2276,30 +2052,436 @@ The interface consists of an input area, where
 \series bold
 MathML 
 \series default
-needs to be inputted, and two options:
+needs to be inputted, and three options:
 \end_layout
 
 \begin_layout Enumerate
-Semantify
+Semantify (The user can guide the semantification of the top symbol directly,
+ by choosing the correct matching range, notation and argument positions)
 \end_layout
 
 \begin_layout Enumerate
-Show Semantic Tree
+Show Semantic Tree (The other option is to ask for all the possibilities
+ and get all the semantic trees)
+\end_layout
+
+\begin_layout Enumerate
+Evaluation (In this case, by repeatedly pressing this, the user is walked
+ through a series of examples to demo the functionality)
 \end_layout
 
 \begin_layout Standard
-Since the second option is technically more powerful that the first one,
- since it generates all the possibilities at once, it is perfect to demo
- the results the system can give.
-\end_layout
-
-\begin_layout Standard
-A series of example in 
+The 
 \series bold
-MathML 
+Evaluation 
 \series default
-is provided to show how the number of produced parse trees scales when varying
- the length and complexity of the input.
+option will be discussed in more detail in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{8}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+User Guided Semantification
+\end_layout
+
+\begin_layout Standard
+The user provides Presentation MathML as input to the system, then uses
+ the 
+\series bold
+Semantify 
+\series default
+button to reveal a list of top level notations as shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:4}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename guided1.png
+	width 13cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Top level notations 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:4}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The names of the notations are derived from the notation paths as follows:
+ 
+\series bold
+archive name
+\series default
+ + 
+\series bold
+sybmol name.
+
+\series default
+ The result is humanly readable in most cases as seen in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:4}
+\end_layout
+
+\end_inset
+
+.
+ For example, 
+\series bold
+natarith addition 
+\series default
+refers to the addition of natural numbers, 
+\series bold
+comparith addition 
+\series default
+- to the addition of complex numbers and so on.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename guided2.png
+	width 9cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Argument choice 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:5a}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename guided3.png
+	width 9cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Content MathML
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:5b}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Semantification
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After determining which notation is the correct one, the user needs to make
+ sure that the arguments were detected properly (see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:5a}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Finally, the resulting Content MathML is displayed, as shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:5b}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Semantic Tree Generation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+ednote{Should I try to export the Semantic Tree in some JSON format and
+ make a nice tree-like visualization?}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The easier but computationaly more expensive alternative is to simply generate
+ all the possible parse trees at once and display them.
+ The user simply needs to click the 
+\series bold
+Show Semantic Tree
+\series default
+ option.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename auto1.png
+	width 12cm
+	BoundingBox 0bp 5bp 800bp 972bp
+	clip
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Semantic Tree Results 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:6}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the example shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:6}
+\end_layout
+
+\end_inset
+
+, there is a total of 72 different readings.
+ This can be easily explained, since 
+\series bold
+Invisible Times 
+\series default
+and 
+\series bold
+Arithmetic Plus
+\series default
+ have each 6 different notations, and 
+\series bold
+Mod 
+\series default
+has 2.
+ 
+\begin_inset Formula $6\cdot6\cdot2=72$
+\end_inset
+
+ explains exactly where the 
+\begin_inset Formula $72$
+\end_inset
+
+ readings come from, since each notation can be combined with any other
+ notation without any restrictions.
+\end_layout
+
+\begin_layout Subsubsection
+Term Sharing
+\end_layout
+
+\begin_layout Standard
+In order to minimize the Content MathML, the standard allows subtree sharing.
+ To enable this option, the 
+\series bold
+Use term sharing 
+\series default
+checkbox should be checked.
+ In that case, the terms is shared along different readings.
+ This feature could be useful for an application that requires all the possible
+ readings, to minimize user interaction, for instance.
 \end_layout
 
 \begin_layout Subsection
@@ -2431,10 +2613,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
 CFG Preamble
-\lang english
-
 \begin_inset ERT
 status open
 
@@ -2552,7 +2731,7 @@ autoref{fig:cfg_preamble}
 
 \end_inset
 
-.
+).
 \end_layout
 
 \begin_layout Standard
@@ -2599,6 +2778,80 @@ label{fig:cfg_prec}
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Finally, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:cfg_ex}
+\end_layout
+
+\end_inset
+
+ presents an example of what the 
+\series bold
+natharith addition 
+\series default
+MMT notation from the 
+\series bold
+smglom/numberfields 
+\series default
+archive translated to CFG rules looks like.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename cfg_ex.png
+	width 10cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ MMT Notation in CFG
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:cfg_ex}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -3187,7 +3440,7 @@ It is important to note that there are two kinds of figures we may want
 \end_layout
 
 \begin_layout Subsection
-The backend APIs
+Backend APIs
 \end_layout
 
 \begin_layout Standard
