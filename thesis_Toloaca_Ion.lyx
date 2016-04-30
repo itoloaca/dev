@@ -316,8 +316,7 @@ mo
 mi
 \series default
  is used for variables and similar objects.
- This provides a clear structured format, that will be easily parsed by
- MathSemantifier.
+ This provides a clear structured format, that is parsed by MathSemantifier.
  In particular, PMML is such a small and convenient language that even building
  a parser for it as a part of MathSemantifier is certainly reasonable.
 \end_layout
@@ -351,9 +350,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2.25cm
+\end_inset
+
+
 \begin_inset Graphics
 	filename pmmlANDcmml.png
-	width 16.5cm
+	width 12cm
 
 \end_inset
 
@@ -495,7 +499,7 @@ Note how such a simple example with just three identifiers has at three
  different possible interpretations.
  It is easy to notice that the number of readings has an exponential complexity
  in the length of the expression.
- For instance, the expression above will have 
+ For instance, the expression above has 
 \begin_inset Formula $2^{n-1}$
 \end_inset
 
@@ -781,7 +785,7 @@ The response time of a query to the system is a big issue, since, as mentioned
 \end_layout
 
 \begin_layout Standard
-The rest of this paper will demonstrate in detail how MathSemantifier harnesses
+The rest of this paper demonstrates in detail how MathSemantifier harnesses
  its strengths and solves or avoids the challenges described.
 \end_layout
 
@@ -1112,9 +1116,9 @@ Action
 \end_layout
 
 \begin_layout Standard
-As it was mentioned in the previous sections, the grammar generated will
- most likely be highly ambiguous, and the Marpa Engine allows for ambiguous
- grammar of any kind that could be required for this application.
+As it was mentioned in the previous sections, the grammar generated is highly
+ ambiguous, and the Marpa Engine allows for ambiguous grammar of any kind
+ that are required for this application.
 \end_layout
 
 \begin_layout Subsection
@@ -1196,9 +1200,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 1.5cm
+\end_inset
+
+
 \begin_inset Graphics
 	filename mwsStructure.png
-	width 16cm
+	width 13cm
 
 \end_inset
 
@@ -1341,9 +1350,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 3cm
+\end_inset
+
+
 \begin_inset Graphics
 	filename marker.png
-	width 16cm
+	width 10cm
 
 \end_inset
 
@@ -1548,7 +1562,7 @@ Marpa Context Free Grammar Parser
 \series bold
 MathSemantifier
 \series default
- will take the an auto-generated CFG and input from the 
+ takes the an auto-generated CFG and input from the 
 \series bold
 Web UI
 \series default
@@ -1600,18 +1614,18 @@ n would be simply impossible
 \end_layout
 
 \begin_layout Standard
-Obviously, since the CFG will be ambiguous this is the most computationally
- intensive part.
- The scalability of the final product will mostly depend on the efficiency
- of this step.
+Since the CFG is ambiguous this is the most computationally intensive part.
+ The perfomance of the final product mostly depends on the efficiency of
+ this step.
 \end_layout
 
 \begin_layout Standard
 As a side note, Marpa does not have a Scala API, so, instead, the Perl API
- will be used.
- This implies that the result parse trees will need to be transported somehow
+ is used.
+ This implies that the result parse trees need to be transported somehow
  to the core application in MMT.
- For that purpose the intended solution is LWP 
+ For that purpose LWP is used.
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "LWP"
@@ -1627,23 +1641,6 @@ key "LWP"
 
 \begin_layout Section
 Use Cases 
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ednote{The screenshots will be replaced after I include some better formatting/C
-SS for my frontend} 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1702,7 +1699,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided1.png
-	width 14cm
+	width 13cm
 
 \end_inset
 
@@ -1737,6 +1734,42 @@ label{fig:4}
 \end_layout
 
 \begin_layout Standard
+The names of the notations are derived from the notation paths as follows:
+ 
+\series bold
+archive name
+\series default
+ + 
+\series bold
+sybmol name.
+
+\series default
+ The result is humanly readable in most cases as seen in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:4}
+\end_layout
+
+\end_inset
+
+.
+ For example, 
+\series bold
+natarith addition 
+\series default
+refers to the addition of natural numbers, 
+\series bold
+comparith addition 
+\series default
+- to the addition of complex numbers and so on.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -1752,7 +1785,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided2.png
-	width 8cm
+	width 9cm
 
 \end_inset
 
@@ -1800,7 +1833,7 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename guided3.png
-	width 10cm
+	width 9cm
 
 \end_inset
 
@@ -1873,7 +1906,7 @@ autoref{fig:5a}
 \end_layout
 
 \begin_layout Standard
-Finally, the resulting Content MathML will be displayed, as shown in 
+Finally, the resulting Content MathML is displayed, as shown in 
 \begin_inset ERT
 status open
 
@@ -2019,7 +2052,7 @@ In order to minimize the Content MathML, the standard allows subtree sharing.
 Use term sharing 
 \series default
 checkbox should be checked.
- In that case, the terms will be shared along different readings.
+ In that case, the terms is shared along different readings.
  This feature could be useful for an application that requires all the possible
  readings, to minimize user interaction, for instance.
 \end_layout
@@ -2128,9 +2161,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
 \begin_inset Graphics
 	filename myThesisComponents_diagram.png
-	width 16cm
+	width 12cm
 
 \end_inset
 
@@ -2193,8 +2231,8 @@ requests
 \end_layout
 
 \begin_layout Standard
-This also implies that the all the different components are not intended
- to run on one machine, especially the 
+This also implies that the all the different components do not need to run
+ on one machine, especially the 
 \series bold
 Web UI 
 \series default
@@ -2290,10 +2328,10 @@ Context Free Grammar Generator
 \begin_layout Standard
 The Grammar Generator aggregates all the knowledge contained in the MMT
  Notations into one Context Free Grammar.
- The grammar will be shaped into the normal form accepted by the Marpa Grammar
+ The grammar is shaped into the normal form accepted by the Marpa Grammar
  Engine.
- To achieve this, the format used to store the notations in MMT will need
- to be decomposed into CFG rules.
+ To achieve this, the format used to store the notations in MMT is decomposed
+ into CFG rules.
  Otherwise said, the tree-like structure of each formula, that is stored
  as nested applications of 
 \series bold
@@ -2418,7 +2456,7 @@ autoref{fig:8}
 Variants - 
 \series default
 represents a list of possible readings.
- It will always be the top node in any parse tree.
+ It is always be the top node in any parse tree.
 \end_layout
 
 \begin_layout Itemize
@@ -2647,8 +2685,8 @@ Sub-term sharing is part of the
 \series bold
 MathML 
 \series default
-standard, and within one request, the response will try to share its terms
- as much as possible in order to compress the output.
+standard, and within one request, if sub-term sharing is enabled, the response
+ tries to share its terms as much as possible in order to compress the output.
 \end_layout
 
 \begin_layout Enumerate
@@ -2679,8 +2717,8 @@ has 6 possible readings, because
 \begin_inset Formula $3$
 \end_inset
 
- - these subterms do not contain any notations, yet, the plugin will need
- to know that for every possibility of 
+ - these subterms do not contain any notations, yet, the plugin needs to
+ know that for every possibility of 
 \begin_inset Formula $+$
 \end_inset
 
@@ -2758,7 +2796,7 @@ Requirements for a more suitable Notation Database
 The most important optimization would be adding types to the notation input
  arguments and output.
  This would allow for type based parsing, which would certainly be more
- efficient and generate more relevant results
+ efficient and generate more relevant results.
 \end_layout
 
 \begin_layout Enumerate
@@ -2787,11 +2825,14 @@ Requirements for a more suitable Parsing Framework
 \end_layout
 
 \begin_layout Enumerate
-Full control over the parsing process is a requirement for further work
+One of the biggest problems with the current implementation is that it greedily
+ matches the argument renderings, which are free form subterms.
+ If a custom parsing framework would be used, lazy matching of such subterms
+ would greatly increase the performance.
 \end_layout
 
 \begin_layout Enumerate
-The ability to handle types, precedences and associativity
+The ability to handle types, precedences and associativity.
 \end_layout
 
 \begin_layout Enumerate
@@ -2912,7 +2953,7 @@ endpoint, which can be accessed with a
 POST
 \series default
  request that contains just the input in a suitable encoding.
- The backend will then return a 
+ The backend then returns a 
 \series bold
 JSON 
 \series default
@@ -2968,7 +3009,6 @@ hyperref[8]{section 8}
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-btprint "btPrintAll"
 bibfiles "bibtexDatabase"
 options "bibtotoc,alpha-fr"
 
