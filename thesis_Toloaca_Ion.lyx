@@ -1961,9 +1961,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
 \begin_inset Graphics
 	filename auto1.png
-	scale 50
+	width 12cm
 
 \end_inset
 
@@ -2358,6 +2363,248 @@ Transform the intermediate representation into valid CFG rules
 
 \begin_layout Enumerate
 Optimize if possible (will be discussed in detail in the subsequent sections)
+\end_layout
+
+\begin_layout Standard
+The fundamental structure of the CFG is established using a preamble as
+ shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:cfg_preamble}
+\end_layout
+
+\end_inset
+
+.
+ Note the default action is the 
+\series bold
+Grammar Entry Point.
+
+\series default
+ It is precisely what tells the Grammar Engine to build parse trees, and
+ also determines their structure.
+\end_layout
+
+\begin_layout Standard
+The entry point into the grammar is the 
+\series bold
+Expression 
+\series default
+rule.
+ It can be an MMT Notation, or Presentation MathML.
+ The 
+\series bold
+prec0
+\series default
+ rule should be read as precedence zero, that is - the lowest precedence
+ there is.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename cfg_preamble.png
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+CFG Preamble
+\lang english
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:cfg_preamble}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Precedence handling is done using a commonly used method for including it
+ in CFGs.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:cfg_prec}
+\end_layout
+
+\end_inset
+
+ gives a quick glace at how exactly it is done.
+ The number of precedences needs to be known in advance, then, for each
+ precedence value a corresponding 
+\series bold
+precN
+\series default
+ rule is created.
+\end_layout
+
+\begin_layout Standard
+The rule contains all the notations with that precedence, and, one of the
+ alternatives is going to a higher precedence value.
+ In the example below there are 15 used precedence values (
+\series bold
+prec0 
+\series default
+corresponds to precedence 
+\begin_inset Formula $-\infty$
+\end_inset
+
+).
+ However 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:cfg_prec}
+\end_layout
+
+\end_inset
+
+ shows only half of the concept.
+\end_layout
+
+\begin_layout Standard
+To make this approach work, what is also needed is that the arguments in
+ a rule of a certain precedence 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+N
+\end_layout
+
+\end_inset
+
+ can only contain notations with precedence 
+\begin_inset Formula $K$
+\end_inset
+
+ if 
+\begin_inset Formula $K>N$
+\end_inset
+
+.
+ This is done by the 
+\series bold
+Argument Precedences 
+\series default
+part in the preamble (as shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:cfg_preamble}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset space \hspace{}
+\length 2cm
+\end_inset
+
+
+\begin_inset Graphics
+	filename cfg_prec.png
+	width 10cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CFG Precedence Handling 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:cfg_prec}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
