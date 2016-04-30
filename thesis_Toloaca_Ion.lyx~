@@ -721,8 +721,8 @@ To sum up, humans read mathematical documents bit by bit and throw away
  impossible interpretations until there is, hopefully, only one left.
  In doing so, they mainly apply two strategies - heuristics and proof by
  contradiction.
- This proposal explores the possibility of MathSemantifier doing the same
- to some extent.
+ This paper explores the possibility of MathSemantifier doing the same to
+ some extent.
  
 \end_layout
 
@@ -923,6 +923,33 @@ Approach to Semantification
 
 \begin_layout Standard
 
+\series bold
+MathSemantifier 
+\series default
+converts PMML into valid CMML as described above.
+ In order to perform this task, it needs to match PMML against a list of
+ notations.
+ This is achieved by compiling the notations into a Context Free Grammar,
+ and using a CFG Parsing Engine to parse the PMML.
+ A parse returns a list of possible parse trees, out of which 
+\series bold
+MathSemantifier 
+\series default
+extracts information regarding what notations matched at top level.
+ This is then done recursively for the arguments of the found notation.
+ The 
+\series bold
+Implementation 
+\series default
+section describes in a lot more detail how the Notations are compiled into
+ a CFG, and how the parse trees are converted to CMML.
+ Parsing using CFGs is a known problem, so, instead of writing a Parsing
+ Engine, a more reasonable approach is using an existing one.
+ For that purpose, the 
+\series bold
+Marpa Grammar Engine 
+\series default
+is used.
 \end_layout
 
 \begin_layout Subsection
@@ -1127,7 +1154,7 @@ LaTeX
 \end_inset
 
  into knowledge rich XML format variations by exploring the space of possible
- readings is one of the main goal of this proposal.
+ readings is one of the main goal of this thesis.
 \end_layout
 
 \begin_layout Subsection
@@ -1198,7 +1225,7 @@ Marpa Grammar Engine
 \end_layout
 
 \begin_layout Standard
-As the idea of the proposal is to use a Grammar Engine, we need to introduce
+As the idea of the thesis is to use a Grammar Engine, we need to introduce
  a concrete solution.
  Text parsing using Context Free Grammars is quite popular, and, therefore,
  there is quite a number of solutions, which can, however, make the choice
@@ -1842,19 +1869,67 @@ key "LWP"
 Implementation
 \end_layout
 
+\begin_layout Standard
+The major idea of 
+\series bold
+MathSemantifier 
+\series default
+is, as already described in the introduction, finding possible Content MathML
+ readings for Presentation MathML input expressions.
+ 
+\end_layout
+
+\begin_layout Standard
+The general flow of a single semantification can be described as follows:
+\end_layout
+
+\begin_layout Enumerate
+Context Free Grammar generation from the MMT Notations 
+\end_layout
+
+\begin_layout Enumerate
+Parsing using the Marpa Grammar Engine and the generated CFG to detect the
+ top level notation
+\end_layout
+
+\begin_layout Enumerate
+Parsing the arguments of the top level notation recursively
+\end_layout
+
+\begin_layout Enumerate
+Using the parse trees from step 2 and 3 to generate an interanal representation
+ of the meaning trees
+\end_layout
+
+\begin_layout Enumerate
+Converting the meaning trees to Content MathML
+\end_layout
+
+\begin_layout Enumerate
+Displaying the Content MathML trees in the fronend
+\end_layout
+
+\begin_layout Standard
+This sections goes into the details of how exactly semantification is accomplish
+ed.
+ First, a general overview of the goals of the project and its high level
+ architecture is given.
+ Then, each component is described in further detail.
+\end_layout
+
 \begin_layout Subsection
 Project Goals and Challenges
 \end_layout
 
 \begin_layout Standard
-The main goals of the project are:
+The main goals of the project can be expressed in a concise manner as follows:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Generating the correct set of parses efficiently and effectively
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Providing opportunities for improvement for further research in the area
 \end_layout
 
@@ -1863,25 +1938,25 @@ The challenges on the way of achieving a way of generating dynamically the
  full set of semantic parse trees are:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Aggregating the mathematical notation database that the MMT system into
  a CFG
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Dealing with scalability issues which are entailed by ambiguity
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 The set of correct parses should be a subset of the set of generated parses
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 The set of generated parses should ideally be a subset of the set of correct
  parses too
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Enumerate
 Handle character encodings correctly
 \end_layout
 
@@ -2351,23 +2426,6 @@ Semantic Tree Generation
 \end_layout
 
 \begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-ednote{Should I try to export the Semantic Tree in some JSON format and
- make a nice tree-like visualization?}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 The easier but computationaly more expensive alternative is to simply generate
  all the possible parse trees at once and display them.
  The user simply needs to click the 
@@ -2642,7 +2700,11 @@ label{fig:cfg_preamble}
 \begin_layout Standard
 Precedence handling is done using a commonly used method for including it
  in CFGs.
- 
+ The 
+\series bold
+Notation Precedences 
+\series default
+section in 
 \begin_inset ERT
 status open
 
@@ -2650,7 +2712,7 @@ status open
 
 
 \backslash
-autoref{fig:cfg_prec}
+autoref{fig:cfg_preamble}
 \end_layout
 
 \end_inset
