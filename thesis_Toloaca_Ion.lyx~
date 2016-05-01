@@ -104,7 +104,7 @@ Jacobs University Bremen
 
 \begin_layout Abstract
 Mathematical formulae are a highly ambiguous content for which typesetting
- systems as LaTeX store only the representation.
+ systems as LaTeX store only the rendering information.
  MathSemantifier is an open-source notation-based mathematical formula semantifi
 cation system that attempts to tackle the problem of ambiguity in mathematical
  documents and produce knowledge-rich equivalents.
