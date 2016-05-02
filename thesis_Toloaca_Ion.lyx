@@ -2627,6 +2627,31 @@ checkbox should be checked.
  In that case, the terms is shared along different readings.
  This feature could be useful for an application that requires all the possible
  readings, to minimize user interaction, for instance.
+ 
+\end_layout
+
+\begin_layout Standard
+The current implementation shares the CML generated at any recursion level.
+ This implies that only 
+\series bold
+apply 
+\series default
+or 
+\series bold
+csymbol 
+\series default
+which correspond to some part of the input can be shared.
+ This can be improved upon, by also sharing ground terms and other parts
+ of the notations.
+ More importantly, this type of sharing is incompatible with cross-referencing,
+ since it may share subtrees that have common ancestors.
+ For instance, 
+\begin_inset Formula $1+1$
+\end_inset
+
+ has two instances of one, however, it may not be shared, because each instance
+ corresponds to a different presentation element.
+ 
 \end_layout
 
 \begin_layout Subsection

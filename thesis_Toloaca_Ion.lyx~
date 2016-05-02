@@ -986,7 +986,7 @@ autoref{mws}
  The idea is that a search engine is only as good as the database of information
  is.
  By improving the information it can search through by adding a semantic
- flavour to it, a new kind of queries could be possible - semantic queries.
+ flavor to it, a new kind of queries could be possible - semantic queries.
  Rather than searching for strings, or formulas with free form subterms,
  the user could specify the meaning of the sought expression.
  This would improve a lot the relevance of the results, since there will
