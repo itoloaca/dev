@@ -952,7 +952,72 @@ Marpa Grammar Engine
 is used.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
+Possible Applications of Semantification
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+MathWebSearch 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MWS12"
+
+\end_inset
+
+ 
+\series default
+(discussed in more detail in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{mws}
+\end_layout
+
+\end_inset
+
+) is a search engine for mathematical formulas.
+ Such search engines could greatly benefit from semantification.
+ The idea is that a search engine is only as good as the database of information
+ is.
+ By improving the information it can search through by adding a semantic
+ flavor to it, a new kind of queries could be possible - semantic queries.
+ Rather than searching for strings, or formulas with free form subterms,
+ the user could specify the meaning of the sought expression.
+ This would improve a lot the relevance of the results, since there will
+ be no result that matched just because it was presented in a similar manner.
+ 
+\end_layout
+
+\begin_layout Itemize
+Another possibility for using semantification is theorem proving and correctness
+ checking.
+ One possible application would be realtime feedback to the user writing
+ a paper about the correctness of the expressions used.
+\end_layout
+
+\begin_layout Itemize
+The possibilities extend even beyond this.
+ Using semantified content, rather than having a database of CMML expressions,
+ it is possible to create a smart knowledge management system that could
+ be used to create expert systems.
+ The user could then ask questions, or create complex queries, to exploit
+ the full power of semantic content.
+\end_layout
+
+\begin_layout Standard
+Semantification will not make all of the above directly possible, however
+ it is a necessary step towards achieving goals similar to the ones described
+ above, that require more knowledge about the used content than just how
+ it is rendered.
+\end_layout
+
+\begin_layout Subsubsection
 MathSemantifier in the Context of Disambiguation
 \end_layout
 
@@ -1348,7 +1413,20 @@ As it was mentioned in the previous sections, the grammar generated is highly
 \end_layout
 
 \begin_layout Subsection
-Extracting Formulae from Mathematical Documents
+Extracting Formulae from Mathematical Documents 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{mws}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1907,6 +1985,15 @@ Converting the meaning trees to Content MathML
 
 \begin_layout Enumerate
 Displaying the Content MathML trees in the frontend
+\end_layout
+
+\begin_layout Standard
+The reason it was decided to use a CFG based solution is that there exist
+ already parsing frameworks like the Marpa Grammar Engine.
+ It solves all the parsing related technical problems, like parsing ambiguous
+ expressions, different kinds of recursion, while also providing a high
+ degree of freedom.
+ 
 \end_layout
 
 \begin_layout Standard

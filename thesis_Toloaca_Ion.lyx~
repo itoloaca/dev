@@ -713,7 +713,7 @@ Let's get to a more interesting example
 \end_inset
 
  would certainly help to reason against the second interpretation, because
- it does not typecheck.
+ it does not type-check.
 \end_layout
 
 \begin_layout Standard
@@ -913,7 +913,7 @@ n).
 \series bold
 MathSemantifier 
 \series default
-does not explore this task beyond using some heurisitics mentioned in the
+does not explore this task beyond using some heuristics mentioned in the
  further sections.
 \end_layout
 
@@ -952,13 +952,78 @@ Marpa Grammar Engine
 is used.
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Subsubsection
+Possible Applications of Semantification
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+MathWebSearch 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "MWS12"
+
+\end_inset
+
+ 
+\series default
+(discussed in more detail in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{mws}
+\end_layout
+
+\end_inset
+
+) is a search engine for mathematical formulas.
+ Such search engines could greatly benefit from semantification.
+ The idea is that a search engine is only as good as the database of information
+ is.
+ By improving the information it can search through by adding a semantic
+ flavour to it, a new kind of queries could be possible - semantic queries.
+ Rather than searching for strings, or formulas with free form subterms,
+ the user could specify the meaning of the sought expression.
+ This would improve a lot the relevance of the results, since there will
+ be no result that matched just because it was presented in a similar manner.
+ 
+\end_layout
+
+\begin_layout Itemize
+Another possibility for using semantification is theorem proving and correctness
+ checking.
+ One possible application would be realtime feedback to the user writing
+ a paper about the correctness of the expressions used.
+\end_layout
+
+\begin_layout Itemize
+The possibilities extend even beyond this.
+ Using semantified content, rather than having a database of CMML expressions,
+ it is possible to create a smart knowledge management system that could
+ be used to create expert systems.
+ The user could then ask questions, or create complex queries, to exploit
+ the full power of semantic content.
+\end_layout
+
+\begin_layout Standard
+Semantification will not make all of the above directly possible, however
+ it is a necessary step towards achieving goals similar to the ones described
+ above, that require more knowledge about the used content than just how
+ it is rendered.
+\end_layout
+
+\begin_layout Subsubsection
 MathSemantifier in the Context of Disambiguation
 \end_layout
 
 \begin_layout Standard
-In the endeavour of extracting semantics from mathematical documents MathSemanti
-fier uses its notation database in order to attempt to explore the space
+In the endeavor of extracting semantics from mathematical documents MathSemantif
+ier uses its notation database in order to attempt to explore the space
  of all possible readings, and the to throw away some using heuristics,
  ultimately letting the user decide which reading is the best.
 \end_layout
@@ -1348,7 +1413,20 @@ As it was mentioned in the previous sections, the grammar generated is highly
 \end_layout
 
 \begin_layout Subsection
-Extracting Formulae from Mathematical Documents
+Extracting Formulae from Mathematical Documents 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{mws}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1841,7 +1919,7 @@ n would be simply impossible
 
 \begin_layout Standard
 Since the CFG is ambiguous this is the most computationally intensive part.
- The perfomance of the final product mostly depends on the efficiency of
+ The performance of the final product mostly depends on the efficiency of
  this step.
 \end_layout
 
@@ -1897,7 +1975,7 @@ Parsing the arguments of the top level notation recursively
 \end_layout
 
 \begin_layout Enumerate
-Using the parse trees from step 2 and 3 to generate an interanal representation
+Using the parse trees from step 2 and 3 to generate an internal representation
  of the meaning trees
 \end_layout
 
@@ -1906,7 +1984,16 @@ Converting the meaning trees to Content MathML
 \end_layout
 
 \begin_layout Enumerate
-Displaying the Content MathML trees in the fronend
+Displaying the Content MathML trees in the frontend
+\end_layout
+
+\begin_layout Standard
+The reason it was decided to use a CFG based solution is that there exist
+ already parsing frameworks like the Marpa Grammar Engine.
+ It solves all the parsing related technical problems, like parsing ambiguous
+ expressions, different kinds of recursion, while also providing a high
+ degree of freedom.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -2244,7 +2331,7 @@ archive name
 \series default
  + 
 \series bold
-sybmol name.
+symbol name.
 
 \series default
  The result is humanly readable in most cases as seen in 
@@ -2426,7 +2513,7 @@ Semantic Tree Generation
 \end_layout
 
 \begin_layout Standard
-The easier but computationaly more expensive alternative is to simply generate
+The easier but computationally more expensive alternative is to simply generate
  all the possible parse trees at once and display them.
  The user simply needs to click the 
 \series bold
@@ -2717,7 +2804,7 @@ autoref{fig:cfg_preamble}
 
 \end_inset
 
- gives a quick glace at how exactly it is done.
+ gives a quick glance at how exactly it is done.
  The number of precedences needs to be known in advance, then, for each
  precedence value a corresponding 
 \series bold
@@ -3003,7 +3090,7 @@ Content MathML Generator
 
 \begin_layout Standard
 The final part of any of the semantification processes is converting the
- internal represenation to a standard one, which is CMML in this case.
+ internal representation to a standard one, which is CMML in this case.
  MMT provides a simple API which requires:
 \end_layout
 
@@ -3017,7 +3104,7 @@ The argument maps
 
 \begin_layout Standard
 Both of which are available in my representation structure.
- The argument path is obtained by extacting the argument number from the
+ The argument path is obtained by extracting the argument number from the
  argument name, and looking up in a map of paths created at the time of
  grammar creation.
  This implies the grammar rule names are overloaded with meaning, however,
@@ -3053,7 +3140,7 @@ Parse Tree Generator
 \end_layout
 
 \begin_layout Standard
-The more complex of the two parts is actually going throught the parse trees
+The more complex of the two parts is actually going through the parse trees
  and extracting useful information.
  Note that going through all the parse trees is not practical, so only the
  first 
@@ -3110,9 +3197,9 @@ strings.
 encodeURIComponent 
 \series default
 in Javascript or its equivalents in other languages, and only the parsing
- backend in Perl actually deals meaningfuly with substrings.
- The result of the parsing backend contains the complete subtrings for the
- matched rules and arguments.
+ backend in Perl actually deals meaningfully with substrings.
+ The result of the parsing backend contains the complete substrings for
+ the matched rules and arguments.
  This also represents an opportunity for improvement, since passing around
  positions in a string is more efficient that substrings.
 \end_layout
@@ -3166,8 +3253,8 @@ section
 
 \begin_layout Enumerate
 The non-empty alternatives in the CFG are put first.
- The Grammar Parser has a predictable behaviour of going through the alternative
-s left to right, and since empty rules match 
+ The Grammar Parser has a predictable behavior of going through the alternatives
+ left to right, and since empty rules match 
 \series bold
 always
 \series default
@@ -3195,7 +3282,7 @@ standard, and within one request, if sub-term sharing is enabled, the response
 \series bold
 The Semantic Tree 
 \series default
-plugin makes use of memoziation to reduce one dimension of the exponential
+plugin makes use of memoization to reduce one dimension of the exponential
  blowup as explained on the following example.
  
 \series bold
@@ -3228,7 +3315,7 @@ has 6 possible readings, because
 \series bold
 POST 
 \series default
-requests even in this simple example, which results into a signficant speedup
+requests even in this simple example, which results into a significant speedup
  of a factor of approximately 4 (13 
 \series bold
 POST
@@ -3238,7 +3325,7 @@ POST
 POST 
 \series default
 requests).
- Also, slight modification of the input benefit of a signifcant speed-up,
+ Also, slight modification of the input benefit of a significant speed-up,
  as well as using a previous input as a subterm in a new input.
 \end_layout
 
@@ -3420,7 +3507,7 @@ Too long inputs /
 \series bold
 MathSemantifier 
 \series default
-only consideres the first 1000 parse trees as mentioned in the 
+only considers the first 1000 parse trees as mentioned in the 
 \series bold
 Heuristics 
 \series default
@@ -3538,7 +3625,7 @@ hyperref[8]{section 8}
  improvements in order for the system to be scalable beyond what is presented
  in the previous section.
  The most important part of this study is, therefore, the optimizations
- and heuristics used, and other techinques presented below that further
+ and heuristics used, and other techniques presented below that further
  research could benefit from.
 \end_layout
 
@@ -3574,7 +3661,7 @@ Theory based optimization - either let the user specify which theories to
 \begin_inset Formula $+$
 \end_inset
 
- are more likely to both be used as arithmetic sybmols in an expression,
+ are more likely to both be used as arithmetic symbols in an expression,
  than only one of them)
 \end_layout
 
@@ -3677,11 +3764,11 @@ Term Indexing is a standard technique for finding substitutions that allow
  CMML into the notation renderings.
  In other words, finding the substitution that unifies an input PMML and
  a notation rendering allows for semantification.
- There are multiple standard techinques, like substitution tree indexing,
+ There are multiple standard techniques, like substitution tree indexing,
  discrimination tree indexing or path indexing that make this possible.
  The main advantage of this approach over the current approach is that it
  matches free form subterms (argument renderings) in a lazy way.
- This may result into a signficant speed improvement.
+ This may result into a significant speed improvement.
  For instance, determining the top level notation would be linear in the
  number of notations rather than exponential.
 \end_layout
