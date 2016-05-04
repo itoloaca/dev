@@ -95,7 +95,9 @@ Toloaca Ion
 \begin_inset Newline newline
 \end_inset
 
-Supervisor: Michael Kohlhase
+Supervisor: Prof.
+ Dr.
+ Michael Kohlhase
 \begin_inset Newline newline
 \end_inset
 
@@ -109,8 +111,8 @@ Mathematical formulae are a highly ambiguous content for which typesetting
 cation system that attempts to tackle the problem of ambiguity in mathematical
  documents and produce knowledge-rich equivalents.
  The system extracts formulae (from formats such as LaTeX or MathML) and
- produces content-rich results (sTeX or Content MathML) that contain no
- semantic ambiguity.
+ produces content-rich results (Content MathML) that contain no semantic
+ ambiguity.
  The disambiguation is achieved by matching the input formulae against a
  known database of notation definitions, which is aggregated into a Context
  Free Grammar.
