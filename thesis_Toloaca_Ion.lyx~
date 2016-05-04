@@ -745,7 +745,7 @@ is the exact opposite of the Presentation Algorithm, trying to convert PMML
 \end_layout
 
 \begin_layout Subsubsection
-Presentation Algorithm
+The Presentation Algorithm
 \end_layout
 
 \begin_layout Standard
@@ -1587,35 +1587,17 @@ key "SMGLOM"
 
  is a part of the notation database of MMT that is especially relevant to
  the MathSemantifier.
- It contains notations from vastly different topics such as:
-\end_layout
+ It contains notations from vastly different topics of mathematics.
+ The ones MathSemantifier uses are number fields, algebra, calculus, geometry,
+ graphs, magic, sets, topology, mv, smglom, primes and numbers.
+ SMGloM is also available online 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "smglomweb"
 
-\begin_layout Itemize
-Algebra
-\end_layout
+\end_inset
 
-\begin_layout Itemize
-Calculus
-\end_layout
-
-\begin_layout Itemize
-Geometry
-\end_layout
-
-\begin_layout Itemize
-Graphs
-\end_layout
-
-\begin_layout Itemize
-Number fields
-\end_layout
-
-\begin_layout Itemize
-Topology
-\end_layout
-
-\begin_layout Itemize
-Set Theory
+.
 \end_layout
 
 \begin_layout Subsection
@@ -1944,7 +1926,9 @@ key "LWP"
 \end_layout
 
 \begin_layout Section
-Implementation
+The 
+\series bold
+MathSemantifier System
 \end_layout
 
 \begin_layout Standard
@@ -2664,18 +2648,78 @@ The MMT Backend is a
 Server Extension 
 \series default
 that is part of MMT.
+ As shown in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:7}
+\end_layout
+
+\end_inset
+
+, it is linked via 
+\series bold
+REST
+\series default
+ with the 
+\series bold
+Web UI 
+\series default
+and the 
+\series bold
+Parsing Backends.
+
+\series default
  
 \end_layout
 
 \begin_layout Standard
-It is the core of the system, that assembles the results from all the other
- parts together into 
+Its role can be summarized to the following core functions:
+\end_layout
+
+\begin_layout Enumerate
+Compile the 
 \series bold
-Semantic Trees.
+MMT Notations
+\series default
+ into a CFG Grammar
+\end_layout
+
+\begin_layout Enumerate
+Receive the input from the 
+\series bold
+Web UI
+\series default
+ and build its Semantic Tree
+\end_layout
+
+\begin_layout Enumerate
+Delegate the parsing to the 
+\series bold
+Parsing Backends
 \end_layout
 
 \begin_layout Standard
-Its subcomponents are discussed below.
+I decided to put the core logic of the application in MMT in order to make
+ it easier to interoperate with the MMT Notation Database, as well as with
+ any other MMT components that may want to need 
+\series bold
+MathSemantifier.
+
+\series default
+ By the current design, using 
+\series bold
+MathSemantifier 
+\series default
+within MMT is as simple as a function call that takes the input as a string.
+\end_layout
+
+\begin_layout Standard
+Let us look at the components of the MMT Backends in more detail below.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3375,8 +3419,8 @@ This section presents an evaluation of
 \series bold
 MathSemantifier 
 \series default
-from the point of view of how effective and efficient in semantic tree generatio
-n.
+from the point of view of efficiency and effectiveness of semantic tree
+ generation.
  Next, the interoperability of the system with other possible applications
  is examined, which mostly depends on the backend APIs.
 \end_layout
@@ -3386,9 +3430,49 @@ Semantic Tree Generation
 \end_layout
 
 \begin_layout Standard
+Testing 
+\series bold
+MathSemantifier
+\series default
+ through normal operation is not a trivial task, because the results need
+ a human expert to check whether the results are indeed correct.
+ Fortunatelly, the 
+\series bold
+MathHub Glossary 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "glossary"
+
+\end_inset
+
+
+\series default
+ contains a sufficient number (about 3000) of examples of Presentation MathML
+ with Content MathML annotations that result from applying the 
+\series bold
+Presentation Algorithm
+\series default
+ discussed in the introduction.
+ Since 
+\series bold
+MathSemantifier 
+\series default
+is the partial inverse of the 
+\series bold
+Presentation Algorithm, 
+\series default
+checking whether the results are indeed correct boils down to comparing
+ two Content MathML trees.
+\end_layout
+
+\begin_layout Standard
 For the purpose of testing 
 \series bold
-MathSemantifier, 
+MathSemantifier
+\series default
+ on the 
+\series bold
+MathHub Glossary, 
 \series default
 the 
 \series bold
@@ -3399,24 +3483,12 @@ option mentioned in the
 Web UI
 \series default
  section is used.
- It goes through the examples extracted from the 
+ It walks the user through the examples extracted from the 
 \series bold
-MathHub Glossary 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "glossary"
-
-\end_inset
-
-.
+MathHub Glossary.
  
 \series default
-The user simply needs to press 
-\series bold
-Evaluation 
-\series default
-to go to the next example.
- A typical example looks as shown in 
+A typical example looks as shown in 
 \begin_inset ERT
 status open
 
@@ -3429,8 +3501,8 @@ autoref{fig:eval_ex}
 
 \end_inset
 
- (note that the example actually produces 7 readings, which are not all
- shown for brevity).
+ (the example actually produces seven readings, which are not all shown
+ for brevity).
 \end_layout
 
 \begin_layout Standard
@@ -3483,48 +3555,74 @@ Results
 \end_layout
 
 \begin_layout Standard
-For expressions with less than 1000 parse trees that are correctly rendered,
+A visual control revealed the following approximate results for the testing
+ on the 
+\series bold
+MathHub Glossary.
  
+\series default
+About 40% of the examples are semantified correctly.
+ However, this is largely because of reasons that do not depend on 
+\series bold
+MathSemantifier
+\series default
+ itself.
+\end_layout
+
+\begin_layout Standard
+Contrary to what the numerical result suggests, for expressions with less
+ than 1000 parse trees that are correctly rendered, 
 \series bold
 MathSemantifier 
 \series default
-produces correct results, unless any of the problems mentioned below apply.
+produces correct results with a very high probability.
 \end_layout
 
 \begin_layout Standard
-This is enough for a proof of concept, however, there are multiple reasons
- why it fails on a large part of the examples.
-\end_layout
-
-\begin_layout Standard
-First of all, there are reasons that are not related to faults in the system
- itself, like:
+Let us look into the reasons that make 
+\series bold
+MathSemantifier 
+\series default
+fail.
+ First of all, the reasons that do not depend on the system itself.
 \end_layout
 
 \begin_layout Enumerate
 The Presentation Algorithm fails to render CMML into PMML properly.
+ This may very well be the main reason for failure.
+ I estimate that about 30-40% of the 
+\series bold
+Glossary 
+\series default
+examples are not rendered properly.
 \end_layout
 
 \begin_layout Enumerate
-A part of the examples includes symbols from archives that were not included
+About 10% of the examples include symbols from archives that were not included
  when generating the CFG that 
 \series bold
 MathSemantifier 
 \series default
 is using.
+ This is a limitation that could be easily overcome by adding those symbols,
+ but, as a proof of concept, having a complete coverage of the symbols was
+ not the primary focus.
 \end_layout
 
 \begin_layout Standard
-Naturally, there are also problems with 
+Up to this point, if we exclude the above mentioned examples, the effective
+ success rate of 
 \series bold
-MathSemantifier 
+MathSemantifier
 \series default
-itself.
+ is about 80-90%.
 \end_layout
 
 \begin_layout Enumerate
 Some notations are omitted (mainly because their rendering consists only
  of one argument rendering, which creates cycles in the CFG).
+ This limitation is considerably hard to work around, since it increase
+ drastically the ambiguity of the input if we allow free form subterms anywhere.
 \end_layout
 
 \begin_layout Enumerate
@@ -3537,6 +3635,13 @@ only considers the first 1000 parse trees as mentioned in the
 Heuristics 
 \series default
 section above.
+ An obvious fix would be increasing the number of considered parse trees,
+ however this would result into a significantly worse performance.
+ Even for further attempts I would recommend failing early (allowing for
+ 80-90% of requests to complete on average) and retrying again with other
+ parameters rather than waiting for too long.
+ In any case, using a huge auto-generated CFG is certainly a big limitation
+ for the performance.
 \end_layout
 
 \begin_layout Enumerate
@@ -3549,12 +3654,40 @@ MathSemantifier
 mrow
 \series default
  or a single bracketed list of expressions.
- 
+ This technical limitation is still present because the number of notations
+ that actually do that is quite low as seen in practice, however it is not
+ impossible to fix, even in the current setup.
+\end_layout
+
+\begin_layout Enumerate
+One last interesting effect is over-semantification.
+ This happens for sybmols like zero or one, that have custom notation definition
+s in some of the archives.
+ Since the process of semantification is greedy, if given 
+\series bold
+<mn>1</mn> MathSemantifier 
+\series default
+will try to semantify it as much as it can, meaning the result will be 
+\series bold
+<csymbol>...
+ one</csymbol> 
+\series default
+rather than just 
+\series bold
+<cn>1</cn>.
+
+\series default
+ While this can be solved easily for particular cases of zero or one, solving
+ this generally may pose an interesting problem.
+ Sometimes parts of the input or the whole input may need to be semantified
+ without using any notations at all.
+ When exactly this should be done could probably be determined by some smart
+ heursitics at best.
 \end_layout
 
 \begin_layout Standard
-However, the above issues do not reflect the main problem that prevents
- 
+While the effective success rate of 80-90% is inspiring for a proof of concept
+ system, it does not reflect the main problem that prevents 
 \series bold
 MathSemantifier 
 \series default
@@ -3565,7 +3698,14 @@ from becoming a practically useful tool rather than just a proof of concept
 MathSemantifier 
 \series default
 has critical efficiency issues, which could have been expected since it
- parses the input against a CFG of more than 
+ parses the input against a CFG 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "cfgex"
+
+\end_inset
+
+ of more than 
 \begin_inset Formula $2800$
 \end_inset
 
@@ -3583,8 +3723,12 @@ has critical efficiency issues, which could have been expected since it
 \begin_layout Standard
 Overall, the results can be said to meet the purpose of proving that MMT
  Notations can be used for semantification purposes.
- Therefore, it is a successful proof of concept, but a failure as a practical
- tool.
+ Therefore, 
+\series bold
+MathSemantifier
+\series default
+ is a successful proof of concept, but not yet the practical tool mathematicians
+ need right now in order to harness the power of semantic content.
 \end_layout
 
 \begin_layout Subsection
@@ -3796,6 +3940,10 @@ Term Indexing is a standard technique for finding substitutions that allow
  This may result into a significant speed improvement.
  For instance, determining the top level notation would be linear in the
  number of notations rather than exponential.
+ Another advantage would be the possibility to paralelize by top-level notations
+ (or of any level, though I expect splitting just by the number of the top
+ level notations should be enough).
+ This scenario is a typical application of MapReduce 
 \end_layout
 
 \begin_layout Standard
