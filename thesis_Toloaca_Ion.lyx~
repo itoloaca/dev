@@ -111,8 +111,8 @@ Mathematical formulae are a highly ambiguous content for which typesetting
 cation system that attempts to tackle the problem of ambiguity in mathematical
  documents and produce knowledge-rich equivalents.
  The system extracts formulae (from formats such as LaTeX or MathML) and
- produces content-rich results (sTeX or Content MathML) that contain no
- semantic ambiguity.
+ produces content-rich results (Content MathML) that contain no semantic
+ ambiguity.
  The disambiguation is achieved by matching the input formulae against a
  known database of notation definitions, which is aggregated into a Context
  Free Grammar.
@@ -2239,6 +2239,21 @@ autoref{8}
 .
 \end_layout
 
+\begin_layout Standard
+The repository containing the 
+\series bold
+Web UI 
+\series default
+can be found on GitHub 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "codeWebUI"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection
 User Guided Semantification
 \end_layout
@@ -2721,6 +2736,17 @@ within MMT is as simple as a function call that takes the input as a string.
 \end_layout
 
 \begin_layout Standard
+The code can be found as part of the MMT codebase 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "codeMMT"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 Let us look at the components of the MMT Backends in more detail below.
 \end_layout
 
@@ -3188,6 +3214,58 @@ Parsing Backend
 \end_layout
 
 \begin_layout Standard
+The Parsing Backend 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{fig:7}
+\end_layout
+
+\end_inset
+
+ receives requests from the 
+\series bold
+Web UI 
+\series default
+directly for Guided Semantification and from the 
+\series bold
+MMT Backend 
+\series default
+for Semantic Tree Generation.
+ All the parsing related work is delegated to this backend, to the extend
+ that it even includes the substrings where the arguments of the notations
+ match (I will explain in more detail why in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{encoding_issues}
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+The code of the Parsing Backend can be found on GitHub 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "codeParsingBackend"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
 The parsing backend consists of two parts.
  
 \end_layout
@@ -3242,7 +3320,20 @@ hyperref[6]{section 6}
 \end_layout
 
 \begin_layout Subsection
-Encoding issues
+Encoding issues 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{encoding_issues}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
