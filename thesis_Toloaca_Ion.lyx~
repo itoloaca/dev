@@ -3944,6 +3944,20 @@ Term Indexing is a standard technique for finding substitutions that allow
  (or of any level, though I expect splitting just by the number of the top
  level notations should be enough).
  This scenario is a typical application of MapReduce 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "mapreduce"
+
+\end_inset
+
+.
+ Moreover, a cutoff heuristic can be applied to ensure the performance is
+ acceptable.
+ If the result is not acceptable, the job could be rerun without the cutoff
+ heuristic.
+ I expect that prioritizing failure and retrial over waiting could improve
+ significantly the average case performance.
+ 
 \end_layout
 
 \begin_layout Standard

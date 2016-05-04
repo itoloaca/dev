@@ -3436,7 +3436,7 @@ MathSemantifier
 \series default
  through normal operation is not a trivial task, because the results need
  a human expert to check whether the results are indeed correct.
- Fortunatelly, the 
+ Fortunately, the 
 \series bold
 MathHub Glossary 
 \begin_inset CommandInset citation
@@ -3661,7 +3661,7 @@ mrow
 
 \begin_layout Enumerate
 One last interesting effect is over-semantification.
- This happens for sybmols like zero or one, that have custom notation definition
+ This happens for symbols like zero or one, that have custom notation definition
 s in some of the archives.
  Since the process of semantification is greedy, if given 
 \series bold
@@ -3682,7 +3682,7 @@ rather than just
  Sometimes parts of the input or the whole input may need to be semantified
  without using any notations at all.
  When exactly this should be done could probably be determined by some smart
- heursitics at best.
+ heuristics at best.
 \end_layout
 
 \begin_layout Standard
@@ -3940,9 +3940,9 @@ Term Indexing is a standard technique for finding substitutions that allow
  This may result into a significant speed improvement.
  For instance, determining the top level notation would be linear in the
  number of notations rather than exponential.
- Another advantage would be the possibility to paralelize by top-level notations
- (or of any level, though I expect splitting just by the number of the top
- level notations should be enough).
+ Another advantage would be the possibility to parallelize by top-level
+ notations (or of any level, though I expect splitting just by the number
+ of the top level notations should be enough).
  This scenario is a typical application of MapReduce 
 \begin_inset CommandInset citation
 LatexCommand citep
