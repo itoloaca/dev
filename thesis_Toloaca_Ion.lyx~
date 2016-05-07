@@ -11,7 +11,7 @@
 \hypersetup{pdftex,colorlinks=true,allcolors=blue}
 \usepackage{hypcap}
 \usepackage{a4wide}
-\usepackage[show]{ed}
+\usepackage[hide]{ed}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -670,7 +670,7 @@ Up until now, different heuristics used were discussed.
 \end_layout
 
 \begin_layout Standard
-Now let's add a bit to the formula 
+Now let us add a bit to the formula 
 \begin_inset Formula $(a=b)\wedge(b=3)$
 \end_inset
 
@@ -692,7 +692,7 @@ Now let's add a bit to the formula
 \end_layout
 
 \begin_layout Standard
-Let's get to a more interesting example 
+Let us consider a more interesting example 
 \begin_inset Formula $f(a+b)$
 \end_inset
 
@@ -737,7 +737,7 @@ In order to understand what
 \series bold
 MathSemantifier 
 \series default
-does, it is required that the Presentation Algorithm is explained first.
+does, the Presentation Algorithm needs to be explained first.
  The reason for that is that 
 \series bold
 MathSemantifier 
@@ -876,10 +876,7 @@ or
 mspace 
 \series default
 as long as those do not change the meaning.
-\end_layout
-
-\begin_layout Standard
-However, different CMML expressions can be rendered the same way, which
+ However, different CMML expressions can be rendered the same way, which
  is were the ambiguity of the reverse process takes origin.
 \end_layout
 
@@ -904,13 +901,10 @@ tags).
 \begin_layout Standard
 Note that, while this is certainly already a difficult task, a more proper
  definition would be, given a PMML expression, a CMML expression that can
- be rendered back to the original expression AND the resulting represents
- the actual meaning of the PMML expression (or at least, it is a valid
-\end_layout
-
-\begin_layout Standard
-meaning for the expression according to the common sense of a human mathematicia
-n).
+ be rendered back to the original expression AND the resulting expression
+ represents the actual meaning of the PMML expression (or at least, it is
+ a valid meaning for the expression according to the common sense of a human
+ mathematician).
  
 \series bold
 MathSemantifier 
@@ -2588,30 +2582,22 @@ autoref{fig:6}
 
 \end_inset
 
-, there is a total of 72 different readings.
+, there is a total of 342 different readings.
  This can be easily explained, since 
 \series bold
-Invisible Times 
+Invisible Times
 \series default
-and 
+, 
 \series bold
 Arithmetic Plus
 \series default
- have each 6 different notations, and 
+ and 
 \series bold
 Mod 
 \series default
-has 2.
- 
-\begin_inset Formula $6\cdot6\cdot2=72$
-\end_inset
-
- explains exactly where the 
-\begin_inset Formula $72$
-\end_inset
-
- readings come from, since each notation can be combined with any other
- notation without any restrictions.
+have each multiple notations definitions (that originate from different
+ MMT archives, for instance), and there are no limitations on what kind
+ of notation definitions can go together in the same CMML tree.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3192,11 +3178,11 @@ The final part of any of the semantification processes is converting the
 \end_layout
 
 \begin_layout Enumerate
-The notation path
+The MMT notation path
 \end_layout
 
 \begin_layout Enumerate
-The argument maps
+The argument maps (maps from the argument number to the corresponding substring)
 \end_layout
 
 \begin_layout Standard
@@ -3594,8 +3580,7 @@ autoref{fig:eval_ex}
 
 \end_inset
 
- (the example actually produces seven readings, which are not all shown
- for brevity).
+.
 \end_layout
 
 \begin_layout Standard
