@@ -118,12 +118,12 @@ cation system that attempts to tackle the problem of ambiguity in mathematical
  Free Grammar.
  This paper outlines an implementation of MathSemantifier that focuses on
  helping researchers in semantifying their works, and the ultimate goal
- being a scalable implementation that would need next to no help from a
- human, and, therefore, could be used to semantify large collections of
- mathematical papers such as arXiV 
+ being a scalable implementation that would need minimal help from a human,
+ and, therefore, could be used to semantify large collections of mathematical
+ papers such as arXiv 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "ArXiv"
+key "arXiv"
 
 \end_inset
 
@@ -159,8 +159,12 @@ Introduction
 
 \begin_layout Standard
 The scientific community produces a large number of mathematical papers
- (approximately 120 thousand new papers per year), which raises the importance
- of machine based processing of such documents.
+ (approximately 
+\begin_inset Formula $120.000$
+\end_inset
+
+ new papers per year), which raises the importance of machine based processing
+ of such documents.
  Unfortunately, the most popular formats in which these papers are found
  (for instance, LaTeX) do not contain much information that would allow
  the computers to infer the complex knowledge graph behind each paper.
@@ -208,16 +212,16 @@ As previously mentioned, a lot of effort went into translating books into
  digital documents.
  Since the year of 1850, there have been produced approximately 3.5 million
  papers, and approximately 120 thousand new papers are written every year.
- Now, when all these digital documents need to be converted to these semantic
- representation, doing it by hand is not just unreasonable, but straight
- out impossible.
+ Manual processing of such an amount of papers in order to convert them
+ to a semantic format is clearly impossible.
+ 
 \end_layout
 
 \begin_layout Standard
 The next step in this evolution is translating digital documents into improved
  digital documents, that the computers can actually understand and not just
  store.
- This next step can only happen if a new, relatively painless, way of transition
+ This next step can only happen if a new, relatively feasible, way of transition
  appears.
  As soon as the ease of transition and the benefits from doing it outweigh
  the difficulties associated with it, the scientific community will open
@@ -230,8 +234,11 @@ Content MathML and Presentation MathML
 \end_layout
 
 \begin_layout Standard
-The two main formats this paper is focusing on are Content MathML (CMML)
- and Presentation MathML (PMML) 
+The two main formats 
+\series bold
+MathSemantifier 
+\series default
+uses are Content MathML (CMML) and Presentation MathML (PMML) 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "W3C03"
@@ -247,9 +254,8 @@ PMML is used to describe the layout and structure of mathematical notations.
  structures present in traditional mathematical notations, containing also
  enough information for good renderings.
  The last part is exactly the motivation as to why MathML alone is not enough
- - because it only suggests specific ways of renderings, but does not require
- anything.
- 
+ - because it only suggests specific ways of renderings, but does not enforce
+ stronger requirements.
 \end_layout
 
 \begin_layout Standard
@@ -319,8 +325,7 @@ mi
 \series default
  is used for variables and similar objects.
  This provides a clear structured format, that is parsed by MathSemantifier.
- In particular, PMML is such a small and convenient language that even building
- a parser for it as a part of MathSemantifier is certainly reasonable.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -497,8 +502,8 @@ Multiplication of
 \end_layout
 
 \begin_layout Standard
-Note how such a simple example with just three identifiers has at three
- different possible interpretations.
+Note how such a simple example with just three identifiers has at least
+ four different possible interpretations.
  It is easy to notice that the number of readings has an exponential complexity
  in the length of the expression.
  For instance, the expression above has 
@@ -509,8 +514,8 @@ Note how such a simple example with just three identifiers has at three
 \begin_inset Formula $n$
 \end_inset
 
- is the number of identifiers, which is because we can considered each applicati
-on as a multiplication too.
+ is the number of identifiers, which is because we can consider each application
+ as a multiplication too.
 \end_layout
 
 \begin_layout Standard
@@ -554,8 +559,13 @@ In other words, the same sequence of symbols, associated with the same parse
  The only feasible way at the moment of solving such ambiguities is having
  a large notation database and ultimately asking the user to choose from
  a list of possible readings.
- This is exactly how MathSemantifier works, which means that the final product
- is expect to excel at solving such tasks.
+ 
+\series bold
+MathSemantifier
+\series default
+ does indeed provide for the user the complete list of possible readings,
+ which means that it is expected to excel at removing both structural and
+ idiomatic ambiguities.
 \end_layout
 
 \begin_layout Subsection
@@ -563,7 +573,8 @@ Extracting Semantics from Mathematical Documents
 \end_layout
 
 \begin_layout Standard
-Ambiguity is the problem, so, now, a solution for it is required.
+In this section we propose a solution to the ambiguity problem described
+ above.
  Let us recall the example from the previous section 
 \begin_inset Formula $f(a(b))$
 \end_inset
@@ -647,8 +658,8 @@ Let
 
 .
  All of these can be translated to heuristics that MathSemantifier can use
- to improve its results, or otherwise said, minimize the amount of work
- the human has to do by restricting the possible meanings as much as possible.
+ to improve its results and minimize the amount of work the human has to
+ do by restricting the possible meanings as much as possible.
 \end_layout
 
 \begin_layout Standard
@@ -683,7 +694,7 @@ Now let us add a bit to the formula
 \begin_inset Formula $=$
 \end_inset
 
- is a relation of numbers by applying First Order Logic to the expression.
+ is a relation between numbers by applying First Order Logic to the expression.
  Notice how more context reduced the ambiguity of the previous expression.
  Also, notice how we naturally assume First Order Logic is applicable to
  this situation.
@@ -719,13 +730,12 @@ Let us consider a more interesting example
 \end_layout
 
 \begin_layout Standard
-To sum up, humans read mathematical documents bit by bit and throw away
- impossible interpretations until there is, hopefully, only one left.
+To sum up, humans read mathematical documents bit by bit and discard impossible
+ interpretations until there is, hopefully, only one left.
  In doing so, they mainly apply two strategies - heuristics and proof by
  contradiction.
- This paper explores the possibility of MathSemantifier doing the same to
- some extent.
- 
+ This paper explores the possibility of MathSemantifier solving ambiguities
+ in a similar way.
 \end_layout
 
 \begin_layout Subsection
@@ -1020,8 +1030,8 @@ MathSemantifier in the Context of Disambiguation
 \begin_layout Standard
 In the endeavor of extracting semantics from mathematical documents MathSemantif
 ier uses its notation database in order to attempt to explore the space
- of all possible readings, and the to throw away some using heuristics,
- ultimately letting the user decide which reading is the best.
+ of all possible readings, and discard some irrelevant readings using heuristics
+, ultimately letting the user decide which reading is the best.
 \end_layout
 
 \begin_layout Standard
