@@ -105,21 +105,21 @@ Jacobs University Bremen
 \end_layout
 
 \begin_layout Abstract
-Mathematical formulae are a highly ambiguous content for which typesetting
- systems as LaTeX store only the rendering information.
+Mathematical formulae are a highly ambiguous natural language fragments
+ for which typesetting systems as LaTeX store only the rendering information.
  MathSemantifier is an open-source notation-based mathematical formula semantifi
 cation system that attempts to tackle the problem of ambiguity in mathematical
  documents and produce knowledge-rich equivalents.
  The system extracts formulae (from formats such as LaTeX or MathML) and
- produces content-rich results (Content MathML) that contain no semantic
- ambiguity.
+ produces content-rich results (Content MathML) that contain no ambiguity.
  The disambiguation is achieved by matching the input formulae against a
- known database of notation definitions, which is aggregated into a Context
- Free Grammar.
+ known database of approximately 700 notation definitions, which is aggregated
+ into a Context Free Grammar of about 2800 rules.
  This paper outlines an implementation of MathSemantifier that focuses on
- helping researchers in semantifying their works, and the ultimate goal
- being a scalable implementation that would need minimal help from a human,
- and, therefore, could be used to semantify large collections of mathematical
+ helping researchers in semantifying their works.
+ The ultimate goal of MathSemantifier is a scalable implementation that
+ would need minimal help from a human.
+ Such a system could be used to semantify large collections of mathematical
  papers such as arXiv 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -160,14 +160,21 @@ Introduction
 \begin_layout Standard
 The scientific community produces a large number of mathematical papers
  (approximately 
-\begin_inset Formula $120.000$
+\begin_inset Formula $108.000$
 \end_inset
 
- new papers per year), which raises the importance of machine based processing
- of such documents.
+ new papers per year 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "arxivSubmission"
+
+\end_inset
+
+), which raises the importance of machine based processing of such documents.
  Unfortunately, the most popular formats in which these papers are found
  (for instance, LaTeX) do not contain much information that would allow
- the computers to infer the complex knowledge graph behind each paper.
+ the computers to infer the human-understandable knowledge contained within
+ a paper.
  Since, at this point, changing these formats is not practically possible,
  the other solution is to add a semantic flavor to the existing documents
  by translating them into a more suitable format, for instance, Content
@@ -201,8 +208,8 @@ key "OMDOC"
 
 .
  These new methods do not directly store the rendering of the documents.
- Instead, what is actually stored is the knowledge graph hidden behind the
- ambiguity of the representation.
+ Instead, what is actually stored is the intended semantics hidden behind
+ the ambiguity of the representation.
  Naturally, these documents can be used to also generate a human readable
  format, examples being Presentation MathML and LaTeX.
 \end_layout
@@ -210,11 +217,18 @@ key "OMDOC"
 \begin_layout Standard
 As previously mentioned, a lot of effort went into translating books into
  digital documents.
- Since the year of 1850, there have been produced approximately 3.5 million
- papers, and approximately 120 thousand new papers are written every year.
+ In the last 24.8 years, there have been produced approximately 1.15 million
+ papers, and approximately 108 thousand new papers are written every year
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "arxivSubmission"
+
+\end_inset
+
+.
  Manual processing of such an amount of papers in order to convert them
  to a semantic format is clearly impossible.
- 
 \end_layout
 
 \begin_layout Standard
@@ -253,9 +267,9 @@ PMML is used to describe the layout and structure of mathematical notations.
  PMML elements construct the basic kinds of symbols and expression-building
  structures present in traditional mathematical notations, containing also
  enough information for good renderings.
- The last part is exactly the motivation as to why MathML alone is not enough
- - because it only suggests specific ways of renderings, but does not enforce
- stronger requirements.
+ The last part is exactly the motivation as to why Presentation MathML alone
+ is not enough - because it only suggests specific ways of renderings, but
+ does not enforce stronger requirements.
 \end_layout
 
 \begin_layout Standard
@@ -289,7 +303,7 @@ H multiplied by e
 \begin_inset Formula $e$
 \end_inset
 
- in the context of lambda calculus, as well as a chemical.
+ in the context of lambda calculus, as well as a chemical element.
 \end_layout
 
 \begin_layout Standard
@@ -399,9 +413,11 @@ label{fig:1}
 \end_layout
 
 \begin_layout Standard
-An important part of CMML is that all notations (like the arithmetic plus
- notations used in the example above), contain specifications of how these
- should be rendered into PMML, so the conversion is not a problem.
+Conversion from CMML to PMML is an issue since CMML does not provide such
+ specifications.
+ However, the MMT Notations that are processed by MathSemantifier do contain
+ rendering specifications.
+ MMT Notations will be discussed in more detail in further sections.
 \end_layout
 
 \begin_layout Subsection
@@ -412,8 +428,8 @@ Ambiguity in Mathematical Documents
 An important concept necessary in order to understand why semantification
  is a complex process is ambiguity.
  Mathematical documents are not a simple collection of symbols.
- The main use of these documents emerges only when the knowledge graph of
- a document is accessible.
+ The main use of these documents emerges only when the intended semantics
+ of a document is accessible.
  However, humans tend to be lazy in writing down the whole graph, but instead
  rely on implicit human knowledge to decipher these documents.
  This is where ambiguity comes into play, when the author relies on the
@@ -430,7 +446,7 @@ Structural Ambiguities
 \begin_layout Standard
 A simple example that demonstrates the concept of structural ambiguities
  can be 
-\begin_inset Formula $f(a(b))$
+\begin_inset Formula $\sin\ x\ /\ 2$
 \end_inset
 
 .
@@ -556,14 +572,13 @@ The vertex of one of a series of geometric objects
 \begin_layout Standard
 In other words, the same sequence of symbols, associated with the same parse
  tree can lead to multiple readings.
- The only feasible way at the moment of solving such ambiguities is having
- a large notation database and ultimately asking the user to choose from
- a list of possible readings.
- 
+ There does not exist a feasible way of solving such ambiguities at the
+ moment.
+ My implementation of 
 \series bold
-MathSemantifier
+MathSemantifier 
 \series default
- does indeed provide for the user the complete list of possible readings,
+solves this problem by providing the complete list of possible readings,
  which means that it is expected to excel at removing both structural and
  idiomatic ambiguities.
 \end_layout
@@ -694,7 +709,7 @@ Now let us add a bit to the formula
 \begin_inset Formula $=$
 \end_inset
 
- is a relation of numbers by applying First Order Logic to the expression.
+ is a relation between numbers by applying First Order Logic to the expression.
  Notice how more context reduced the ambiguity of the previous expression.
  Also, notice how we naturally assume First Order Logic is applicable to
  this situation.
@@ -3653,10 +3668,13 @@ Results
 \end_layout
 
 \begin_layout Standard
-A visual control revealed the following approximate results for the testing
- on the 
+A visual control of approximately 200 examples from the 
 \series bold
-MathHub Glossary.
+MathHub Glossary
+\series default
+ revealed the following results
+\series bold
+.
  
 \series default
 About 40% of the examples are semantified correctly.
@@ -3886,6 +3904,12 @@ hyperref[8]{section 8}
 \end_inset
 
  is done beyond that).
+ Naturally, 
+\series bold
+MathSemantifier 
+\series default
+can only recognize the symbols that were used when building the Context
+ Free Grammar it uses.
  This shows that it is certainly possible to aggregate the knowledge from
  the MMT Notations and to use it for parsing purposes.
  However, both the Notations and the Parsing Framework need significant
