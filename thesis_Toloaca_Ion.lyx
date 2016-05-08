@@ -275,9 +275,8 @@ PMML is used to describe the layout and structure of mathematical notations.
 \begin_layout Standard
 CMML, on the other hand, is used to provide an explicit encoding of the
  underlying mathematical meaning of mathematical expressions.
- This fact is important in this context because this implies that CMML contains
- no ambiguity, so, by choosing the final product to be CMML, it is indeed
- possible to achieve meaningful semantification.
+ Therefore, CMML contains no ambiguity, so, by choosing the final product
+ to be CMML, it is indeed possible to achieve meaningful semantification.
  For example, considered 
 \begin_inset Quotes eld
 \end_inset
@@ -454,26 +453,25 @@ A simple example that demonstrates the concept of structural ambiguities
 \end_layout
 
 \begin_layout Enumerate
-Application of function 
 \begin_inset Formula $\sin$
 \end_inset
 
- to 
-\begin_inset Formula $x/2$
+ applied to 
+\begin_inset Formula $\frac{x}{2}$
 \end_inset
 
  
 \end_layout
 
 \begin_layout Enumerate
-\begin_inset Formula $1/2$
+\begin_inset Formula $\frac{1}{2}$
 \end_inset
 
- multiplied by the application of function 
+ times 
 \begin_inset Formula $\sin$
 \end_inset
 
- to 
+ applied to 
 \begin_inset Formula $x$
 \end_inset
 
@@ -530,6 +528,77 @@ A user defined sequence
 
 \begin_layout Enumerate
 The vertex of one of a series of geometric objects
+\end_layout
+
+\begin_layout Standard
+Another typical example could be 
+\begin_inset Formula $f(a(b))$
+\end_inset
+
+.
+ This example contains two invisible operators, each of which could mean
+ either multiplication or function application.
+ The possible meanings are therefore:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f$
+\end_inset
+
+ applied to 
+\begin_inset Formula $a$
+\end_inset
+
+ applied to 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f$
+\end_inset
+
+ applied to 
+\begin_inset Formula $a$
+\end_inset
+
+ times 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f$
+\end_inset
+
+ times 
+\begin_inset Formula $a$
+\end_inset
+
+ applied to 
+\begin_inset Formula $b$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $f$
+\end_inset
+
+ times 
+\begin_inset Formula $a$
+\end_inset
+
+ times 
+\begin_inset Formula $b$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -786,6 +855,39 @@ autoref{fig:presentation_output}
 \end_inset
 
  as well).
+ OMDoc Notations like 
+\series bold
+natarith addition 
+\series default
+are initially written in sTeX, and then converted to OMDoc using LaTeXML.
+ Further sections will reveal more detail both about the origin of the notation
+ (see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{pre_not}
+\end_layout
+
+\end_inset
+
+), as well as about the LaTeXML conversion (see 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+autoref{pre_lat}
+\end_layout
+
+\end_inset
+
+).
 \end_layout
 
 \begin_layout Standard
@@ -1538,7 +1640,20 @@ Preliminaries
 \end_layout
 
 \begin_layout Subsection
-The Notation Database of MMT
+The Notation Database of MMT 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{pre_not}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1732,7 +1847,20 @@ and so on.
 \end_layout
 
 \begin_layout Subsection
-LaTeXML Pre-processing
+LaTeXML Pre-processing 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{pre_lat}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3631,7 +3759,7 @@ Results
 \end_layout
 
 \begin_layout Standard
-A visual control of approximately 200 examples from the 
+A visual control of approximately 500 examples from the 
 \series bold
 MathHub Glossary
 \series default
