@@ -95,7 +95,7 @@ Toloaca Ion
 \begin_inset Newline newline
 \end_inset
 
-Supervisor: Prof.
+Prof.
  Dr.
  Michael Kohlhase
 \begin_inset Newline newline
@@ -128,22 +128,6 @@ key "arXiv"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -198,225 +182,14 @@ As a system as complex as the current scientific community was created,
 \end_layout
 
 \begin_layout Standard
-Now, scientists have found ways to represent their knowledge in a machine
- comprehensible manner, some of which are Content MathML and OMDoc 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "OMDOC"
-
-\end_inset
-
-.
- These new methods do not directly store the rendering of the documents.
- Instead, what is actually stored is the intended semantics hidden behind
- the ambiguity of the representation.
- Naturally, these documents can be used to also generate a human readable
- format, examples being Presentation MathML and LaTeX.
-\end_layout
-
-\begin_layout Standard
-As previously mentioned, a lot of effort went into translating books into
- digital documents.
- In the last 24.8 years, there have been produced approximately 1.15 million
- papers, and approximately 108 thousand new papers are written every year
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "arxivSubmission"
-
-\end_inset
-
-.
- Manual processing of such an amount of papers in order to convert them
- to a semantic format is clearly impossible.
-\end_layout
-
-\begin_layout Standard
-The next step in this evolution is translating digital documents into improved
- digital documents, that the computers can actually understand and not just
- store.
- This next step can only happen if a new, relatively feasible, way of transition
- appears.
- As soon as the ease of transition and the benefits from doing it outweigh
- the difficulties associated with it, the scientific community will open
- the door into the world where computers can actively help researchers with
- more than just symbolic searches.
-\end_layout
-
-\begin_layout Subsection
-Content MathML and Presentation MathML
-\end_layout
-
-\begin_layout Standard
-The two main formats 
+The next step in this evolution is translating digital documents into knowledge-
+rich digital documents.
+ This next step can only happen if a new feasible way of transition appears,
+ which 
 \series bold
 MathSemantifier 
 \series default
-uses are Content MathML (CMML) and Presentation MathML (PMML) 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "W3C03"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-PMML is used to describe the layout and structure of mathematical notations.
- PMML elements construct the basic kinds of symbols and expression-building
- structures present in traditional mathematical notations, containing also
- enough information for good renderings.
- The last part is exactly the motivation as to why Presentation MathML alone
- is not enough - because it only suggests specific ways of renderings, but
- does not enforce stronger requirements.
-\end_layout
-
-\begin_layout Standard
-CMML, on the other hand, is used to provide an explicit encoding of the
- underlying mathematical meaning of mathematical expressions.
- Therefore, CMML contains no ambiguity, so, by choosing the final product
- to be CMML, it is indeed possible to achieve meaningful semantification.
- For example, considered 
-\begin_inset Quotes eld
-\end_inset
-
-H multiplied by e
-\begin_inset Quotes erd
-\end_inset
-
-.
- It can be often seen to be written as 
-\begin_inset Formula $H$
-\end_inset
-
-
-\begin_inset Formula $e$
-\end_inset
-
- in mathematics, however, this can be interpreted also as 
-\begin_inset Formula $H$
-\end_inset
-
- applied to 
-\begin_inset Formula $e$
-\end_inset
-
- in the context of lambda calculus, as well as a chemical element.
-\end_layout
-
-\begin_layout Standard
-An example of PMML and CMML code for the expression 
-\begin_inset Formula $x+y$
-\end_inset
-
- is provided in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:1}
-\end_layout
-
-\end_inset
-
-.
- Note how the 
-\series bold
-mrow
-\series default
- tag is used to delimit nested expressions, while the 
-\series bold
-mo
-\series default
- tag indicate mathematical objects (such as arithmetic operators) and 
-\series bold
-mi
-\series default
- is used for variables and similar objects.
- This provides a clear structured format, that is parsed by MathSemantifier.
- 
-\end_layout
-
-\begin_layout Standard
-In the CMML part of the example, the 
-\series bold
-apply
-\series default
- tag is semantically the application of its first element (the arithmetic
- plus) on two identifiers 
-\begin_inset Formula $x$
-\end_inset
-
- and 
-\begin_inset Formula $y$
-\end_inset
-
-, which altogether means simply 
-\begin_inset Formula $x+y$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2.25cm
-\end_inset
-
-
-\begin_inset Graphics
-	filename pmmlANDcmml.png
-	width 12cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-PMML and CMML 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:1}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Conversion from CMML to PMML is an issue since CMML does not provide such
- specifications.
- However, the MMT Notations that are processed by MathSemantifier do contain
- rendering specifications.
- MMT Notations will be discussed in more detail in further sections.
+attempts to become.
 \end_layout
 
 \begin_layout Subsection
@@ -478,30 +251,6 @@ A simple example that demonstrates the concept of structural ambiguities
 
 \end_layout
 
-\begin_layout Standard
-Note how such a simple example with just several symbols has more than one
- possible interpretation.
- It is easy to notice that the number of readings has an exponential complexity
- in the length of the expression.
- For instance, the expression above has 
-\begin_inset Formula $2^{n-1}$
-\end_inset
-
- readings, where 
-\begin_inset Formula $n$
-\end_inset
-
- is the number of identifiers, which is because we can consider each application
- as a multiplication too.
-\end_layout
-
-\begin_layout Standard
-The concept above can be generalized as structural ambiguities being associated
- to different readings generated from different parse trees.
- This means that the document may provide some direct clue about what parse
- tree is the best, and the readings can be characterized by parse trees.
-\end_layout
-
 \begin_layout Subsubsection
 Idiomatic Ambiguities
 \end_layout
@@ -530,91 +279,6 @@ A user defined sequence
 The vertex of one of a series of geometric objects
 \end_layout
 
-\begin_layout Standard
-Another typical example could be 
-\begin_inset Formula $f(a(b))$
-\end_inset
-
-.
- This example contains two invisible operators, each of which could mean
- either multiplication or function application.
- The possible meanings are therefore:
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $f$
-\end_inset
-
- applied to 
-\begin_inset Formula $a$
-\end_inset
-
- applied to 
-\begin_inset Formula $b$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $f$
-\end_inset
-
- applied to 
-\begin_inset Formula $a$
-\end_inset
-
- times 
-\begin_inset Formula $b$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $f$
-\end_inset
-
- times 
-\begin_inset Formula $a$
-\end_inset
-
- applied to 
-\begin_inset Formula $b$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-\begin_inset Formula $f$
-\end_inset
-
- times 
-\begin_inset Formula $a$
-\end_inset
-
- times 
-\begin_inset Formula $b$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-In other words, the same sequence of symbols, associated with the same parse
- tree can lead to multiple readings.
- There does not exist a feasible way of solving such ambiguities at the
- moment.
- My implementation of 
-\series bold
-MathSemantifier 
-\series default
-solves this problem by providing the complete list of possible readings,
- which means that it is expected to excel at removing both structural and
- idiomatic ambiguities.
-\end_layout
-
 \begin_layout Subsection
 Extracting Semantics from Mathematical Documents
 \end_layout
@@ -622,167 +286,35 @@ Extracting Semantics from Mathematical Documents
 \begin_layout Standard
 In this section we propose a solution to the ambiguity problem described
  above.
- Let us recall the example from the previous section 
-\begin_inset Formula $f(a(b))$
+ Consider 
+\begin_inset Formula $c(a(b))$
 \end_inset
 
 .
- The first interpretation of the expression a human reader is likely to
- come up with is the application of 
-\begin_inset Formula $f$
+ The most natural interpretation is 
+\begin_inset Formula $c$
 \end_inset
 
- to the application of 
+ of 
 \begin_inset Formula $a$
 \end_inset
 
- to 
+ of 
 \begin_inset Formula $b$
 \end_inset
 
 .
- Moreover, the other readings may take the human reader by surprise, as
- he or she would assume that the first reading is the correct one.
- 
-\end_layout
-
-\begin_layout Standard
-Let us look into why this happens.
- First of all, 
-\begin_inset Formula $f$
-\end_inset
-
- is a symbol humans usually use for functions, moreover, the brackets around
- 
-\begin_inset Formula $a(b)$
-\end_inset
-
- could be omitted if it were a multiplication rather than an application.
- Next, 
-\begin_inset Formula $a$
-\end_inset
-
- and 
-\begin_inset Formula $b$
-\end_inset
-
- are usually used for variables, but then again the brackets are useless
- if it is a multiplication.
- To sum up, the human throws away meanings that would imply useless work
- or usage of symbols in an unusual way.
- Imagine asking a mathematician which of the expressions is more natural,
- 
-\begin_inset Formula $fa$
-\end_inset
-
- or 
-\begin_inset Formula $ab$
-\end_inset
-
-, or, to be even more extreme, 
-\begin_inset Quotes eld
-\end_inset
-
-Let 
-\begin_inset Formula $\epsilon>0$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
- or 
-\begin_inset Quotes eld
-\end_inset
-
-Let 
-\begin_inset Formula $\epsilon<0$
-\end_inset
-
-
-\begin_inset Quotes erd
-\end_inset
-
-.
- All of these can be translated to heuristics that MathSemantifier can use
- to improve its results and minimize the amount of work the human has to
- do by restricting the possible meanings as much as possible.
-\end_layout
-
-\begin_layout Standard
-Up until now, different heuristics used were discussed.
- However, mathematics has better means of finding the one true meaning of
- the document.
- Imagine the formula 
-\begin_inset Formula $a=b$
-\end_inset
-
-.
- As a human, we can deduce it may mean that some two objects are equal.
- We still have absolutely no understanding of what those objects are, and
- we just assume 
-\begin_inset Formula $=$
-\end_inset
-
- works as a relation on any 2 objects of the same type.
-\end_layout
-
-\begin_layout Standard
-Now let us add a bit to the formula 
-\begin_inset Formula $(a=b)\wedge(b=3)$
-\end_inset
-
-.
- At this point, we deduce that 
-\begin_inset Formula $a=3$
-\end_inset
-
-, and 
-\begin_inset Formula $=$
-\end_inset
-
- is a relation between numbers by applying First Order Logic to the expression.
- Notice how more context reduced the ambiguity of the previous expression.
- Also, notice how we naturally assume First Order Logic is applicable to
- this situation.
- Notice also that we are not using just heuristics, but rather we are applying
- a deterministic approach to find out which meanings are impossible.
-\end_layout
-
-\begin_layout Standard
-Let us consider a more interesting example 
-\begin_inset Formula $f(a+b)$
-\end_inset
-
-.
- Normally, we would assume this is a function applied to 
-\begin_inset Formula $a+b$
-\end_inset
-
-, but nothing in this context can help us decide against 
-\begin_inset Formula $f$
-\end_inset
-
- multiplied by 
-\begin_inset Formula $a+b$
-\end_inset
-
-.
- Adding an expression like 
-\begin_inset Formula $f:\mbox{R\rightarrow R}$
-\end_inset
-
- would certainly help to reason against the second interpretation, because
- it does not type-check.
-\end_layout
-
-\begin_layout Standard
-To sum up, humans read mathematical documents bit by bit and discard impossible
- interpretations until there is, hopefully, only one left.
- In doing so, they mainly apply two strategies - heuristics and proof by
- contradiction.
- This paper explores the possibility of MathSemantifier solving ambiguities
- in a similar way.
+ However, there arise multiple meanings if we consider that the application
+ could be interpreted as multiplication.
+ The human reader discards such meanings by convention and experience of
+ handling mathematical documents, however, teaching this to a computer is
+ a complex task.
+ The approach that 
+\series bold
+MathSemantifier 
+\series default
+takes is simply extracting all the possible meanings, while trying to apply
+ heuristics to weed out impossible meanings.
 \end_layout
 
 \begin_layout Subsection
@@ -950,60 +482,6 @@ label{fig:presentation_output}
 \end_layout
 
 \begin_layout Subsubsection
-Definition of Valid Results
-\end_layout
-
-\begin_layout Standard
-The Presentation Algorithm is conceptually simple because there is no ambiguity
- involved.
- A certain CMML expression is always presented the same way.
- Even more so, the implementation is free to include elements like 
-\series bold
-mrow 
-\series default
-or 
-\series bold
-mspace 
-\series default
-as long as those do not change the meaning.
- However, different CMML expressions can be rendered the same way, which
- is were the ambiguity of the reverse process takes origin.
-\end_layout
-
-\begin_layout Standard
-A valid result for 
-\series bold
-MathSemantifier 
-\series default
-is, given a PMML expression, such a CMML expression that the Presentation
- Algorithm can render back to the original expression (up to 
-\series bold
-mrow 
-\series default
-or 
-\series bold
-mspace 
-\series default
-tags).
- 
-\end_layout
-
-\begin_layout Standard
-Note that, while this is certainly already a difficult task, a more proper
- definition would be, given a PMML expression, a CMML expression that can
- be rendered back to the original expression AND the resulting expression
- represents the actual meaning of the PMML expression (or at least, it is
- a valid meaning for the expression according to the common sense of a human
- mathematician).
- 
-\series bold
-MathSemantifier 
-\series default
-does not explore this task beyond using some heuristics mentioned in the
- further sections.
-\end_layout
-
-\begin_layout Subsubsection
 Approach to Semantification
 \end_layout
 
@@ -1103,538 +581,6 @@ Semantification will not make all of the above directly possible, however
  it is rendered.
 \end_layout
 
-\begin_layout Subsubsection
-MathSemantifier in the Context of Disambiguation
-\end_layout
-
-\begin_layout Standard
-In the endeavor of extracting semantics from mathematical documents MathSemantif
-ier uses its notation database in order to attempt to explore the space
- of all possible readings, and discard some irrelevant readings using heuristics
-, ultimately letting the user decide which reading is the best.
-\end_layout
-
-\begin_layout Standard
-This makes clear the parts the final product excels at, but also the main
- challenges related to that.
-\end_layout
-
-\begin_layout Standard
-Regarding the good parts:
-\end_layout
-
-\begin_layout Itemize
-Solving both structural and idiomatic ambiguities by exploring the space
- of all readings
-\end_layout
-
-\begin_layout Itemize
-Notation addition can be easily added to the system, since the Context Free
- Grammar used is generated automatically 
-\end_layout
-
-\begin_layout Itemize
-Enhanced overall user experience when writing or semantifying existing mathemati
-cal documents by creating a dynamic, adaptive system by means of the above
- mentioned strengths
-\end_layout
-
-\begin_layout Standard
-The main challenges are:
-\end_layout
-
-\begin_layout Itemize
-Scalability in the context of such a system translates into finding the
- best ways to generate as few useless parse trees as possible
-\end_layout
-
-\begin_layout Itemize
-Compiling a notation database into a Context Free Grammar when including
- multiple notation archives simultaneously 
-\end_layout
-
-\begin_layout Itemize
-The response time of a query to the system is a big issue, since, as mentioned
- before, everything related to ambiguities has an exponential time complexity.
- Finding a balance between exploring the space of all readings enough in
- order to find meaningful results while keeping the response time low is
- a very difficult challenge.
-\end_layout
-
-\begin_layout Standard
-The rest of this paper demonstrates in detail how MathSemantifier harnesses
- its strengths and solves or avoids the challenges described.
-\end_layout
-
-\begin_layout Section
-State of the Art
-\end_layout
-
-\begin_layout Subsection
-Semantification
-\end_layout
-
-\begin_layout Standard
-Nowadays extracting the semantics of mathematical documents is regarded
- as an interesting field, however the number of researchers in it is limited.
- This is caused by several domain specific problems.
-\end_layout
-
-\begin_layout Standard
-First of all, mathematics is usually represented in a format where it mixed
- with natural language.
- Research on extracting mathematical expressions from such contexts has
- not been incredibly successful so far.
- Another important problem is the lack of a well prepared set of data.
- This kind of data could be used for Machine Learning applications as training
- data, or simply as test data for complex systems.
- As software that has not been tested cannot be called particularly useful,
- this poses a great problem.
-\end_layout
-
-\begin_layout Subsubsection
-Restricted Natural Language
-\end_layout
-
-\begin_layout Standard
-There are multiple projects that try to use a subset of the natural language
- that is still not that ambiguous but allows for intuitive document creation.
- Such projects are FMathL 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "NS10"
-
-\end_inset
-
-, MathLang 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "KMW04"
-
-\end_inset
-
-, MathNat 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "HR10"
-
-\end_inset
-
- and Naproche 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "CKS11"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Most such approaches try to analyze the context free parts of mathematical
- expressions.
- We will go into more detail about Context Free Grammar applications in
- semantification in the next sections.
- It is worthy to note though that most such projects are not satisfied by
- commonly found grammar engines, and some, like FMathL, are developing their
- own specialized parsers.
- This paper does not outline custom parsers, however, if further work is
- to be done on the subject, implementing heuristics as to reduce the disambiguat
-ion choice list could require at some point a similar approach.
-\end_layout
-
-\begin_layout Subsubsection
-Format Conversions
-\end_layout
-
-\begin_layout Standard
-Mathematical documents in their majority are written in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-TeX/
-\backslash
-LaTeX
-\end_layout
-
-\end_inset
-
-, but for storage and processing purposes converting them to an XML representati
-on is a good idea.
- Large scale mathematical document archives such as 
-\begin_inset Formula $arXMLiv$
-\end_inset
-
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "SKG"
-
-\end_inset
-
- are using the LaTeXML 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Bru07"
-
-\end_inset
-
- converter to produce MathML and OpenMath.
-\end_layout
-
-\begin_layout Standard
-LaTeXML can actually already produce Content MathML, however the result
- produced in such a way from a knowledge poor setting contains only one
- of the possible readings, and, therefore, is not satisfactory from a semantic
- point of view as it not need satisfy the actual semantics of the document.
- Enhancing LaTeXML's ability of converting 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-LaTeX
-\end_layout
-
-\end_inset
-
- into knowledge rich XML format variations by exploring the space of possible
- readings is one of the main goal of this thesis.
-\end_layout
-
-\begin_layout Subsection
-Using Grammars for Semantification
-\end_layout
-
-\begin_layout Subsubsection
-Combinatory Categorial Grammars
-\end_layout
-
-\begin_layout Standard
-The MSc Thesis of Deyan Ginev 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "DEYAN11"
-
-\end_inset
-
- studies a similar approach that uses Combinatory Categorial Grammars as
- a part of a larger analysis pipeline that is applied to handpicked set
- of mathematical texts.
- The results show a close to perfect recall rate with a low degree of ambiguity.
- 
-\end_layout
-
-\begin_layout Standard
-This approach, however, uses a manually crafted grammar as opposed to the
- generated grammar used by MathSemantifier.
- While writing a grammar by hand can lead to good results as mentioned above,
- this approach does not scale, since it is hard to find someone who will
- write such grammars every time a new notation is needed.
- Notations, on the other hand, are much faster and easier to write.
- In other words, scalability and extensibility are the reasons behind MathSemant
-ifier.
-\end_layout
-
-\begin_layout Subsubsection
-S-graph grammars
-\end_layout
-
-\begin_layout Standard
-The research of Alexander Koller of University of Potsdam exhibits an interestin
-g way of utilizing grammars for semantic construction.
- S-graph grammars 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "KOLLSG"
-
-\end_inset
-
- constitute a new grammar formalism for computing graph based semantic represent
-ations.
- What distinguishes this line of research from the common data-driven systems
- trained for such purposes is that S-graph grammars use graphs as semantic
- representations in a way that is consistent with more classical views on
- semantic construction.
-\end_layout
-
-\begin_layout Standard
-S-graph grammars are introduced as a synchronous grammar formalism that
- describes relations between strings and graphs, which can be used for a
- graph based compositional semantic construction, which is essentially what
- this paper outlines in simpler terms - using Context Free Grammars.
-\end_layout
-
-\begin_layout Subsubsection
-Marpa Grammar Engine
-\end_layout
-
-\begin_layout Standard
-As the idea of the thesis is to use a Grammar Engine, we need to introduce
- a concrete solution.
- Text parsing using Context Free Grammars is quite popular, and, therefore,
- there is quite a number of solutions, which can, however, make the choice
- of the best grammar engine for a particular purpose difficult.
- After comparing several such tools, the conclusion reached was that the
- Marpa Grammar Engine 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Jeff"
-
-\end_inset
-
- stands out as a flexible, powerful and efficient tool suited for the purpose
- of semantification.
-\end_layout
-
-\begin_layout Standard
-To understand better the claim about efficiency, 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:mcomp}
-\end_layout
-
-\end_inset
-
- provides a comparison between multiple regex parsers and Marpa made by
- the creator of Marpa is provided.
-\begin_inset CommandInset citation
-LatexCommand citep
-key "marpaComparison"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename marpaComparison.png
-	width 16cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Marpa Parser - Comparison with other Parsers 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:mcomp}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The results are presented in executions per second.
- We can see that standard solutions may be faster for a small nesting level,
- but they go quadratic as it rises.
-\end_layout
-
-\begin_layout Standard
-Another important point is that Marpa Grammar Engine has a quite simple
- interface, allowing for extensive manipulations during the parsing process.
- Each rules can be given an 
-\begin_inset Quotes eld
-\end_inset
-
-Action
-\begin_inset Quotes erd
-\end_inset
-
- - a Perl routine - that can define what the engine is supposed to do when
- the rules is used.
- 
-\end_layout
-
-\begin_layout Standard
-As it was mentioned in the previous sections, the grammar generated is highly
- ambiguous, and the Marpa Engine allows for ambiguous grammar of any kind
- that are required for this application.
-\end_layout
-
-\begin_layout Subsection
-Extracting Formulae from Mathematical Documents 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{mws}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-As MathSemantifier as described in this paper need not be restricted to
- processing just MathML formulae, but also mathematical documents written
- in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-LaTeX
-\end_layout
-
-\end_inset
-
-, a method of extracting MathML formulae from mathematical documents needs
- to be provided.
- A simple way of achieving that would be by using the same method as MathWebSear
-ch 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "MWS12"
-
-\end_inset
-
- is using in order to extract MathML formulae from documents containing
- MathML formulae and other information.
- The structure of MWS is shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:mws}
-\end_layout
-
-\end_inset
-
-.
- MathWebSearch accepts MwsHarvest 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "MWSHarvest"
-
-\end_inset
-
- as from the crawler as seen in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:mws}
-\end_layout
-
-\end_inset
-
-.
- These harvests are in Presentation MathML, therefore perfectly suited for
- this application.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 1.5cm
-\end_inset
-
-
-\begin_inset Graphics
-	filename mwsStructure.png
-	width 13cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MathWebSearch Architecture 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:mws}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Preliminaries
 \end_layout
@@ -1700,153 +646,6 @@ key "smglomweb"
 \end_layout
 
 \begin_layout Subsection
-MMT Notation Storage Format
-\end_layout
-
-\begin_layout Standard
-The original format that MMT uses to store the notations is of high relevance,
- since it the raw material from which the Context Free Grammar is generated.
- The format consists of a Scala 
-\series bold
-case class 
-\series default
-tree.
- Several examples are provided in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:2}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 3cm
-\end_inset
-
-
-\begin_inset Graphics
-	filename marker.png
-	width 10cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MMT Notation Markers 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:2}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since there are about 40 types of different Markers, the tree above is meant
- to simply give an idea of the structure, rather than explain it fully.
- The 
-\series bold
-Marker
-\series default
- class is the tree of all possible notation components.
- The most basic types of Markers include 
-\series bold
-Presentation Markers 
-\series default
-and 
-\series bold
-Argument Markers.
-
-\series default
- They have a great diversity of subtypes.
- 
-\series bold
-Simple Argument 
-\series default
-is used for single arguments, while 
-\series bold
-Sequence Argument 
-\series default
-is a placeholder for a sequence with a specified delimiter.
- The most basic example of a sequence argument is, if considering the example
- 
-\begin_inset Formula $2+3+5$
-\end_inset
-
-, the sequence 
-\begin_inset Formula $2,3,5$
-\end_inset
-
- and the delimiter 
-\begin_inset Formula $+$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Presentation Markers 
-\series default
-have yet another purpose of simulating the PMML structure.
- 
-\series bold
-Group Marker 
-\series default
-stands for the 
-\series bold
-mrow 
-\series default
-MathML tag, 
-\series bold
-Fraction Marker 
-\series default
-- for 
-\series bold
-mfrac 
-\series default
-and so on.
- MMT has Markers for every possible MathML tag, which goes to explain the
- total number of Markers to an extent.
-\end_layout
-
-\begin_layout Subsection
 LaTeXML Pre-processing 
 \begin_inset ERT
 status open
@@ -1888,67 +687,6 @@ key "OMDOC"
 .
  OMDoc is then processed and stored in MMT.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:3}
-\end_layout
-
-\end_inset
-
- contains an example of the arithmetic plus notation written in sTeX and
- the equivalent in MathML.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename sTeXtoOMDOC.png
-	width 16cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-sTeX to OMDoc conversion 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:3}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -2246,48 +984,6 @@ label{fig:7}
 \end_layout
 
 \begin_layout Subsection
-Component communication
-\end_layout
-
-\begin_layout Standard
-Regarding the communication between parts:
-\end_layout
-
-\begin_layout Itemize
-MMT Backends and MMT Notation DB are both part of the MMT Server Application
-\end_layout
-
-\begin_layout Itemize
-All the other connections are implemented using the 
-\series bold
-REST 
-\series default
-protocol, using simple 
-\series bold
-POST 
-\series default
-requests
-\end_layout
-
-\begin_layout Standard
-This also implies that the all the different components do not need to run
- on one machine, especially the 
-\series bold
-Web UI 
-\series default
-and
-\series bold
- 
-\series default
-the reset of the components.
-\end_layout
-
-\begin_layout Standard
-The frontend / backend separation reveals opportunities for distributed
- solutions of such a system, in case scalability becomes an issue.
-\end_layout
-
-\begin_layout Subsection
 Web User Interface
 \end_layout
 
@@ -2374,127 +1070,24 @@ The user provides Presentation MathML as input to the system, then uses
 \series bold
 Semantify 
 \series default
-button to reveal a list of top level notations as shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:4}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided1.png
-	width 13cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Top level notations 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:4}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The names of the notations are derived from the notation paths as follows:
+button to reveal a list of top level notation names.
+ The names of the notations are derived from the notation paths as follows:
  
 \series bold
 archive name
 \series default
  + 
 \series bold
-symbol name.
-
+symbol name
 \series default
- The result is humanly readable in most cases as seen in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:4}
-\end_layout
-
-\end_inset
-
-.
- For example, 
+, for example, 
 \series bold
 natarith addition 
 \series default
-refers to the addition of natural numbers, 
-\series bold
-comparith addition 
-\series default
-- to the addition of complex numbers and so on.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided2.png
-	width 9cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Argument choice 
+refers to the addition of natural numbers.
+ After determining which notation is the correct one, the user needs to
+ make sure that the arguments were detected properly and, finally, the resulting
+ Content MathML tree is displayed (see 
 \begin_inset ERT
 status open
 
@@ -2502,121 +1095,12 @@ status open
 
 
 \backslash
-label{fig:5a}
+autoref{fig:6}
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
- 
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename guided3.png
-	width 9cm
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Content MathML
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:5b}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Semantification
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-After determining which notation is the correct one, the user needs to make
- sure that the arguments were detected properly (see 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:5a}
-\end_layout
-
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Standard
-Finally, the resulting Content MathML is displayed, as shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:5b}
-\end_layout
-
-\end_inset
-
-.
+ for a similar representation of the result).
 \end_layout
 
 \begin_layout Subsubsection
@@ -2932,18 +1416,14 @@ prec0
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0in
+width "50col%"
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2cm
-\end_inset
-
-
 \begin_inset Graphics
 	filename cfg_preamble.png
 	width 8cm
@@ -3099,18 +1579,18 @@ archive translated to CFG rules looks like.
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2cm
-\end_inset
 
+\end_layout
 
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cfg_ex.png
 	width 10cm
@@ -3121,7 +1601,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
- MMT Notation in CFG
+MMT Notation in CFG
 \begin_inset ERT
 status open
 
@@ -3139,6 +1619,10 @@ label{fig:cfg_ex}
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -3165,76 +1649,6 @@ and using the result to construct a the tree of possible meanings.
 
 \begin_layout Standard
 The parse trees stored in MMT have the following structure:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename parseTreeStructure.png
-	scale 70
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Semantic Parse Tree Structure 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:8}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-This simple structure shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:8}
-\end_layout
-
-\end_inset
-
- allows for a flexible way of parse tree storage.
- 
 \end_layout
 
 \begin_layout Itemize
@@ -3271,16 +1685,6 @@ an argument of a notation.
 RawString - 
 \series default
 the ground term representation
-\end_layout
-
-\begin_layout Standard
-This structure is important because, in case another application wants to
- access the parse trees and process them, this structure will need to be
- dealt with.
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -3678,80 +2082,10 @@ option mentioned in the
 Web UI
 \series default
  section is used.
- It walks the user through the examples extracted from the 
+ It processes examples from the 
 \series bold
 MathHub Glossary.
  
-\series default
-A typical example looks as shown in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{fig:eval_ex}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2cm
-\end_inset
-
-
-\begin_inset Graphics
-	filename eval.png
-	width 10cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Glossary Example 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:eval_ex}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The editor displays the example itself, which contains the PMML and the
- corresponding CMML it was generated from using the Presentation algorithm.
- The readings are displayed below in a manner that makes reading more efficient.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3795,25 +2129,13 @@ fail.
 \end_layout
 
 \begin_layout Enumerate
-The Presentation Algorithm fails to render CMML into PMML properly.
- This may very well be the main reason for failure.
- I estimate that about 30-40% of the 
-\series bold
-Glossary 
-\series default
-examples are not rendered properly.
+The Presentation Algorithm fails to render CMML into PMML properly in about
+ 30-40% of the cases.
 \end_layout
 
 \begin_layout Enumerate
 About 10% of the examples include symbols from archives that were not included
- when generating the CFG that 
-\series bold
-MathSemantifier 
-\series default
-is using.
- This is a limitation that could be easily overcome by adding those symbols,
- but, as a proof of concept, having a complete coverage of the symbols was
- not the primary focus.
+ in the CFG
 \end_layout
 
 \begin_layout Standard
@@ -3826,116 +2148,29 @@ MathSemantifier
 \end_layout
 
 \begin_layout Enumerate
-Some notations are omitted (mainly because their rendering consists only
- of one argument rendering, which creates cycles in the CFG).
- This limitation is considerably hard to work around, since it increase
- drastically the ambiguity of the input if we allow free form subterms anywhere.
+Some notations are omitted because they create cycles in the CFG
 \end_layout
 
 \begin_layout Enumerate
-Too long inputs / 
-\series bold
-MathSemantifier 
-\series default
-only considers the first 1000 parse trees as mentioned in the 
-\series bold
-Heuristics 
-\series default
-section above.
- An obvious fix would be increasing the number of considered parse trees,
- however this would result into a significantly worse performance.
- Even for further attempts I would recommend failing early (allowing for
- 80-90% of requests to complete on average) and retrying again with other
- parameters rather than waiting for too long.
- In any case, using a huge auto-generated CFG is certainly a big limitation
- for the performance.
+Input data that is too long or complex having more than 1000 parse trees
 \end_layout
 
 \begin_layout Enumerate
-
-\series bold
-MathSemantifier
-\series default
- assumes that the input has only one top level 
-\series bold
-mrow
-\series default
- or a single bracketed list of expressions.
- This technical limitation is still present because the number of notations
- that actually do that is quite low as seen in practice, however it is not
- impossible to fix, even in the current setup.
-\end_layout
-
-\begin_layout Enumerate
-One last interesting effect is over-semantification.
- This happens for symbols like zero or one, that have custom notation definition
-s in some of the archives.
- Since the process of semantification is greedy, if given 
-\series bold
-<mn>1</mn> MathSemantifier 
-\series default
-will try to semantify it as much as it can, meaning the result will be 
-\series bold
-<csymbol>...
- one</csymbol> 
-\series default
-rather than just 
-\series bold
-<cn>1</cn>.
-
-\series default
- While this can be solved easily for particular cases of zero or one, solving
- this generally may pose an interesting problem.
- Sometimes parts of the input or the whole input may need to be semantified
- without using any notations at all.
- When exactly this should be done could probably be determined by some smart
- heuristics at best.
+Assuming the input is more knowledge-rich than it actually is
 \end_layout
 
 \begin_layout Standard
 While the effective success rate of 80-90% is inspiring for a proof of concept
- system, it does not reflect the main problem that prevents 
+ system, the main issue of 
 \series bold
 MathSemantifier 
 \series default
-from becoming a practically useful tool rather than just a proof of concept
- study.
- 
-\series bold
-MathSemantifier 
-\series default
-has critical efficiency issues, which could have been expected since it
- parses the input against a CFG 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "cfgex"
-
-\end_inset
-
- of more than 
-\begin_inset Formula $2800$
-\end_inset
-
- rules that contains over 
-\begin_inset Formula $700$
-\end_inset
-
- MMT Notations.
- It is the greedy free form subterm matching that, when applied in a context
- of such ambiguity results into unsatisfactory performance for an industrial
- setting.
- 
-\end_layout
-
-\begin_layout Standard
-Overall, the results can be said to meet the purpose of proving that MMT
- Notations can be used for semantification purposes.
+is simply poor performance on long or complex input.
  Therefore, 
 \series bold
 MathSemantifier
 \series default
- is a successful proof of concept, but not yet the practical tool mathematicians
- need right now in order to harness the power of semantic content.
+ is a successful proof of concept, but not yet a practical tool.
 \end_layout
 
 \begin_layout Subsection
@@ -4132,45 +2367,6 @@ regexes
 , the non-greedy version.
  This is critical to reduce the number of useless parse trees when dealing
  with Sequence Arguments
-\end_layout
-
-\begin_layout Subsubsection
-Term Indexing 
-\end_layout
-
-\begin_layout Standard
-Term Indexing is a standard technique for finding substitutions that allow
- term unification.
- This exactly applies to the subject of semantification since we can think
- about the Presentation Algorithm as if it generates substitutions for the
- CMML into the notation renderings.
- In other words, finding the substitution that unifies an input PMML and
- a notation rendering allows for semantification.
- There are multiple standard techniques, like substitution tree indexing,
- discrimination tree indexing or path indexing that make this possible.
- The main advantage of this approach over the current approach is that it
- matches free form subterms (argument renderings) in a lazy way.
- This may result into a significant speed improvement.
- For instance, determining the top level notation would be linear in the
- number of notations rather than exponential.
- Another advantage would be the possibility to parallelize by top-level
- notations (or of any level, though I expect splitting just by the number
- of the top level notations should be enough).
- This scenario is a typical application of MapReduce 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "mapreduce"
-
-\end_inset
-
-.
- Moreover, a cutoff heuristic can be applied to ensure the performance is
- acceptable.
- If the result is not acceptable, the job could be rerun without the cutoff
- heuristic.
- I expect that prioritizing failure and retrial over waiting could improve
- significantly the average case performance.
- 
 \end_layout
 
 \begin_layout Standard
