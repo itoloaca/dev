@@ -1117,6 +1117,54 @@ MMT Backend
 \end_layout
 
 \begin_layout Standard
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0in
+width "50col%"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename cfg_preamble.png
+	width 8cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CFG Preamble
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+label{fig:cfg_preamble}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The MMT Backend is a 
 \series bold
 Server Extension 
@@ -1207,8 +1255,24 @@ key "codeMMT"
 Let us look at the components of the MMT Backends in more detail below.
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.1cm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
-Context Free Grammar Generator
+CFG Generator
 \end_layout
 
 \begin_layout Standard
@@ -1290,25 +1354,22 @@ prec0
 \begin_inset Wrap figure
 lines 0
 placement o
-overhang 0in
+overhang 0col%
 width "50col%"
 status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename cfg_preamble.png
-	width 8cm
+	filename cfg_ex.png
+	width 10cm
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-CFG Preamble
+MMT Notation in CFG
 \begin_inset ERT
 status open
 
@@ -1316,7 +1377,7 @@ status open
 
 
 \backslash
-label{fig:cfg_preamble}
+label{fig:cfg_ex}
 \end_layout
 
 \end_inset
@@ -1447,55 +1508,6 @@ MMT notation from the
 smglom/numberfields 
 \series default
 archive translated to CFG rules looks like.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Wrap figure
-lines 0
-placement o
-overhang 0col%
-width "50col%"
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename cfg_ex.png
-	width 10cm
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-MMT Notation in CFG
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{fig:cfg_ex}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
