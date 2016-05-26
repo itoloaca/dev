@@ -612,10 +612,8 @@ key "MMT"
 
 \end_inset
 
- (Module system for Mathematical Theories) is a language developed as a
- scalable representation and interchange language for mathematical knowledge.
- It permits natural representations of the syntax and semantics of virtually
- all declarative languages.
+ is a language developed as a scalable representation and interchange language
+ for mathematical knowledge.
  The decisive factor about MMT is that there is already a large database
  of notations written in sTeX, which is transformed and stored in MMT in
  an original format that MathSemantifier is processing in order to generate
@@ -630,11 +628,12 @@ key "SMGLOM"
 
 \end_inset
 
- is a part of the notation database of MMT that is especially relevant to
- the MathSemantifier.
- It contains notations from vastly different topics of mathematics.
- The ones MathSemantifier uses are number fields, algebra, calculus, geometry,
- graphs, magic, sets, topology, mv, smglom, primes and numbers.
+ is a part of the notation database of MMT that contains the notations used
+ by 
+\series bold
+MathSemantifier
+\series default
+.
  SMGloM is also available online 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -781,7 +780,7 @@ ed.
 \end_layout
 
 \begin_layout Subsection
-Project Goals and Challenges
+Project Goals 
 \end_layout
 
 \begin_layout Standard
@@ -797,55 +796,12 @@ Providing opportunities for improvement for further research in the area
 \end_layout
 
 \begin_layout Standard
-The challenges on the way of achieving a way of generating dynamically the
- full set of semantic parse trees are:
-\end_layout
-
-\begin_layout Enumerate
-Aggregating the mathematical notation database that the MMT system into
- a CFG
-\end_layout
-
-\begin_layout Enumerate
-Dealing with scalability issues which are entailed by ambiguity
-\end_layout
-
-\begin_layout Enumerate
-The set of correct parses should be a subset of the set of generated parses
-\end_layout
-
-\begin_layout Enumerate
-The set of generated parses should ideally be a subset of the set of correct
- parses too
-\end_layout
-
-\begin_layout Enumerate
-Handle character encodings correctly
-\end_layout
-
-\begin_layout Standard
 This following subsections how 
 \series bold
 MathSemantifier
 \series default
  achieves the above goals.
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hyperref[6]{Section 6}
-\end_layout
-
-\end_inset
-
- shows to what extent the challenges described are overcome and how.
 \end_layout
 
 \begin_layout Subsection
@@ -1154,33 +1110,6 @@ Use term sharing
 \series default
 checkbox should be checked.
  In that case, the terms is shared along different readings.
- This feature could be useful for an application that requires all the possible
- readings, to minimize user interaction, for instance.
- 
-\end_layout
-
-\begin_layout Standard
-The current implementation shares the CML generated at any recursion level.
- This implies that only 
-\series bold
-apply 
-\series default
-or 
-\series bold
-csymbol 
-\series default
-which correspond to some part of the input can be shared.
- This can be improved upon, by also sharing ground terms and other parts
- of the notations.
- More importantly, this type of sharing is incompatible with cross-referencing,
- since it may share subtrees that have common ancestors.
- For instance, 
-\begin_inset Formula $1+1$
-\end_inset
-
- has two instances of one, however, it may not be shared, because each instance
- corresponds to a different presentation element.
- 
 \end_layout
 
 \begin_layout Subsection
@@ -1529,10 +1458,6 @@ width "50col%"
 status open
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Graphics
 	filename cfg_ex.png
 	width 10cm
@@ -1684,22 +1609,7 @@ directly for Guided Semantification and from the
 MMT Backend 
 \series default
 for Semantic Tree Generation.
- All the parsing related work is delegated to this backend, to the extend
- that it even includes the substrings where the arguments of the notations
- match (I will explain in more detail why in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{encoding_issues}
-\end_layout
-
-\end_inset
-
-).
+ All the parsing related work is delegated to this backend.
 \end_layout
 
 \begin_layout Standard
@@ -1765,53 +1675,6 @@ hyperref[6]{section 6}
 \end_inset
 
 ).
-\end_layout
-
-\begin_layout Subsection
-Encoding issues 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{encoding_issues}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Since 
-\series bold
-MathSemantifier 
-\series default
-deals with unicode, and has parts written in Javascript, Scala and Perl,
- which treat unicode symbols differently, it needed a solution for this
- problem.
- Javascript and Scala have 
-\series bold
-UTF-16 
-\series default
-strings, while Perl has 
-\series bold
-UTF-8 
-\series default
-strings.
- The implemented solution simply passes around the string encoded using
- 
-\series bold
-encodeURIComponent 
-\series default
-in Javascript or its equivalents in other languages, and only the parsing
- backend in Perl actually deals meaningfully with substrings.
- The result of the parsing backend contains the complete substrings for
- the matched rules and arguments.
- This also represents an opportunity for improvement, since passing around
- positions in a string is more efficient that substrings.
 \end_layout
 
 \begin_layout Section
@@ -1893,50 +1756,7 @@ standard, and within one request, if sub-term sharing is enabled, the response
 The Semantic Tree 
 \series default
 plugin makes use of memoization to reduce one dimension of the exponential
- blowup as explained on the following example.
- 
-\series bold
-
-\begin_inset Formula $2+3$
-\end_inset
-
- 
-\series default
-has 6 possible readings, because 
-\begin_inset Formula $+$
-\end_inset
-
- is defined 6 times, between natural, integer, real numbers and so on.
- However, 
-\begin_inset Formula $2$
-\end_inset
-
- and 
-\begin_inset Formula $3$
-\end_inset
-
- - these subterms do not contain any notations, yet, the plugin needs to
- know that for every possibility of 
-\begin_inset Formula $+$
-\end_inset
-
-.
- Memoization allows to omit a large number of 
-\series bold
-POST 
-\series default
-requests even in this simple example, which results into a significant speedup
- of a factor of approximately 4 (13 
-\series bold
-POST
-\series default
- requests vs 3 
-\series bold
-POST 
-\series default
-requests).
- Also, slight modification of the input benefit of a significant speed-up,
- as well as using a previous input as a subterm in a new input.
+ blowup.
 \end_layout
 
 \begin_layout Section
