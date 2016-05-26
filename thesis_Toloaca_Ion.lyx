@@ -702,77 +702,19 @@ MathSemantifier
 \series bold
 Web UI
 \series default
- (discussed in more details in further sections) in order to produce possible
- parse trees of the input.
+ in order to produce possible parse trees of the input.
  Marpa Grammar Engine is the proposed.
- It was already discussed above, so let us summarize the important points
- that matter for this particular application.
-\end_layout
-
-\begin_layout Standard
-Marpa is 
+ The main advantages are that Marpa handles ambiguous grammars and provides
+ control over the parsing process.
+ The author of Marpa provides a more detailed analysis of the advantages
+ of Marpa (see 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "marpaParser"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Itemize
-Fast - it parses grammars in linear time.
- This is critical since the size of the grammar is likely to be at least
- linear in the number of notations
-\end_layout
-
-\begin_layout Itemize
-Powerful - it can parse left, right and middle recursions.
- Since it is unclear what kind of recursions can occur in generated grammars,
- and it would be a pity if the parse tree generator would need to be changed
- midway because of it, it is better to choose something that can handle
- all kinds of recursion
-\end_layout
-
-\begin_layout Itemize
-Convenient - Parser generation is unrestricted and exact, all that needs
- to be provided is a CFG in BNF form.
- Also, if several alternatives may yield a parse, all of them are considered.
- This is critical, since this directly implies that it can deal with ambiguous
- grammars
-\end_layout
-
-\begin_layout Itemize
-Flexibility - it provides control over the parsing process, giving out informati
-on about which rules have been recognized so far and their locations.
- This is again extremely important because otherwise, once again, semantificatio
-n would be simply impossible
-\end_layout
-
-\begin_layout Standard
-Since the CFG is ambiguous this is the most computationally intensive part.
- The performance of the final product mostly depends on the efficiency of
- this step.
-\end_layout
-
-\begin_layout Standard
-As a side note, Marpa does not have a Scala API, so, instead, the Perl API
- is used.
- This implies that the result parse trees need to be transported somehow
- to the core application in MMT.
- For that purpose LWP is used.
- 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "LWP"
-
-\end_inset
-
-.
- LWP is a set of Perl modules which provide a simple and consistent API
- to the World Wide Web.
- After experimenting with the API, the conclusion was that the API is simple
- and powerful enough for the current purpose.
+).
 \end_layout
 
 \begin_layout Section
@@ -2171,31 +2113,6 @@ is simply poor performance on long or complex input.
 MathSemantifier
 \series default
  is a successful proof of concept, but not yet a practical tool.
-\end_layout
-
-\begin_layout Subsection
-Backend APIs
-\end_layout
-
-\begin_layout Standard
-It is important that the MMT backend provides a simple 
-\series bold
-HTTP 
-\series default
-endpoint, which can be accessed with a 
-\series bold
-POST
-\series default
- request that contains just the input in a suitable encoding.
- The backend then returns a 
-\series bold
-JSON 
-\series default
-object that contains all the possible readings.
- The backend could be modified to accept parameters to fine tune the system,
- like the maximum number of processed parse trees, but even then accessing
- it would be just as simple.
- 
 \end_layout
 
 \begin_layout Section
