@@ -12,6 +12,10 @@
 \usepackage{hypcap}
 \usepackage{a4wide}
 \usepackage[hide]{ed}
+
+\title{Notation-based Semantification}
+\author{Toloaca Ion \and Kohlhase Michael}
+\institute{Jacobs University Bremen}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -94,18 +98,6 @@ figs-within-sections
 Notation-based Semantification
 \end_layout
 
-\begin_layout Author
-Toloaca Ion
-\begin_inset Newline newline
-\end_inset
-
-Michael Kohlhase
-\begin_inset Newline newline
-\end_inset
-
-Jacobs University Bremen
-\end_layout
-
 \begin_layout Section
 Introduction
 \end_layout
@@ -134,10 +126,6 @@ key "arxivSubmission"
  MathML.
 \end_layout
 
-\begin_layout Subsection
-History and Motivation
-\end_layout
-
 \begin_layout Standard
 As a system as complex as the current scientific community was created,
  it went through a series of evolutions in the attempt to introduce the
@@ -161,10 +149,6 @@ MathSemantifier
 attempts to become.
 \end_layout
 
-\begin_layout Subsection
-Ambiguity in Mathematical Documents
-\end_layout
-
 \begin_layout Standard
 An important concept necessary in order to understand why semantification
  is a complex process is ambiguity.
@@ -178,10 +162,6 @@ An important concept necessary in order to understand why semantification
  the actual meaning an expression.
  Ambiguities can be largely divided into two: structural and idiomatic ambiguiti
 es.
-\end_layout
-
-\begin_layout Subsubsection
-Structural Ambiguities
 \end_layout
 
 \begin_layout Standard
@@ -220,10 +200,6 @@ A simple example that demonstrates the concept of structural ambiguities
 
 \end_layout
 
-\begin_layout Subsubsection
-Idiomatic Ambiguities
-\end_layout
-
 \begin_layout Standard
 Contrary to structural ambiguities, idiomatic ambiguities are not due to
  different parse trees.
@@ -246,10 +222,6 @@ A user defined sequence
 
 \begin_layout Enumerate
 The vertex of one of a series of geometric objects
-\end_layout
-
-\begin_layout Subsection
-Extracting Semantics from Mathematical Documents
 \end_layout
 
 \begin_layout Standard
@@ -302,10 +274,6 @@ MathSemantifier
 \series default
 is the exact opposite of the Presentation Algorithm, trying to convert PMML
  to CMML, as opposed to CMML to PMML.
-\end_layout
-
-\begin_layout Subsubsection
-The Presentation Algorithm
 \end_layout
 
 \begin_layout Standard
@@ -450,10 +418,6 @@ label{fig:presentation_output}
 
 \end_layout
 
-\begin_layout Subsubsection
-Approach to Semantification
-\end_layout
-
 \begin_layout Standard
 
 \series bold
@@ -479,8 +443,8 @@ Marpa Grammar Engine
 is used.
 \end_layout
 
-\begin_layout Subsubsection
-Possible Applications of Semantification
+\begin_layout Standard
+Possible Applications of Semantification include:
 \end_layout
 
 \begin_layout Itemize
@@ -548,23 +512,6 @@ Semantification will not make all of the above directly possible, however
 Preliminaries
 \end_layout
 
-\begin_layout Subsection
-The Notation Database of MMT 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{pre_not}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 MathSemantifier uses a Notation Database to create the grammar it uses.
  Therefore, it needs to be explained where those notations come from.
@@ -607,23 +554,6 @@ key "smglomweb"
 .
 \end_layout
 
-\begin_layout Subsection
-LaTeXML Pre-processing 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-label{pre_lat}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 Since sTeX, as an extension of 
 \begin_inset ERT
@@ -649,10 +579,6 @@ key "OMDOC"
 .
  OMDoc is then processed and stored in MMT.
  
-\end_layout
-
-\begin_layout Subsection
-Marpa Context Free Grammar Parser
 \end_layout
 
 \begin_layout Standard
@@ -742,10 +668,6 @@ ed.
  Then, each component is described in further detail.
 \end_layout
 
-\begin_layout Subsection
-Project Goals 
-\end_layout
-
 \begin_layout Standard
 The main goals of the project can be expressed in a concise manner as follows:
 \end_layout
@@ -756,12 +678,6 @@ Generating the correct set of parses efficiently and effectively
 
 \begin_layout Enumerate
 Providing opportunities for improvement for further research in the area
-\end_layout
-
-\begin_layout Subsection
-MathSemantifier 
-\series medium
-Architecture
 \end_layout
 
 \begin_layout Standard
@@ -833,10 +749,6 @@ label{fig:7}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsection
-Web User Interface
 \end_layout
 
 \begin_layout Standard
@@ -912,13 +824,9 @@ key "codeWebUI"
 .
 \end_layout
 
-\begin_layout Subsubsection
-User Guided Semantification
-\end_layout
-
 \begin_layout Standard
-The user provides Presentation MathML as input to the system, then uses
- the 
+User Guided Semantification is performed as follows: The user provides Presentat
+ion MathML as input to the system, then uses the 
 \series bold
 Semantify 
 \series default
@@ -953,10 +861,6 @@ autoref{fig:6}
 \end_inset
 
  for a similar representation of the result).
-\end_layout
-
-\begin_layout Subsubsection
-Semantic Tree Generation
 \end_layout
 
 \begin_layout Standard
@@ -1052,10 +956,6 @@ have each multiple notations definitions (that originate from different
  of notation definitions can go together in the same CMML tree.
 \end_layout
 
-\begin_layout Subsubsection
-Term Sharing
-\end_layout
-
 \begin_layout Standard
 In order to minimize the Content MathML, the standard allows subtree sharing.
  To enable this option, the 
@@ -1064,10 +964,6 @@ Use term sharing
 \series default
 checkbox should be checked.
  In that case, the terms is shared along different readings.
-\end_layout
-
-\begin_layout Subsection
-MMT Backend
 \end_layout
 
 \begin_layout Standard
@@ -1223,10 +1119,6 @@ vspace{0.1cm}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-CFG Generator
 \end_layout
 
 \begin_layout Standard
@@ -1460,10 +1352,6 @@ smglom/numberfields
 archive translated to CFG rules looks like.
 \end_layout
 
-\begin_layout Subsubsection
-Semantic Tree Generator
-\end_layout
-
 \begin_layout Standard
 The 
 \series bold
@@ -1516,10 +1404,6 @@ RawString -
 the ground term representation
 \end_layout
 
-\begin_layout Subsubsection
-Content MathML Generator
-\end_layout
-
 \begin_layout Standard
 The final part of any of the semantification processes is converting the
  internal representation to a standard one, which is CMML in this case.
@@ -1542,10 +1426,6 @@ Both of which are available in my representation structure.
  This implies the grammar rule names are overloaded with meaning, however,
  the possibilities are very limited in this aspect since the parsing framework
  used does not give complete control over the parsing process.
-\end_layout
-
-\begin_layout Subsection
-Parsing Backend
 \end_layout
 
 \begin_layout Standard
@@ -1590,10 +1470,6 @@ The parsing backend consists of two parts.
  
 \end_layout
 
-\begin_layout Subsubsection
-Context Free Grammar Parser
-\end_layout
-
 \begin_layout Standard
 First of all, the the CFG needs to be queried and parsed.
  This is implemented using lazy evaluation, which means that it is only
@@ -1602,10 +1478,6 @@ First of all, the the CFG needs to be queried and parsed.
 
 \begin_layout Standard
 The serialized CFG is unpacked and feed to the Marpa Parser Generator.
-\end_layout
-
-\begin_layout Subsubsection
-Parse Tree Generator
 \end_layout
 
 \begin_layout Standard
@@ -1666,10 +1538,6 @@ from the point of view of efficiency and effectiveness of semantic tree
  is examined, which mostly depends on the backend APIs.
 \end_layout
 
-\begin_layout Subsection
-Semantic Tree Generation
-\end_layout
-
 \begin_layout Standard
 Testing 
 \series bold
@@ -1728,10 +1596,6 @@ Web UI
 \series bold
 MathHub Glossary.
  
-\end_layout
-
-\begin_layout Subsubsection
-Results
 \end_layout
 
 \begin_layout Standard
