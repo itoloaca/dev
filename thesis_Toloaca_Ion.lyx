@@ -14,6 +14,7 @@
 \usepackage[hide]{ed}
 \usepackage{graphicx}
 \usepackage{onecolpceurws}
+\usepackage{paralist}
 
 \title{Notation-based Semantification}
 \author{ Toloaca Ion \and Kohlhase Michael}
@@ -443,22 +444,9 @@ key "MWS12"
 
 \end_inset
 
- 
+
 \series default
-(discussed in more detail in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{mws}
-\end_layout
-
-\end_inset
-
-) is a search engine for mathematical formulas.
+ is a search engine for mathematical formulas.
  Such search engines could greatly benefit from semantification.
  The idea is that a search engine is only as good as the database of information
  is.
@@ -492,10 +480,6 @@ Semantification will not make all of the above directly possible, however
  it is a necessary step towards achieving goals similar to the ones described
  above, that require more knowledge about the used content than just how
  it is rendered.
-\end_layout
-
-\begin_layout Section
-Preliminaries
 \end_layout
 
 \begin_layout Standard
@@ -774,27 +758,6 @@ Evaluation (In this case, by repeatedly pressing this, the user is walked
 \end_layout
 
 \begin_layout Standard
-The 
-\series bold
-Evaluation 
-\series default
-option will be discussed in more detail in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{8}
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 The repository containing the 
 \series bold
 Web UI 
@@ -859,20 +822,34 @@ Show Semantic Tree
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\begin_inset Wrap figure
+lines 0
+placement o
+overhang 0col%
+width "50col%"
 status open
 
 \begin_layout Plain Layout
-\begin_inset space \hspace{}
-\length 2cm
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{-1.5cm}
+\end_layout
+
 \end_inset
 
 
 \begin_inset Graphics
 	filename auto1.png
-	width 12cm
+	width 10cm
 	BoundingBox 0bp 5bp 800bp 972bp
 	clip
 
@@ -882,7 +859,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Semantic Tree Results 
 \begin_inset ERT
 status open
 
@@ -900,6 +876,10 @@ label{fig:6}
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -1071,9 +1051,9 @@ The Grammar Generator aggregates all the knowledge contained in the MMT
  Otherwise said, the tree-like structure of each formula, that is stored
  as nested applications of 
 \series bold
-MMT Markers 
+MMT Markers
 \series default
-(discussed previously) needs to be serialized into CFG rules.
+ needs to be serialized into CFG rules.
 \end_layout
 
 \begin_layout Standard
@@ -1483,20 +1463,7 @@ The more complex of the two parts is actually going through the parse trees
 ) parse trees are processed.
  This still gives the correct results in most cases since the grammar rules
  are optimized for giving preference to parse trees that are more likely
- to be correct (discussed in more detail in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hyperref[6]{section 6}
-\end_layout
-
-\end_inset
-
-).
+ to be correct.
 \end_layout
 
 \begin_layout Section
