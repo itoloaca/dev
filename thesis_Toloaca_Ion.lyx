@@ -343,34 +343,6 @@ autoref{fig:presentation_output}
 natarith addition 
 \series default
 are initially written in sTeX, and then converted to OMDoc using LaTeXML.
- Further sections will reveal more detail both about the origin of the notation
- (see 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{pre_not}
-\end_layout
-
-\end_inset
-
-), as well as about the LaTeXML conversion (see 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-autoref{pre_lat}
-\end_layout
-
-\end_inset
-
-).
 \end_layout
 
 \begin_layout Standard
@@ -1059,6 +1031,52 @@ within MMT is as simple as a function call that takes the input as a string.
 \end_layout
 
 \begin_layout Standard
+The code can be found as part of the MMT codebase 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "codeMMT"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Let us look at the components of the MMT Backends in more detail below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.1cm}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Grammar Generator aggregates all the knowledge contained in the MMT
+ Notations into one Context Free Grammar.
+ The grammar is shaped into the normal form accepted by the Marpa Grammar
+ Engine.
+ To achieve this, the format used to store the notations in MMT is decomposed
+ into CFG rules.
+ Otherwise said, the tree-like structure of each formula, that is stored
+ as nested applications of 
+\series bold
+MMT Markers 
+\series default
+(discussed previously) needs to be serialized into CFG rules.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Wrap figure
 lines 0
 placement o
@@ -1104,52 +1122,6 @@ label{fig:cfg_preamble}
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-The code can be found as part of the MMT codebase 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "codeMMT"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Let us look at the components of the MMT Backends in more detail below.
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-vspace{0.1cm}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The Grammar Generator aggregates all the knowledge contained in the MMT
- Notations into one Context Free Grammar.
- The grammar is shaped into the normal form accepted by the Marpa Grammar
- Engine.
- To achieve this, the format used to store the notations in MMT is decomposed
- into CFG rules.
- Otherwise said, the tree-like structure of each formula, that is stored
- as nested applications of 
-\series bold
-MMT Markers 
-\series default
-(discussed previously) needs to be serialized into CFG rules.
 \end_layout
 
 \begin_layout Standard
