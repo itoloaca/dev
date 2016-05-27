@@ -2,7 +2,7 @@
 \lyxformat 474
 \begin_document
 \begin_header
-\textclass article
+\textclass llncs
 \begin_preamble
 \usepackage{pgfgantt}
 \usepackage{adjustbox}
@@ -14,6 +14,10 @@
 \usepackage[hide]{ed}
 \end_preamble
 \use_default_options true
+\begin_modules
+eqs-within-sections
+figs-within-sections
+\end_modules
 \maintain_unincluded_children false
 \language english
 \language_package default
@@ -87,7 +91,7 @@
 \begin_body
 
 \begin_layout Title
-MathSemantifier - a Notation-based Semantification Study
+Notation-based Semantification
 \end_layout
 
 \begin_layout Author
@@ -95,46 +99,11 @@ Toloaca Ion
 \begin_inset Newline newline
 \end_inset
 
-Prof.
- Dr.
- Michael Kohlhase
+Michael Kohlhase
 \begin_inset Newline newline
 \end_inset
 
 Jacobs University Bremen
-\end_layout
-
-\begin_layout Abstract
-Mathematical formulae are a highly ambiguous natural language fragments
- for which typesetting systems as LaTeX store only the rendering information.
- MathSemantifier is an open-source notation-based mathematical formula semantifi
-cation system that attempts to tackle the problem of ambiguity in mathematical
- documents and produce knowledge-rich equivalents.
- The system extracts formulae (from formats such as LaTeX or MathML) and
- produces content-rich results (Content MathML) that contain no ambiguity.
- The disambiguation is achieved by matching the input formulae against a
- known database of approximately 700 notation definitions, which is aggregated
- into a Context Free Grammar of about 2800 rules.
- This paper outlines an implementation of MathSemantifier that focuses on
- helping researchers in semantifying their works.
- The ultimate goal of MathSemantifier is a scalable implementation that
- would need minimal help from a human.
- Such a system could be used to semantify large collections of mathematical
- papers such as arXiv 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "arXiv"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage newpage
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -284,7 +253,7 @@ Extracting Semantics from Mathematical Documents
 \end_layout
 
 \begin_layout Standard
-In this section we propose a solution to the ambiguity problem described
+In this paragraph we propose a solution to the ambiguity problem described
  above.
  Consider 
 \begin_inset Formula $c(a(b))$
@@ -501,12 +470,6 @@ MathSemantifier
 \series default
 extracts information regarding what notations matched at top level.
  This is then done recursively for the arguments of the found notation.
- The 
-\series bold
-Implementation 
-\series default
-section describes in a lot more detail how the Notations are compiled into
- a CFG, and how the parse trees are converted to CMML.
  Parsing using CFGs is a known problem, so, instead of writing a Parsing
  Engine, a more reasonable approach is using an existing one.
  For that purpose, the 
@@ -795,15 +758,6 @@ Generating the correct set of parses efficiently and effectively
 Providing opportunities for improvement for further research in the area
 \end_layout
 
-\begin_layout Standard
-This following subsections how 
-\series bold
-MathSemantifier
-\series default
- achieves the above goals.
- 
-\end_layout
-
 \begin_layout Subsection
 MathSemantifier 
 \series medium
@@ -825,7 +779,7 @@ autoref{fig:7}
 \end_inset
 
 .
- The components will be discussed in more details in the further subsections.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -1306,10 +1260,6 @@ trees into level by level representations
 Transform the intermediate representation into valid CFG rules
 \end_layout
 
-\begin_layout Enumerate
-Optimize if possible (will be discussed in detail in the subsequent sections)
-\end_layout
-
 \begin_layout Standard
 The fundamental structure of the CFG is established using a preamble as
  shown in 
@@ -1697,88 +1647,6 @@ status open
 
 
 \backslash
-label{6}
-\end_layout
-
-\end_inset
-
-Optimizations and Heuristics
-\end_layout
-
-\begin_layout Standard
-This section describes the attempts made in order to deal with the overwhelming
- ambiguity of mathematical notations and produce actual results.
- 
-\end_layout
-
-\begin_layout Enumerate
-Only notations on the whole input are matched.
- Subterms are matched directly by the 
-\series bold
-Semantic Tree 
-\series default
-plugin.
-\end_layout
-
-\begin_layout Enumerate
-The number of parse trees is limited to 
-\begin_inset Formula $N=1000$
-\end_inset
-
-.
- The number of parse trees was empirically determined to include the set
- of correct parses for the examples used (see the 
-\series bold
-Evaluation 
-\series default
-section
-\series bold
-).
-\end_layout
-
-\begin_layout Enumerate
-The non-empty alternatives in the CFG are put first.
- The Grammar Parser has a predictable behavior of going through the alternatives
- left to right, and since empty rules match 
-\series bold
-always
-\series default
-, it is imperative that other alternative are attempted first.
- Note that only after this optimization any kind of results were possible
- to achieve on non-trivial input.
-\end_layout
-
-\begin_layout Enumerate
-The CFG includes precedences correctly.
- This weeds out a large number of incorrect readings.
-\end_layout
-
-\begin_layout Enumerate
-Sub-term sharing is part of the 
-\series bold
-MathML 
-\series default
-standard, and within one request, if sub-term sharing is enabled, the response
- tries to share its terms as much as possible in order to compress the output.
-\end_layout
-
-\begin_layout Enumerate
-
-\series bold
-The Semantic Tree 
-\series default
-plugin makes use of memoization to reduce one dimension of the exponential
- blowup.
-\end_layout
-
-\begin_layout Section
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
 label{8}
 \end_layout
 
@@ -1993,129 +1861,6 @@ can only recognize the symbols that were used when building the Context
  The most important part of this study is, therefore, the optimizations
  and heuristics used, and other techniques presented below that further
  research could benefit from.
-\end_layout
-
-\begin_layout Subsection
-Further work
-\end_layout
-
-\begin_layout Standard
-The study presented in this paper reached certain results, however there
- is a long way yet to a fully automatic and scalable system that could handle
- large collections of papers without any supervision.
- Below there are some suggestions that further research could make use of
- in order to get closer to this goal.
-\end_layout
-
-\begin_layout Subsubsection
-Suggestions for further optimizations
-\end_layout
-
-\begin_layout Enumerate
-The CFG could be checked for unused rules, and, more importantly, converted
- to BNF, for instance
-\end_layout
-
-\begin_layout Enumerate
-Theory based optimization - either let the user specify which theories to
- create the grammar from, or take into consideration that notations from
- the same theory are likely to be close in the input (for instance, 
-\begin_inset Formula $-$
-\end_inset
-
- and 
-\begin_inset Formula $+$
-\end_inset
-
- are more likely to both be used as arithmetic symbols in an expression,
- than only one of them)
-\end_layout
-
-\begin_layout Enumerate
-Sequence arguments (for instance, 
-\begin_inset Formula $2+3+4+5+6$
-\end_inset
-
-) currently generate a very high number of possible parses.
- If more control over parsing were possible, parsing of sequence arguments
- should be greedy - attempting to take in as many delimiter argument pairs
- as there are.
-\end_layout
-
-\begin_layout Subsubsection
-Requirements for a more suitable Notation Database 
-\end_layout
-
-\begin_layout Enumerate
-The most important optimization would be adding types to the notation input
- arguments and output.
- This would allow for type based parsing, which would certainly be more
- efficient and generate more relevant results.
-\end_layout
-
-\begin_layout Enumerate
-Grouping similar notations within a theory.
- For example, arithmetic plus on natural, integer or real number should
- be possible to connect somehow.
- If the notations have types, the it will naturally occur by grouping the
- notations with the same types into single rules.
-\end_layout
-
-\begin_layout Enumerate
-For the 
-\series bold
-csymbol 
-\series default
-used in an 
-\series bold
-apply 
-\series default
-tag, the notation should cross-reference it with the part of the representation
- it corresponds to, since it is not otherwise clearly specified.
-\end_layout
-
-\begin_layout Subsubsection
-Requirements for a more suitable Parsing Framework
-\end_layout
-
-\begin_layout Enumerate
-One of the biggest problems with the current implementation is that it greedily
- matches the argument renderings, which are free form subterms.
- If a custom parsing framework would be used, lazy matching of such subterms
- would greatly increase the performance.
-\end_layout
-
-\begin_layout Enumerate
-The ability to handle types, precedences and associativity.
-\end_layout
-
-\begin_layout Enumerate
-The ability to handle greedy parsing - most CFG parsing frameworks have
- the counted rule 
-\begin_inset Formula $Expression::=Expression+$
-\end_inset
-
-, which has a similar meaning to the 
-\begin_inset Formula $+$
-\end_inset
-
- found in a 
-\series bold
-regex.
- 
-\series default
-However, 
-\series bold
-regexes
-\series default
- actually will do a greedy match, the more appropriate match being then
- 
-\begin_inset Formula $Expression+?$
-\end_inset
-
-, the non-greedy version.
- This is critical to reduce the number of useless parse trees when dealing
- with Sequence Arguments
 \end_layout
 
 \begin_layout Standard
