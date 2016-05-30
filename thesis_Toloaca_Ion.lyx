@@ -1652,19 +1652,6 @@ Content MathML
  The testing revealed that the system is able to recognize correctly single
  top level symbols, as well as the whole set of readings of expressions
  with less than 1000 parse trees (this is not the limit, but no testing
- in 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-hyperref[8]{section 8}
-\end_layout
-
-\end_inset
-
  is done beyond that).
  Naturally, 
 \series bold
