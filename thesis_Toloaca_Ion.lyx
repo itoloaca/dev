@@ -556,7 +556,7 @@ key "OMDOC"
 \series bold
 MathSemantifier
 \series default
- takes the an auto-generated CFG and input from the 
+ takes the auto-generated CFG and input from the 
 \series bold
 Web UI
 \series default
@@ -1329,7 +1329,7 @@ works by recursively querying the
 \series bold
 Parsing Backend 
 \series default
-and using the result to construct a the tree of possible meanings.
+and using the result to construct the tree of possible meanings.
 \end_layout
 
 \begin_layout Standard
@@ -1342,7 +1342,7 @@ The parse trees stored in MMT have the following structure:
 Variants - 
 \series default
 represents a list of possible readings.
- It is always be the top node in any parse tree.
+ It is always the top node in any parse tree.
 \end_layout
 
 \begin_layout Itemize
@@ -1373,8 +1373,8 @@ the ground term representation
 \end_layout
 
 \begin_layout Standard
-The final part of any of the semantification processes is converting the
- internal representation to a standard one, which is CMML in this case.
+The final part of the semantification processes is converting the internal
+ representation to a standard one, which is CMML in this case.
  MMT provides a simple API which requires:
 \end_layout
 
@@ -1439,7 +1439,7 @@ The parsing backend consists of two parts.
 \end_layout
 
 \begin_layout Standard
-First of all, the the CFG needs to be queried and parsed.
+First of all, the CFG needs to be queried and parsed.
  This is implemented using lazy evaluation, which means that it is only
  done when a request actually comes.
 \end_layout
