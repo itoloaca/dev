@@ -63,16 +63,16 @@ knowledge-rich digital documents. This next step can only happen if
 a new feasible way of transition appears, which \textbf{MathSemantifier
 }attempts to become.
 
-An important concept necessary in order to understand why semantification
-is a complex process is ambiguity. Mathematical documents are not
-a simple collection of symbols. The main use of these documents emerges
-only when the intended semantics of a document is accessible. However,
-humans tend to be lazy in writing down the whole graph, but instead
-rely on implicit human knowledge to decipher these documents. This
-is where ambiguity comes into play, when the author relies on the
-ability of the human to use the context of document in order to pinpoint
-the actual meaning an expression. Ambiguities can be largely divided
-into two: structural and idiomatic ambiguities.
+Ambiguity is one of the main reasons that makes semantification complex.
+Mathematical documents are not a simple collection of symbols. The
+main use of these documents emerges only when the intended semantics
+of a document is accessible. However, humans tend to be lazy in writing
+down the whole graph, but instead rely on implicit human knowledge
+to decipher these documents. This is where ambiguity comes into play,
+when the author relies on the ability of the human to use the context
+of document in order to pinpoint the actual meaning an expression.
+Ambiguities can be largely divided into two: structural and idiomatic
+ambiguities.
 
 A simple example that demonstrates the concept of structural ambiguities
 can be $\sin\ x\ /\ 2$. It can mean one of the following:
@@ -148,9 +148,8 @@ of the sought expression. This would improve a lot the relevance of
 the results, since there will be no result that matched just because
 it was presented in a similar manner. 
 \item Another possibility for using semantification is theorem proving and
-correctness checking. One possible application would be realtime feedback
-to the user writing a paper about the correctness of the expressions
-used.
+correctness checking. One possible application would be assisting
+authors in writing semantic content by providing real-time feedback.
 \item The possibilities extend even beyond this. Using semantified content,
 rather than having a database of CMML expressions, it is possible
 to create a smart knowledge management system that could be used to
@@ -181,10 +180,10 @@ OMDoc is then processed and stored in MMT.
 
 \textbf{MathSemantifier} takes the auto-generated CFG and input from
 the \textbf{Web UI} in order to produce possible parse trees of the
-input. Marpa Grammar Engine is the proposed. The main advantages are
-that Marpa handles ambiguous grammars and provides control over the
-parsing process. The author of Marpa provides a more detailed analysis
-of the advantages of Marpa (see \citep{marpaParser}).
+input. Marpa Grammar Engine is the proposed tool for this purpose.
+The main advantages are that Marpa handles ambiguous grammars and
+provides control over the parsing process. The author of Marpa provides
+a more detailed analysis of the advantages of Marpa (see \citep{marpaParser}).
 
 
 \section{The MathSemantifier System}
@@ -195,7 +194,7 @@ Presentation MathML input expressions.
 
 The general flow of a single semantification can be described as follows:
 \begin{enumerate}
-\item Context Free Grammar generation from the MMT Notations 
+\item Generation of Context Free Grammar from MMT Notations 
 \item Parsing using the Marpa Grammar Engine and the generated CFG to detect
 the top level notation
 \item Parsing the arguments of the top level notation recursively
@@ -204,16 +203,16 @@ of the meaning trees
 \item Converting the meaning trees to Content MathML
 \item Displaying the Content MathML trees in the frontend
 \end{enumerate}
-The reason it was decided to use a CFG based solution is that there
-exist already parsing frameworks like the Marpa Grammar Engine. It
-solves all the parsing related technical problems, like parsing ambiguous
-expressions, different kinds of recursion, while also providing a
-high degree of freedom. 
+A CFG-based solution was chosen because of the preexisting parsing
+frameworks like the Marpa Grammar Engine. Such frameworks solve all
+the parsing-related technical problems, like parsing ambiguous expressions,
+different kinds of recursion, while also providing a high degree of
+freedom. 
 
-This sections goes into the details of how exactly semantification
-is accomplished. First, a general overview of the goals of the project
-and its high level architecture is given. Then, each component is
-described in further detail.
+This sections describes how exactly semantification is accomplished.
+First, a general overview of the goals of the project and its high
+level architecture is given. Then, each component is described in
+further detail.
 
 The main goals of the project can be expressed in a concise manner
 as follows:
@@ -232,7 +231,7 @@ The architecture can be roughly divided into four parts as shown in
 
 The \textbf{Web UI }is a core component of \textbf{MathSemantifier.}
 It is intended to be a lightweight solution that queries a server
-for the results of more computationally intensive tasks.
+for the results of more computationally-intensive tasks.
 
 The interface consists of an input area, where \textbf{MathML }needs
 to be inputted, and three options:
@@ -242,8 +241,8 @@ directly, by choosing the correct matching range, notation and argument
 positions)
 \item Show Semantic Tree (The other option is to ask for all the possibilities
 and get all the semantic trees)
-\item Evaluation (In this case, by repeatedly pressing this, the user is
-walked through a series of examples to demo the functionality)
+\item Evaluation (The user is walked through a series of examples to demo
+the functionality)
 \end{enumerate}
 The repository containing the \textbf{Web UI }can be found on GitHub
 \citep{codeWebUI}.
@@ -281,7 +280,7 @@ definitions can go together in the same CMML tree.
 
 In order to minimize the Content MathML, the standard allows subtree
 sharing. To enable this option, the \textbf{Use term sharing }checkbox
-should be checked. In that case, the terms is shared along different
+should be checked. In that case, the terms is shared among different
 readings.
 
 
@@ -297,11 +296,9 @@ Its role can be summarized to the following core functions:
 Tree
 \item Delegate the parsing to the \textbf{Parsing Backends}
 \end{enumerate}
-I decided to put the core logic of the application in MMT in order
+We decided to put the core logic of the application in MMT in order
 to make it easier to interoperate with the MMT Notation Database,
-as well as with any other MMT components that may want to need \textbf{MathSemantifier.}
-By the current design, using \textbf{MathSemantifier }within MMT is
-as simple as a function call that takes the input as a string.
+as well as with any other MMT components that may need \textbf{MathSemantifier.}
 
 The code can be found as part of the MMT codebase \citep{codeMMT}.
 
@@ -344,7 +341,7 @@ there is.
 \end{wrapfigure}%
 
 
-Precedence handling is done using a commonly used method for including
+Precedence handling is done using a commonly-used method for including
 it in CFGs. The \textbf{Notation Precedences }section in \autoref{fig:cfg_preamble}
 gives a quick glance at how exactly it is done. The number of precedences
 needs to be known in advance, then, for each precedence value a corresponding
@@ -373,21 +370,21 @@ The parse trees stored in MMT have the following structure:
 \begin{itemize}
 \item \textbf{Variants - }represents a list of possible readings. It is
 always the top node in any parse tree.
-\item \textbf{Notation - }a notation detected in the input. It contains
-its name and arguments.
+\item \textbf{Notation - }a notation detected in the input. This node contains
+the name and arguments of the notation it represents.
 \item \textbf{Argument - }an argument of a notation. The plugin is recursively
 called on it to construct its meaning subtree as well.
-\item \textbf{RawString - }the ground term representation
+\item \textbf{RawString - }the ground term representation.
 \end{itemize}
 The final part of the semantification processes is converting the
 internal representation to a standard one, which is CMML in this case.
 MMT provides a simple API which requires:
 \begin{enumerate}
-\item The MMT notation path
-\item The argument maps (maps from the argument number to the corresponding
+\item MMT notation path
+\item Argument maps (maps from the argument number to the corresponding
 substring)
 \end{enumerate}
-Both of which are available in my representation structure. The argument
+Both of which are available in the representation structure. The argument
 path is obtained by extracting the argument number from the argument
 name, and looking up in a map of paths created at the time of grammar
 creation. This implies the grammar rule names are overloaded with
@@ -408,14 +405,14 @@ First of all, the CFG needs to be queried and parsed. This is implemented
 using lazy evaluation, which means that it is only done when a request
 actually comes.
 
-The serialized CFG is unpacked and feed to the Marpa Parser Generator.
+The serialized CFG is unpacked and fed to the Marpa Parser Generator.
 
-The more complex of the two parts is actually going through the parse
-trees and extracting useful information. Note that going through all
-the parse trees is not practical, so only the first $N$ (currently
-$1000$) parse trees are processed. This still gives the correct results
-in most cases since the grammar rules are optimized for giving preference
-to parse trees that are more likely to be correct.
+Second, useful information needs to be extracted from the generated
+parse trees. Note that going through all the parse trees is not practical,
+so only the first $N$ (currently $1000$) parse trees are processed.
+This still gives the correct results in most cases since the grammar
+rules are optimized for giving preference to parse trees that are
+more likely to be correct.
 
 
 \section{\label{8}Evaluation }
@@ -445,7 +442,7 @@ Glossary} revealed the following results\textbf{. }About 40\% of the
 examples are semantified correctly. However, this is largely because
 of reasons that do not depend on \textbf{MathSemantifier} itself.
 
-Contrary to what the numerical result suggests, for expressions with
+Contrary to what the percentage number suggests, for expressions with
 less than 1000 parse trees that are correctly rendered, \textbf{MathSemantifier
 }produces correct results with a very high probability.
 
